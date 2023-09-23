@@ -5,3 +5,15 @@
     }
   }
 }
+
+
+// export const useBlog = () => {
+//   const context = useContext(BlogContext);
+//   if (context === undefined) {
+//     throw new Error('useUser must be used within the BlogProvider')
+//   }
+
+//   const blogs = context.data.blogs;
+
+//   return [context.data];
+// }
