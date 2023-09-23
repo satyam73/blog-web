@@ -18,7 +18,18 @@ const theme = createTheme({
       fontWeight: 500,
       lineHeight: 1.4,
     },
-  }
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      mobile: 600, // down from 600px 
+      desktop: 1000, // up from 1000px 
+    },
+  },
 });
 
 export default function ThemeProvider({ children }) {
