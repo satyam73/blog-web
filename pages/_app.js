@@ -8,10 +8,10 @@ export const metadata = {
 }
 
 export default function MyApp({ Component, pageProps }) {
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <ThemeProvider>
-      <Component
-        {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   )
 }
