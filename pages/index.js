@@ -5,7 +5,7 @@ import { Montserrat } from 'next/font/google';
 const montserrat = Montserrat({ subsets: ['latin'] });
 export default function Home() {
   return (
-    <Typography className={styles.home} >
+    <Typography className={styles.home} data-testid={'home-heading'} >
       Hello
     </ Typography>
   )
