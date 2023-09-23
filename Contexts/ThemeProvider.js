@@ -7,10 +7,11 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#292524',
-      light: '#fafaf9',
+      main: '#fafaf9',
+      light: '#292524',
       dark: '#57534e'
     },
+
   },
   typography: {
     allVariants: {
