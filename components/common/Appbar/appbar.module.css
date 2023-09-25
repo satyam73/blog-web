@@ -1,0 +1,24 @@
+.appbar {
+  top: auto;
+  bottom: 0;
+}
+
+.appbar__main {
+  justify-content: space-around;
+}
+
+.main__item {
+  height: fit-content;
+  width: fit-content;
+  color: var(--contrast-color);
+  border-radius: 0;
+}
+
+.main__item--active {
+  color: var(--secondary-color);
+}
+
+.main__item .item__text {
+  font-weight: 700;
+  font-size: 12px;
+}

@@ -1,6 +1,7 @@
 import { useTheme } from "@emotion/react";
 import Navbar from "../Navbar/Navbar";
 import { useMediaQuery } from "@mui/material";
+import Appbar from "../Appbar/Appbar";
 
 export default function Layout({ children }) {
   const theme = useTheme();
@@ -10,6 +11,7 @@ export default function Layout({ children }) {
     <>
       {!isMobile && < Navbar />}
       {children}
+      {isMobile && <Appbar />}
     </>
   )
 }

@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #fafaf9;
+  --secondary-color: #292524;
+  --contrast-color: #57534e;
+}
+
 body {
   font-family: Montserrat;
 }
