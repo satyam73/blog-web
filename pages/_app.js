@@ -1,6 +1,5 @@
 import ThemeProvider from '@/Contexts/ThemeProvider'
-import '../styles/globals.css'
-import { Inter } from 'next/font/google'
+import '../styles/globals.css';
 
 export const metadata = {
   title: 'Create Next App',
@@ -9,6 +8,7 @@ export const metadata = {
 
 export default function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
+
   return (
     <ThemeProvider>
       {getLayout(<Component {...pageProps} />)}
