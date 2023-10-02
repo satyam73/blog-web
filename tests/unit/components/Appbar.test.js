@@ -22,7 +22,7 @@ describe('Unit: Appbar Component', () => {
   it('should render Appbar component', () => {
     const onItemClick = jest.fn();
     let activePage = 1;
-    render(<AppbarPresentation activePage={activePage} onItemClick={onItemClick} />);
+    const { rerender } = render(<AppbarPresentation activePage={activePage} onItemClick={onItemClick} />);
 
     const activeItem = screen.getByTestId(`appbar-item-${APPBAR_ITEMS[1].name}`);
     expect(activeItem).toHaveClass('main__item--active');
@@ -32,6 +32,7 @@ describe('Unit: Appbar Component', () => {
     fireEvent.click(notActiveItem);
     activePage = 0;
 
+    rerender(<AppbarPresentation activePage={activePage} onItemClick={onItemClick} />);
     expect(activeItem).not.toHaveClass('main__item--active');
     expect(notActiveItem).toHaveClass('main__item--active');
     expect(onItemClick).toHaveBeenCalledTimes(1);
