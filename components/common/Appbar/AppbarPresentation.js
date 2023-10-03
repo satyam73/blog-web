@@ -1,5 +1,5 @@
 import { AppBar as MUIAppbar, IconButton, Toolbar, Box, Typography } from "@mui/material";
-import { Home, Article, AccountCircle } from "@mui/icons-material";
+
 
 import styles from './appbar.module.css';
 import { APPBAR_ITEMS } from "./appbar.constant";
@@ -19,7 +19,6 @@ export default function AppbarPresentation({ activePage, onItemClick }) {
   return (
     <MUIAppbar position="fixed" color="primary" className={styles.appbar}>
       <Toolbar className={styles.appbar__main}>
-
         {itemsMapping}
       </Toolbar>
     </MUIAppbar >
