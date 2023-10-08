@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
 import styles from './blogCard.module.css';
 
-export default function BlogCardPresentation({ title, image = null, onClick = () => { } }) {
+export default function BlogCardPresentation({ title, image, onClick = () => { } }) {
   return <Box component="div" onClick={onClick} className={styles['blog-card']} data-testid="blog-card">
     <Typography component='h4' className={styles['blog-card__title']} >
       {title}

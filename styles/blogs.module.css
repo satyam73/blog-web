@@ -1,3 +1,31 @@
+.blogs {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.blogs .blogs__heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  padding-left: 25px;
+}
+
+.blogs__main {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.main__container {
+  flex: 2;
+  padding: 10px 20px;
+}
+
+.main__sidebar {
+  flex: 1;
+}
+
+
 @media only screen and (min-width: 600px) {
   .blogs {
     margin-top: 64px;
