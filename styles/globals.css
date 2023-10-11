@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -10,8 +12,11 @@
   --contrast-color: #57534e;
 
   --light-grey: #f8f9fa;
+  --color-white: white;
+  --color-grey-low-opacity: rgba(128, 128, 128, 0.259);
+  --grey-box-shadow: 0px 0px 12px #808080;
 }
 
 body {
-  font-family: Montserrat;
+  font-family: 'Montserrat', sans-serif;
 }

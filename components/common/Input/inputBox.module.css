@@ -1,0 +1,35 @@
+.input-box {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-box__label {
+  display: block;
+  width: 100%;
+  font-size: 1.1rem;
+  color: var(--contrast-color);
+  margin-left: 5px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.input-box__input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 7px 10px;
+  border: none;
+
+  border: 2px solid var(--secondary-color);
+  color: var(--contrast-color);
+  font-weight: 500;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.input-box__input:focus {
+  outline: none;
+  transition: box-shadow .1s ease-in-out;
+  box-shadow: 0px 0px 0px 4px #80808042;
+
+}

@@ -1,7 +1,7 @@
 .blog-card {
   height: 180px;
   width: 100%;
-  box-shadow: 0px 0px 12px grey;
+  box-shadow: var(--grey-box-shadow);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
