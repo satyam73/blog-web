@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export default function RegisterModal({ open, handleClose }) {
   function handleChange() {
-    console.log('handle change');
+    //TODO implement this function
   }
 
   return (
