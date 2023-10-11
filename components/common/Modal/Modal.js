@@ -10,5 +10,5 @@ export default function Modal({ open, handleClose, children }) {
     >
       {children}
     </MUIModal>
-  )
+  );
 }

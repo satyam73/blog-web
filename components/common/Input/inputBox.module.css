@@ -13,13 +13,15 @@
   margin-bottom: 5px;
 }
 
-.input-box__input {
+.input-box__container {
+  display: flex;
+}
+
+.container__input {
   width: 100%;
   font-size: 1rem;
   padding: 10px;
-  border-radius: 7px 10px;
-  border: none;
-
+  border-radius: 10px;
   border: 2px solid var(--secondary-color);
   color: var(--contrast-color);
   font-weight: 500;
@@ -27,9 +29,17 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.input-box__input:focus {
+.container__input:focus {
   outline: none;
   transition: box-shadow .1s ease-in-out;
   box-shadow: 0px 0px 0px 4px #80808042;
+}
 
+.input-box__container .container__visibility-button {
+  border: 2px solid var(--secondary-color);
+  border-left: 0;
+  border-radius: 7px 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: var(--color-grey);
 }

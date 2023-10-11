@@ -26,6 +26,7 @@ export default function RegisterModal({ open, handleClose }) {
           <Image
             className={styles['image-container__image']}
             src={'assets/welcome.svg'}
+            alt='welcome cat illustration'
             height={130}
             width={130}
           />
@@ -47,7 +48,6 @@ export default function RegisterModal({ open, handleClose }) {
               id='password'
               handleChange={handleChange}
             />
-
             <Button variant='contained' className={styles['form__button']}>
               Signup
             </Button>

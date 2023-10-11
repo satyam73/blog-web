@@ -18,7 +18,8 @@ export default function Home() {
     setIsLoginModalOpen(true);
   }
 
-  function closeRegisterModal() {
+  function closeRegisterModal(e) {
+    e.stopPropagation();
     setIsRegisterModalOpen(false);
   }
   return (
