@@ -4,6 +4,7 @@ import { Montserrat } from 'next/font/google';
 import Layout from '@/components/common/Layout/Layout';
 import { useState } from 'react';
 import RegisterModal from '@/components/RegisterModal/RegisterModal';
+import LoginModal from '@/components/LoginModal/LoginModal';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 export default function Home() {
@@ -22,6 +23,11 @@ export default function Home() {
     e.stopPropagation();
     setIsRegisterModalOpen(false);
   }
+
+  function closeLoginModal(e) {
+    e.stopPropagation();
+    setIsLoginModalOpen(false);
+  }
   return (
     <>
       <Box className={styles.home} data-testid={'home-heading'} >
@@ -30,6 +36,7 @@ export default function Home() {
       </ Box>
 
       <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} />
+      <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
     </>
   )
 }
