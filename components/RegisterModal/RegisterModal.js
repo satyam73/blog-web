@@ -35,12 +35,18 @@ export default function RegisterModal({ open, handleClose }) {
           <form className={styles['main__form']}>
             <InputBox
               type={'text'}
+              name={'Name'}
+              placeholder={'Enter your name'}
+              id='name'
+              handleChange={handleChange}
+            />
+            <InputBox
+              type={'text'}
               name={'Email'}
               placeholder={'Enter your email'}
               id='email'
               handleChange={handleChange}
             />
-
             <InputBox
               type={'password'}
               name={'Password'}
