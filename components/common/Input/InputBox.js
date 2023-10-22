@@ -11,6 +11,7 @@ export default function InputBox({
   placeholder,
   id,
   isValid,
+  ref = null,
   handleChange = () => { },
 }) {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
