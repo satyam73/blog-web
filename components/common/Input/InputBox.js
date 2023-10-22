@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import styles from './inputBox.module.css';
+import { errorMessages } from './inputBox.constant';
 
 export default function InputBox({
   type,
   name,
   placeholder,
   id,
-  handleChange = () => {},
+  isValid,
+  handleChange = () => { },
 }) {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const lowerCaseName = name?.toLowerCase();
   const isTypePassword = type === 'password';
   const inputStyles = {
     borderTopRightRadius: isTypePassword ? 0 : '10px',
@@ -28,7 +31,7 @@ export default function InputBox({
           id={id}
           className={styles['container__input']}
           type={isPasswordHidden && isTypePassword ? type : 'text'}
-          name={name?.toLowerCase()}
+          name={lowerCaseName}
           placeholder={placeholder}
           onChange={handleChange}
           style={inputStyles}
@@ -44,6 +47,9 @@ export default function InputBox({
           </IconButton>
         )}
       </Box>
+      {!isValid && <Typography component='p' variant='subtitle2' className={styles['input-box__helper-text']} >
+        {errorMessages[lowerCaseName]}
+      </Typography>}
     </Box>
   );
 }

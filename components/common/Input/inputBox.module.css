@@ -42,3 +42,10 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+.input-box__helper-text {
+  color: var(--color-red-600);
+  font-size: 0.8rem;
+  margin-top: 2px;
+  padding-left: 5px;
+}

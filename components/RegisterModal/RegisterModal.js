@@ -1,13 +1,35 @@
-import { Box, Button, IconButton } from '@mui/material';
-import styles from './registerModal.module.css';
-import Modal from '../common/Modal/Modal';
-import CloseIcon from '@mui/icons-material/Close';
-import InputBox from '../common/Input/InputBox';
 import Image from 'next/image';
+import { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Button, IconButton } from '@mui/material';
+import Modal from '../common/Modal/Modal';
+import InputBox from '../common/Input/InputBox';
+import styles from './registerModal.module.css';
+import { emailValidator, isOnlyAlphabetChars, passwordValidator } from '@/utilities/validators';
 
 export default function RegisterModal({ open, handleClose }) {
-  function handleChange() {
-    //TODO implement this function
+  const [signupDetails, setSignupDetails] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const [errorState, setErrorState] = useState({
+    name: true,
+    email: true,
+    password: true
+  });
+
+  function handleChange(e) {
+    setSignupDetails((prevSignupDetails) => ({ ...prevSignupDetails, [e.target.name]: e.target.value }));
+  }
+
+  function handleSignup(e) {
+    const isNameValid = isOnlyAlphabetChars(signupDetails.name);
+    const isEmailValid = emailValidator(signupDetails.email);
+    const isPasswordValid = passwordValidator(signupDetails.password);
+
+    setErrorState({ name: isNameValid, email: isEmailValid, password: isPasswordValid });
   }
 
   return (
@@ -39,6 +61,7 @@ export default function RegisterModal({ open, handleClose }) {
               placeholder={'Enter your name'}
               id='name'
               handleChange={handleChange}
+              isValid={errorState.name}
             />
             <InputBox
               type={'text'}
@@ -46,6 +69,7 @@ export default function RegisterModal({ open, handleClose }) {
               placeholder={'Enter your email'}
               id='email'
               handleChange={handleChange}
+              isValid={errorState.email}
             />
             <InputBox
               type={'password'}
@@ -53,8 +77,9 @@ export default function RegisterModal({ open, handleClose }) {
               placeholder={'Enter your password'}
               id='password'
               handleChange={handleChange}
+              isValid={errorState.password}
             />
-            <Button variant='contained' className={styles['form__button']}>
+            <Button onClick={handleSignup} variant='contained' className={styles['form__button']}>
               Signup
             </Button>
           </form>
