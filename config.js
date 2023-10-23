@@ -1,1 +1,1 @@
-export const DOMAIN = process.env.NEXT_ENVIRONMENT === 'development' ? 'http://localhost:3000' : '';
+export const DOMAIN = process.env.NEXT_PUBLIC_ENVIRONMENT == 'development' ? 'http://localhost:3000' : '';

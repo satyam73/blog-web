@@ -1,6 +1,7 @@
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import firebaseApp from "../config";
 import { createUserWithEmailAndPassword, getAuth, updateProfile, sendEmailVerification } from "firebase/auth";
+import { DOMAIN } from "@/config";
 
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);

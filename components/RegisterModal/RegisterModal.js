@@ -1,13 +1,8 @@
-import Image from 'next/image';
 import { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, IconButton } from '@mui/material';
 import signUp from '@/firebase/auth/signup';
 import { emailValidator, isOnlyAlphabetChars, passwordValidator } from '@/utilities/validators';
-import Modal from '../common/Modal/Modal';
-import InputBox from '../common/Input/InputBox';
-import styles from './registerModal.module.css';
 import RegisterModalPresentation from './RegisterModalPresentation';
+import { DOMAIN } from '@/config';
 
 export default function RegisterModal({ open, handleClose }) {
   const [signupDetails, setSignupDetails] = useState({
@@ -16,7 +11,7 @@ export default function RegisterModal({ open, handleClose }) {
     password: ''
   });
 
-  const [errorState, setErrorState] = useState({
+  const [isDetailsValid, setIsDetailsValid] = useState({
     name: true,
     email: true,
     password: true
@@ -40,7 +35,7 @@ export default function RegisterModal({ open, handleClose }) {
 
     if (!isTargetValueValid) return;
 
-    setErrorState({ ...errorState, [targetName]: isTargetValueValid });
+    setIsDetailsValid({ ...isDetailsValid, [targetName]: isTargetValueValid });
   }
 
   async function handleSignup(e) {
@@ -51,7 +46,7 @@ export default function RegisterModal({ open, handleClose }) {
     const isEmailValid = emailValidator(trimmedEmail);
     const isPasswordValid = passwordValidator(trimmedPassword);
 
-    setErrorState({ name: isNameValid, email: isEmailValid, password: isPasswordValid });
+    setIsDetailsValid({ name: isNameValid, email: isEmailValid, password: isPasswordValid });
 
     const isAllInputsValid = isNameValid && isEmailValid && isPasswordValid;
 
@@ -65,9 +60,10 @@ export default function RegisterModal({ open, handleClose }) {
   return (
     <RegisterModalPresentation
       open={open}
+      signupDetails={signupDetails}
+      isDetailsValid={isDetailsValid}
       handleClose={handleClose}
       handleChange={handleChange}
-      errorState={errorState}
       handleSignup={handleSignup}
     />
   )

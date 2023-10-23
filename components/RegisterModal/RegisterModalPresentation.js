@@ -5,7 +5,7 @@ import Modal from '../common/Modal/Modal';
 import InputBox from '../common/Input/InputBox';
 import styles from './registerModal.module.css';
 
-export default function RegisterModalPresentation({ open, handleClose, handleChange, errorState, handleSignup }) {
+export default function RegisterModalPresentation({ open, isDetailsValid, signupDetails, handleClose, handleChange, handleSignup }) {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={styles['register-modal']}>
@@ -35,7 +35,7 @@ export default function RegisterModalPresentation({ open, handleClose, handleCha
               placeholder={'Enter your name'}
               id='name'
               handleChange={handleChange}
-              isValid={errorState.name}
+              isValid={isDetailsValid.name}
             />
             <InputBox
               type={'text'}
@@ -43,7 +43,7 @@ export default function RegisterModalPresentation({ open, handleClose, handleCha
               placeholder={'Enter your email'}
               id='email'
               handleChange={handleChange}
-              isValid={errorState.email}
+              isValid={isDetailsValid.email}
             />
             <InputBox
               type={'password'}
@@ -51,7 +51,7 @@ export default function RegisterModalPresentation({ open, handleClose, handleCha
               placeholder={'Enter your password'}
               id='password'
               handleChange={handleChange}
-              isValid={errorState.password}
+              isValid={isDetailsValid.password}
             />
             <Button onClick={handleSignup} variant='contained' className={styles['form__button']}>
               Signup
