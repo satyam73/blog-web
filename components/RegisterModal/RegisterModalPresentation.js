@@ -32,6 +32,7 @@ export default function RegisterModalPresentation({ open, isDetailsValid, signup
             <InputBox
               type={'text'}
               name={'Name'}
+              value={signupDetails.name}
               placeholder={'Enter your name'}
               id='name'
               handleChange={handleChange}
@@ -40,6 +41,7 @@ export default function RegisterModalPresentation({ open, isDetailsValid, signup
             <InputBox
               type={'text'}
               name={'Email'}
+              value={signupDetails.email}
               placeholder={'Enter your email'}
               id='email'
               handleChange={handleChange}
@@ -48,6 +50,7 @@ export default function RegisterModalPresentation({ open, isDetailsValid, signup
             <InputBox
               type={'password'}
               name={'Password'}
+              value={signupDetails.password}
               placeholder={'Enter your password'}
               id='password'
               handleChange={handleChange}
