@@ -6,6 +6,7 @@ import styles from './inputBox.module.css';
 import { errorMessages } from './inputBox.constant';
 
 export default function InputBox({
+  value,
   type,
   name,
   placeholder,
@@ -32,6 +33,7 @@ export default function InputBox({
           id={id}
           className={styles['container__input']}
           type={isPasswordHidden && isTypePassword ? type : 'text'}
+          value={value}
           name={lowerCaseName}
           placeholder={placeholder}
           onChange={handleChange}

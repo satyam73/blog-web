@@ -8,7 +8,6 @@ import Modal from '../common/Modal/Modal';
 import InputBox from '../common/Input/InputBox';
 import styles from './registerModal.module.css';
 import RegisterModalPresentation from './RegisterModalPresentation';
-import { addDataToDB } from '@/firebase/db/db';
 
 export default function RegisterModal({ open, handleClose }) {
   const [signupDetails, setSignupDetails] = useState({
@@ -45,17 +44,19 @@ export default function RegisterModal({ open, handleClose }) {
   }
 
   async function handleSignup(e) {
-    const isNameValid = isOnlyAlphabetChars(signupDetails.name.trim());
-    const isEmailValid = emailValidator(signupDetails.email.trim());
-    const isPasswordValid = passwordValidator(signupDetails.password.trim());
+    const trimmedName = signupDetails.name.trim();
+    const trimmedEmail = signupDetails.email.trim();
+    const trimmedPassword = signupDetails.password.trim();
+    const isNameValid = isOnlyAlphabetChars(trimmedName);
+    const isEmailValid = emailValidator(trimmedEmail);
+    const isPasswordValid = passwordValidator(trimmedPassword);
 
     setErrorState({ name: isNameValid, email: isEmailValid, password: isPasswordValid });
 
     const isAllInputsValid = isNameValid && isEmailValid && isPasswordValid;
 
     if (isAllInputsValid) {
-      console.log('signing up...');
-      const signUpResponse = await signUp(signupDetails.name, signupDetails.email, signupDetails.password);
+      const signUpResponse = await signUp(trimmedName, trimmedEmail, trimmedPassword);
 
       console.log(signUpResponse);
     }
