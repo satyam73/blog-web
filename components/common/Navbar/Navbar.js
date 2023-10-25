@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import firebaseApp from "@/firebase/config";
-import { getAuth, signOut } from "firebase/auth";
-import { NAVBAR_ITEMS } from "./navbar.constant";
-import NavbarPresentation from "./NavbarPresentation";
 import signoutHandler from "@/firebase/auth/signout";
+import NavbarPresentation from "./NavbarPresentation";
 
 export default function Navbar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
@@ -16,8 +13,7 @@ export default function Navbar() {
     }
 
     setActiveLinkIndex(index);
-    const activePage = item.link;
-    push(activePage);
+    push(item.link);
   }
   return (
     <NavbarPresentation activeLinkIndex={activeLinkIndex} onNavbarItemClick={onNavbarItemClick} />
