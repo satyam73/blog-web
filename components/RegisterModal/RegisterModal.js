@@ -2,7 +2,7 @@ import { useState } from 'react';
 import signUp from '@/firebase/auth/signup';
 import { emailValidator, isOnlyAlphabetChars, passwordValidator } from '@/utilities/validators';
 import RegisterModalPresentation from './RegisterModalPresentation';
-import { DOMAIN } from '@/config';
+
 
 export default function RegisterModal({ open, handleClose }) {
   const [signupDetails, setSignupDetails] = useState({
