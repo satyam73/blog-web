@@ -14,4 +14,9 @@ export const NAVBAR_ITEMS = [
     text: 'Profile',
     link: '/profile'
   },
+  {
+    name: 'sign out',
+    text: 'Sign out',
+    link: 'javascript:void(0)'
+  }
 ]

@@ -6,7 +6,7 @@ import { useTheme } from "@mui/material";
 export default function NavbarPresentation({ activeLinkIndex, onNavbarItemClick }) {
   const theme = useTheme();
   const navbarItemsMapping = NAVBAR_ITEMS.map((item, index) => (
-    <Button onClick={() => onNavbarItemClick(index)} className={`${styles['navbar__item']} ${activeLinkIndex == index ? styles['navbar__item--active'] : ''}`} data-testid={`navbar-item-${item.name}`} key={item.name} sx={{ color: theme.palette.primary.dark }}>
+    <Button onClick={() => onNavbarItemClick(index, item)} className={`${styles['navbar__item']} ${activeLinkIndex == index ? styles['navbar__item--active'] : ''}`} data-testid={`navbar-item-${item.name}`} key={item.name} sx={{ color: theme.palette.primary.dark }}>
       {item.text}
     </Button>
   ));
