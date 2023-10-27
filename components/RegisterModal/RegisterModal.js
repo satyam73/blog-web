@@ -52,8 +52,6 @@ export default function RegisterModal({ open, handleClose }) {
 
     if (isAllInputsValid) {
       const signUpResponse = await signUp(trimmedName, trimmedEmail, trimmedPassword);
-
-      console.log(signUpResponse);
     }
   }
 

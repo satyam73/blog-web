@@ -5,7 +5,6 @@ import AuthGuard from "@/components/AuthGuard/AuthGuard";
 
 export default function Profile() {
   const { user, loading } = useUser();
-  console.log(user);
 
   return <Box>
     {loading ? <>loading...</> :

@@ -4,12 +4,12 @@ import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
-      main: '#fafaf9',
-      light: '#292524',
-      dark: '#57534e'
+      main: '#292524',
+      light: '#fafaf9',
+      dark: '#57534e',
     },
 
   },
@@ -18,6 +18,9 @@ const theme = createTheme({
       fontFamily: montserrat.style.fontFamily,
       fontWeight: 500,
       lineHeight: 1.4,
+    },
+    h4: {
+      fontWeight: 600,
     },
   },
   breakpoints: {
@@ -30,6 +33,76 @@ const theme = createTheme({
       mobile: 600, // down from 600px 
       desktop: 1000, // up from 1000px 
     },
+  },
+
+});
+
+theme = createTheme(theme, {
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: theme.palette.primary.dark,
+          color: theme.palette.primary.light,
+          borderRadius: '10px',
+          textTransform: 'none',
+          letterSpacing: 0,
+          fontFamily: 'Montserrat',
+          fontWeight: 600
+        },
+      },
+      variants: [
+        {
+          props: {
+            variant: 'outlined',
+          },
+          style: {
+            backgroundColor: 'transparent',
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: theme.palette.primary.main,
+            color: theme.palette.primary.main,
+            '&:hover': {
+              backgroundColor: 'unset',
+            },
+          },
+        },
+        {
+          props: {
+            variant: 'contained',
+          },
+          style: {
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.light,
+            border: 'none',
+            '&:hover': {
+              backgroundColor: '#fffff',
+            },
+          },
+        },
+        {
+          props: {
+            variant: 'text',
+          },
+          style: {
+            backgroundColor: 'transparent',
+            color: theme.palette.primary.main,
+            border: 'none',
+            '&:hover': {
+              backgroundColor: 'unset',
+            },
+          },
+        },
+      ],
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: theme.palette.primary.light,
+          color: theme.palette.primary.dark,
+        }
+      }
+    }
   },
 });
 

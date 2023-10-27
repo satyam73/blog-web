@@ -33,7 +33,6 @@ export default function LoginModal({ open, handleClose, }) {
     const trimmedPassword = loginDetails.password.trim();
     const isEmailValid = emailValidator(trimmedEmail);
     const isPasswordValid = passwordValidator(trimmedPassword);
-    console.log('handle login');
 
     setIsDetailsValid({ email: isEmailValid, password: isPasswordValid });
 
@@ -41,8 +40,6 @@ export default function LoginModal({ open, handleClose, }) {
 
     if (isAllInputsValid) {
       const signInResponse = await signIn(trimmedEmail, trimmedPassword);
-
-      console.log(signInResponse);
     }
   }
   return (

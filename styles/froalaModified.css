@@ -1,0 +1,4 @@
+.fr-box.fr-basic .fr-element {
+  height: 56vh;
+  border-top: 1px solid var(--light-grey);
+}
