@@ -44,7 +44,6 @@ export const toolbarButtons = {
       'emoticons',
       'fontAwesome',
       'specialCharacters',
-      'embedly',
       'insertFile',
       'insertHR',
     ],
@@ -54,13 +53,8 @@ export const toolbarButtons = {
     buttons: [
       'undo',
       'redo',
-      'fullscreen',
-      'print',
-      'getPDF',
-      'spellChecker',
       'selectAll',
-      'html',
-      'help',
+      'help'
     ],
 
     align: 'right',

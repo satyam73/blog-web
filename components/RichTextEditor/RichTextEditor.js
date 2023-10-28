@@ -14,6 +14,8 @@ import 'froala-editor/js/plugins/table.min.js';
 import 'froala-editor/js/plugins/image_manager.min.js';
 import 'froala-editor/js/plugins/paragraph_format.min.js';
 import 'froala-editor/js/plugins/quote.min.js';
+import 'froala-editor/js/plugins/link.min.js';
+import 'froala-editor/js/plugins/lists.min.js';
 
 const FroalaEditor = dynamic(() => import('react-froala-wysiwyg'), {
   ssr: false,
