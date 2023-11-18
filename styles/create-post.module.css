@@ -11,6 +11,16 @@
   margin: 10px 0;
 }
 
+.editor__title {
+  width: 100%;
+  padding: 6px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  border: 2px solid var(--light-grey-mid);
+  margin-bottom: 10px;
+  outline: none;
+}
+
 .create-post__buttons {
   width: 100%;
   display: flex;
