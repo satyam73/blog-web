@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, IconButton } from '@mui/material';
+import { Box, Button, CircularProgress, IconButton } from '@mui/material';
 import Modal from '../common/Modal/Modal';
 import InputBox from '../common/Input/InputBox';
 import styles from './registerModal.module.css';
 
-export default function RegisterModalPresentation({ open, isDetailsValid, signupDetails, handleClose, handleChange, handleSignup }) {
+export default function RegisterModalPresentation({ open, isDetailsValid, signupDetails, isSignupLoading, handleClose, handleChange, handleSignup, }) {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={styles['register-modal']}>
@@ -56,7 +56,8 @@ export default function RegisterModalPresentation({ open, isDetailsValid, signup
               handleChange={handleChange}
               isValid={isDetailsValid.password}
             />
-            <Button onClick={handleSignup} variant='contained' className={styles['form__button']}>
+            <Button disabled={isSignupLoading} onClick={handleSignup} variant='contained' className={styles['form__button']}>
+              {isSignupLoading && <CircularProgress size={20} color="inherit" />}
               Signup
             </Button>
           </form>

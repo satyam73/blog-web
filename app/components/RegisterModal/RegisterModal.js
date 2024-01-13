@@ -2,8 +2,9 @@ import { useState } from 'react';
 import signUp from '@/app/firebase/auth/signup';
 import { emailValidator, isOnlyAlphabetChars, passwordValidator } from '@/utilities/validators';
 import RegisterModalPresentation from './RegisterModalPresentation';
-import { FIREBASE_ERRROR_CODES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+import { FIREBASE_ERRROR_CODES, INFO_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
 import { useToast } from '@/app/contexts/ToastProvider';
+import { useRouter } from 'next/router';
 
 
 export default function RegisterModal({ open, handleClose }) {
@@ -17,8 +18,9 @@ export default function RegisterModal({ open, handleClose }) {
     email: true,
     password: true
   });
+  const [isSignupLoading, setIsSignupLoading] = useState(false);
   const { toast, showToast } = useToast();
-
+  const router = useRouter();
   function handleChange(e) {
     const targetName = e.target.name;
     setSignupDetails((prevSignupDetails) => ({ ...prevSignupDetails, [targetName]: e.target.value }));
@@ -41,6 +43,7 @@ export default function RegisterModal({ open, handleClose }) {
   }
 
   async function handleSignup(e) {
+    setIsSignupLoading(true);
     const trimmedName = signupDetails.name.trim();
     const trimmedEmail = signupDetails.email.trim();
     const trimmedPassword = signupDetails.password.trim();
@@ -58,11 +61,11 @@ export default function RegisterModal({ open, handleClose }) {
         const { result, error } = await signUp(trimmedName, trimmedEmail, trimmedPassword);
         let toastMessage = '';
         let toastType = '';
-        const modalCloseTimeout = toast.hideDuration + 100;
 
         if (!error && result?.user?.uid) {
           showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.SIGNUP_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS })
-          setTimeout(handleClose, modalCloseTimeout);
+          handleClose();
+          router.push('/blogs');
           return;
         }
 
@@ -80,6 +83,8 @@ export default function RegisterModal({ open, handleClose }) {
       }
     } catch (error) {
       console.error('Some error occured while registering ', error)
+    } finally {
+      setIsSignupLoading(false);
     }
   }
 
@@ -91,6 +96,7 @@ export default function RegisterModal({ open, handleClose }) {
       handleClose={handleClose}
       handleChange={handleChange}
       handleSignup={handleSignup}
+      isSignupLoading={isSignupLoading}
     />
   )
 }

@@ -43,6 +43,7 @@
   border-radius: 10px;
   padding: 13px 6px;
   margin-top: 5px;
+  gap: 10px;
 }
 
 .main__form .form__button:hover {
