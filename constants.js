@@ -13,7 +13,12 @@ export const ERROR_MESSAGES = {
 }
 
 export const INFO_MESSAGES = {
-  TOO_MANY_REQUESTS: 'Too many requests please try again later'
+  TOO_MANY_REQUESTS: 'Too many requests please try again later',
+  EMAIL_ALREADY_EXISTS_MESSAGE: 'Email already exists'
+}
+
+export const SUCCESS_MESSAGES = {
+  SIGNUP_SUCCESS_MESSAGE: 'Successfully signed up',
 }
 
 export const FIREBASE_ERRROR_CODES = {

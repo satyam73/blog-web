@@ -20,12 +20,12 @@ export default function Home() {
   }
 
   function closeRegisterModal(e) {
-    e.stopPropagation();
+    e?.stopPropagation();
     setIsRegisterModalOpen(false);
   }
 
   function closeLoginModal(e) {
-    e.stopPropagation();
+    e?.stopPropagation();
     setIsLoginModalOpen(false);
   }
   return (

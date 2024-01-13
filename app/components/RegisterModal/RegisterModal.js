@@ -2,9 +2,8 @@ import { useState } from 'react';
 import signUp from '@/app/firebase/auth/signup';
 import { emailValidator, isOnlyAlphabetChars, passwordValidator } from '@/utilities/validators';
 import RegisterModalPresentation from './RegisterModalPresentation';
-import { FIREBASE_ERRROR_CODES, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
-import { EMAIL_ALREADY_EXISTS_MESSAGE, SIGNUP_SUCCESS_MESSAGE } from './registerModal.constant';
-import { Alert, Snackbar } from '@mui/material';
+import { FIREBASE_ERRROR_CODES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+import { useToast } from '@/app/contexts/ToastProvider';
 
 
 export default function RegisterModal({ open, handleClose }) {
@@ -13,20 +12,13 @@ export default function RegisterModal({ open, handleClose }) {
     email: '',
     password: ''
   });
-
   const [isDetailsValid, setIsDetailsValid] = useState({
     name: true,
     email: true,
     password: true
   });
-  const [isRegisterToastVisible, setIsRegisterToastVisible] = useState(false);
-  const [toastDetails, setToastDetails] = useState({
-    type: '', //can be error / warning / success / info
-    message: ''
-  });
-  function handleRegisterToastClose() {
-    setIsRegisterToastVisible(false);
-  }
+  const { toast, showToast } = useToast();
+
   function handleChange(e) {
     const targetName = e.target.name;
     setSignupDetails((prevSignupDetails) => ({ ...prevSignupDetails, [targetName]: e.target.value }));
@@ -64,22 +56,27 @@ export default function RegisterModal({ open, handleClose }) {
     try {
       if (isAllInputsValid) {
         const { result, error } = await signUp(trimmedName, trimmedEmail, trimmedPassword);
+        let toastMessage = '';
+        let toastType = '';
+        const modalCloseTimeout = toast.hideDuration + 100;
 
         if (!error && result?.user?.uid) {
-          setToastDetails({ ...toastDetails, message: SIGNUP_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS })
-          setIsRegisterToastVisible(true);
-          handleClose();
+          showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.SIGNUP_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS })
+          setTimeout(handleClose, modalCloseTimeout);
           return;
         }
 
-        if (error.code === FIREBASE_ERRROR_CODES.AUTH_EMAIL_ALREADY_IN_USE) {
-          console.log('error is ', error, result, error.message, `error code : ${error.code}`);
-          setToastDetails({ ...toastDetails, message: EMAIL_ALREADY_EXISTS_MESSAGE, type: TOAST_TYPES.INFO })
-          setIsRegisterToastVisible(true);
-        } else {
-          setToastDetails({ ...toastDetails, message: SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR })
-          setIsRegisterToastVisible(true);
+        switch (error?.code) {
+          case FIREBASE_ERRROR_CODES.AUTH_EMAIL_ALREADY_IN_USE:
+            toastMessage = INFO_MESSAGES.EMAIL_ALREADY_EXISTS_MESSAGE;
+            toastType = TOAST_TYPES.INFO;
+            break;
+          default:
+            toastMessage = ERROR_MESSAGES.SOMETHING_WENT_WRONG;
+            toastType = TOAST_TYPES.ERROR;
         }
+
+        showToast({ ...toast, isVisible: true, text: toastMessage, type: toastType });
       }
     } catch (error) {
       console.error('Some error occured while registering ', error)
@@ -87,20 +84,13 @@ export default function RegisterModal({ open, handleClose }) {
   }
 
   return (
-    <>
-      <Snackbar open={isRegisterToastVisible} autoHideDuration={TOAST_HIDEOUT_TIME} onClose={handleRegisterToastClose} anchorOrigin={TOAST_OPTIONS_TOP_RIGHT}>
-        <Alert severity={toastDetails.type} sx={{ width: '100%' }}>
-          {toastDetails.message}
-        </Alert>
-      </Snackbar>
-      <RegisterModalPresentation
-        open={open}
-        signupDetails={signupDetails}
-        isDetailsValid={isDetailsValid}
-        handleClose={handleClose}
-        handleChange={handleChange}
-        handleSignup={handleSignup}
-      />
-    </>
+    <RegisterModalPresentation
+      open={open}
+      signupDetails={signupDetails}
+      isDetailsValid={isDetailsValid}
+      handleClose={handleClose}
+      handleChange={handleChange}
+      handleSignup={handleSignup}
+    />
   )
 }
