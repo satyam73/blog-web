@@ -51,7 +51,7 @@ export default function LoginModal({ open, handleClose, }) {
           return;
         }
 
-        switch (error.code) {
+        switch (error?.code) {
           case FIREBASE_ERRROR_CODES.AUTH_TOO_MANY_REQUESTS:
             toastMessage = INFO_MESSAGES.TOO_MANY_REQUESTS;
             toastType = TOAST_TYPES.INFO;
