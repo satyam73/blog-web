@@ -1,4 +1,4 @@
-import ThemeProvider from '@/app/Contexts/ThemeProvider'
+import ThemeProvider from '@/app/contexts/ThemeProvider'
 import '../styles/globals.css';
 import { Montserrat } from 'next/font/google';
 

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import UserProvider, { useUser } from "@/app/Contexts/UserProvider";
+import UserProvider, { useUser } from "@/app/contexts/UserProvider";
 import Layout from "@/app/components/common/Layout/Layout";
 import AuthGuard from "@/app/components/AuthGuard/AuthGuard";
 

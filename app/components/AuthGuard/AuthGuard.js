@@ -1,4 +1,4 @@
-import { useUser } from "@/app/Contexts/UserProvider";
+import { useUser } from "@/app/contexts/UserProvider";
 
 export default function AuthGuard({ children }) {
   const { user } = useUser();
