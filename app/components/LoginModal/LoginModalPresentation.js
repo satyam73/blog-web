@@ -1,11 +1,11 @@
-import { Box, Button, IconButton } from '@mui/material';
+import { Box, Button, CircularProgress, IconButton } from '@mui/material';
 import Image from 'next/image';
 import CloseIcon from '@mui/icons-material/Close';
 import InputBox from '../common/Input/InputBox';
 import Modal from '../common/Modal/Modal';
 import styles from './loginModal.module.css';
 
-export default function LoginModalPresentation({ open, handleClose, handleChange, handleLogin, isDetailsValid, loginDetails }) {
+export default function LoginModalPresentation({ open, handleClose, handleChange, handleLogin, isDetailsValid, loginDetails, isLoginLoading }) {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={styles['login-modal']}>
@@ -47,7 +47,8 @@ export default function LoginModalPresentation({ open, handleClose, handleChange
               handleChange={handleChange}
               isValid={isDetailsValid.password}
             />
-            <Button onClick={handleLogin} variant='contained' className={styles['form__button']}>
+            <Button disabled={isLoginLoading} onClick={handleLogin} variant='contained' className={styles['form__button']}>
+              {isLoginLoading && <CircularProgress size={20} color="inherit" />}
               Login
             </Button>
           </form>

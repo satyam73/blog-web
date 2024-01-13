@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { emailValidator, passwordValidator } from '@/utilities/validators';
+import { useToast } from '@/app/contexts/ToastProvider';
 import signIn from '@/app/firebase/auth/signin';
 import LoginModalPresentation from './LoginModalPresentation';
 import { ERROR_MESSAGES, FIREBASE_ERRROR_CODES, INFO_MESSAGES, SOMETHING_WENT_WRONG, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
 import { LOGIN_SUCCESS_MESSAGE } from './loginModal.constant';
-import { useToast } from '@/app/contexts/ToastProvider';
 
 export default function LoginModal({ open, handleClose, }) {
   const [loginDetails, setLoginDetails] = useState({ email: '', password: '' });
@@ -12,7 +13,9 @@ export default function LoginModal({ open, handleClose, }) {
     email: true,
     password: true
   });
-  const { toast, showToast } = useToast()
+  const { toast, showToast } = useToast();
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const router = useRouter();
   function handleChange(e) {
     const targetName = e.target.name;
     setLoginDetails(prevLoginDetails => ({ ...prevLoginDetails, [targetName]: e.target.value }));
@@ -32,6 +35,7 @@ export default function LoginModal({ open, handleClose, }) {
   }
 
   async function handleLogin(e) {
+    setIsLoginLoading(true);
     const trimmedEmail = loginDetails.email.trim();
     const trimmedPassword = loginDetails.password.trim();
     const isEmailValid = emailValidator(trimmedEmail);
@@ -47,7 +51,9 @@ export default function LoginModal({ open, handleClose, }) {
         let toastType = '';
 
         if (!error && result?.user?.uid) {
-          showToast({ ...toast, isVisible: true, text: LOGIN_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS })
+          showToast({ ...toast, isVisible: true, text: LOGIN_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS });
+          handleClose();
+          router.push('/blogs');
           return;
         }
 
@@ -70,6 +76,8 @@ export default function LoginModal({ open, handleClose, }) {
     } catch (error) {
       showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });
       console.error('Some error occured ', error)
+    } finally {
+      setIsLoginLoading(false)
     }
   }
 
@@ -81,6 +89,7 @@ export default function LoginModal({ open, handleClose, }) {
       handleLogin={handleLogin}
       isDetailsValid={isDetailsValid}
       loginDetails={loginDetails}
+      isLoginLoading={isLoginLoading}
     />
   )
 }
