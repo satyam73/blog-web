@@ -1,6 +1,7 @@
 import ThemeProvider from '@/app/contexts/ThemeProvider'
-import '../styles/globals.css';
 import { Montserrat } from 'next/font/google';
+import ToastProvider from '@/app/contexts/ToastProvider';
+import '../styles/globals.css';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 export default function MyApp({ Component, pageProps }) {
@@ -8,7 +9,9 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider>
-      {getLayout(<Component {...pageProps} className={montserrat.className} />)}
+      <ToastProvider>
+        {getLayout(<Component {...pageProps} className={montserrat.className} />)}
+      </ToastProvider>
     </ThemeProvider>
   )
 }

@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { emailValidator, passwordValidator } from '@/utilities/validators';
 import signIn from '@/app/firebase/auth/signin';
 import LoginModalPresentation from './LoginModalPresentation';
-import { FIREBASE_ERRROR_CODES, SOMETHING_WENT_WRONG, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
-import { Alert, Snackbar } from '@mui/material';
+import { ERROR_MESSAGES, FIREBASE_ERRROR_CODES, INFO_MESSAGES, SOMETHING_WENT_WRONG, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
 import { LOGIN_SUCCESS_MESSAGE } from './loginModal.constant';
-import { useLoginToast } from './loginModal.hooks';
+import { useToast } from '@/app/contexts/ToastProvider';
 
 export default function LoginModal({ open, handleClose, }) {
   const [loginDetails, setLoginDetails] = useState({ email: '', password: '' });
@@ -13,17 +12,7 @@ export default function LoginModal({ open, handleClose, }) {
     email: true,
     password: true
   });
-  console.log(process.env.FIREBASE_API_KEY)
-
-  const [isLoginToastVisible, setIsLoginToastVisible] = useState(false);
-  const [toastDetails, setToastDetails] = useState({
-    type: '', //can be error / warning / success / info
-    message: ''
-  });
-  function handleLoginToastClose() {
-    setIsLoginToastVisible(false);
-  }
-
+  const { toast, showToast } = useToast()
   function handleChange(e) {
     const targetName = e.target.name;
     setLoginDetails(prevLoginDetails => ({ ...prevLoginDetails, [targetName]: e.target.value }));
@@ -54,42 +43,44 @@ export default function LoginModal({ open, handleClose, }) {
     try {
       if (isAllInputsValid) {
         const { error, result } = await signIn(trimmedEmail, trimmedPassword);
+        let toastMessage = '';
+        let toastType = '';
+
         if (!error && result?.user?.uid) {
-          setToastDetails({ ...toastDetails, message: LOGIN_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS })
-          setIsLoginToastVisible(true);
-          handleClose();
+          showToast({ ...toast, isVisible: true, text: LOGIN_SUCCESS_MESSAGE, type: TOAST_TYPES.SUCCESS })
           return;
         }
 
-        if (error.code === FIREBASE_ERRROR_CODES.AUTH_EMAIL_ALREADY_IN_USE) {
-          console.log('error is ', error, result, error.message, `error code : ${error.code}`);
-          setToastDetails({ ...toastDetails, message: EMAIL_ALREADY_EXISTS_MESSAGE, type: TOAST_TYPES.INFO })
-          setIsLoginToastVisible(true);
-        } else {
-          setToastDetails({ ...toastDetails, message: SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR })
-          setIsLoginToastVisible(true);
+        switch (error.code) {
+          case FIREBASE_ERRROR_CODES.AUTH_TOO_MANY_REQUESTS:
+            toastMessage = INFO_MESSAGES.TOO_MANY_REQUESTS;
+            toastType = TOAST_TYPES.INFO;
+            break;
+          case FIREBASE_ERRROR_CODES.AUTH_INVALID_LOGIN_CREDENTIALS:
+            toastMessage = ERROR_MESSAGES.INVALID_LOGIN_CREDENTIALS;
+            toastType = TOAST_TYPES.ERROR;
+            break;
+          default:
+            toastMessage = ERROR_MESSAGES.SOMETHING_WENT_WRONG;
+            toastType = TOAST_TYPES.ERROR;
         }
+
+        showToast({ ...toast, isVisible: true, text: toastMessage, type: toastType });
       }
     } catch (error) {
+      showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });
       console.error('Some error occured ', error)
     }
   }
-  return (
-    <>
-      <Snackbar open={isLoginToastVisible} autoHideDuration={TOAST_HIDEOUT_TIME} onClose={handleLoginToastClose} anchorOrigin={TOAST_OPTIONS_TOP_RIGHT}>
-        <Alert severity={toastDetails.type} sx={{ width: '100%' }}>
-          {toastDetails.message}
-        </Alert>
-      </Snackbar>
 
-      <LoginModalPresentation
-        open={open}
-        handleClose={handleClose}
-        handleChange={handleChange}
-        handleLogin={handleLogin}
-        isDetailsValid={isDetailsValid}
-        loginDetails={loginDetails}
-      />
-    </>
+  return (
+    <LoginModalPresentation
+      open={open}
+      handleClose={handleClose}
+      handleChange={handleChange}
+      handleLogin={handleLogin}
+      isDetailsValid={isDetailsValid}
+      loginDetails={loginDetails}
+    />
   )
 }
