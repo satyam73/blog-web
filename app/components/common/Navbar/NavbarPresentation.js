@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import styles from './navbar.module.css';
 import { NAVBAR_ITEMS } from "./navbar.constant";
@@ -18,7 +19,9 @@ export default function NavbarPresentation({ activeLinkIndex, onNavbarItemClick 
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           className={styles['navbar__logo']}
         >
-          Bloggie
+          <Link href='/' style={{ textDecoration: 'none', color: 'var(--secondary-color)' }}>
+            Bloggie
+          </Link>
         </Typography>
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           {navbarItemsMapping}

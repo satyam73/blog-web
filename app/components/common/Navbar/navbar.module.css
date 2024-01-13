@@ -1,12 +1,13 @@
 .navbar__logo {
   font-weight: 600;
+  color: var(--secondary-color);
 }
 
 .navbar__item {
   margin-left: 20px;
 }
 
-.navbar__item:hover::before  {
+.navbar__item:hover::before {
   content: '';
   position: absolute;
   bottom: 4px;
@@ -14,7 +15,7 @@
   width: 50%;
   height: 2px;
   background-color: black;
-  animation:  bottom-tile 1.5s cubic-bezier(0.18, 0.41, 0.74, 1.21);
+  animation: bottom-tile 1.5s cubic-bezier(0.18, 0.41, 0.74, 1.21);
 }
 
 .navbar__item--active::before {
@@ -25,14 +26,15 @@
   width: 50%;
   height: 2px;
   background-color: black;
-  animation:  bottom-tile 1.5s cubic-bezier(0.18, 0.41, 0.74, 1.21);
+  animation: bottom-tile 1.5s cubic-bezier(0.18, 0.41, 0.74, 1.21);
 }
 
 @keyframes bottom-tile {
-  0%{
+  0% {
     width: 0%;
   }
-  100%{
+
+  100% {
     width: 50%;
   }
 }
