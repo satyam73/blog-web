@@ -4,7 +4,7 @@ import {
   onAuthStateChanged,
   getAuth,
 } from 'firebase/auth';
-import firebaseApp from '@/firebase/config';
+import firebaseApp from '@/app/firebase/config';
 
 const auth = getAuth(firebaseApp);
 export const UserContext = createContext({});

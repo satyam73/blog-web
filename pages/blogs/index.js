@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
-import Layout from '@/components/common/Layout/Layout';
+import Layout from '@/app/components/common/Layout/Layout';
 import styles from '@/styles/blogs.module.css';
-import BlogCard from '@/components/blogs/BlogCard/BlogCard';
-import ProfileCard from '@/components/ProfileCard/ProfileCard';
+import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
+import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
 
 export default function BlogsPage() {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { emailValidator, passwordValidator } from '@/utilities/validators';
-import signIn from '@/firebase/auth/signin';
+import signIn from '@/app/firebase/auth/signin';
 import LoginModalPresentation from './LoginModalPresentation';
 import { FIREBASE_ERRROR_CODES, SOMETHING_WENT_WRONG, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
 import { Alert, Snackbar } from '@mui/material';
@@ -13,6 +13,7 @@ export default function LoginModal({ open, handleClose, }) {
     email: true,
     password: true
   });
+  console.log(process.env.FIREBASE_API_KEY)
 
   const [isLoginToastVisible, setIsLoginToastVisible] = useState(false);
   const [toastDetails, setToastDetails] = useState({

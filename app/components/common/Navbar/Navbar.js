@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import signoutHandler from "@/firebase/auth/signout";
+import signoutHandler from "@/app/firebase/auth/signout";
 import NavbarPresentation from "./NavbarPresentation";
 
 export default function Navbar() {

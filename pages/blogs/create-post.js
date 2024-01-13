@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import Layout from '@/components/common/Layout/Layout';
+import Layout from '@/app/components/common/Layout/Layout';
 import { Box, Button, Typography } from '@mui/material';
 
 const RichTextEditor = dynamic(
-  () => import('@/components/RichTextEditor/RichTextEditor'),
+  () => import('@/app/components/RichTextEditor/RichTextEditor'),
   {
     ssr: false,
   }
 );
 
-import { addDataToFirebase } from '@/firebase/db/db';
+import { addDataToFirebase } from '@/app/firebase/db/db';
 import styles from '@/styles/create-post.module.css';
 
 export default function CreatePost() {

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import AppbarPresentation from '@/components/common/Appbar/AppbarPresentation';
-import { APPBAR_ITEMS } from '@/components/common/Appbar/appbar.constant'
+import AppbarPresentation from '@/app/components/common/Appbar/AppbarPresentation';
+import { APPBAR_ITEMS } from '@/app/components/common/Appbar/appbar.constant'
 
 describe('Unit: Appbar Component', () => {
   it('should render Appbar component', () => {

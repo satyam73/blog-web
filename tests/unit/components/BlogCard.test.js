@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import Image from 'next/image';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import BlogCardPresentation from '@/components/blogs/BlogCard/BlogCardPresentation';
+import BlogCardPresentation from '@/app/components/blogs/BlogCard/BlogCardPresentation';
 
 describe('Unit: BlogCard component', () => {
   const mockedFunction = jest.fn();

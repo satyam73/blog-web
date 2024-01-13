@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import NavbarPresentation from '@/components/common/Navbar/NavbarPresentation';
-import { NAVBAR_ITEMS } from '@/components/common/Navbar/navbar.constant';
+import NavbarPresentation from '@/app/components/common/Navbar/NavbarPresentation';
+import { NAVBAR_ITEMS } from '@/app/components/common/Navbar/navbar.constant';
 
 describe('Unit: Navbar Component', () => {
   it('should render Navbar component', () => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import signUp from '@/firebase/auth/signup';
+import signUp from '@/app/firebase/auth/signup';
 import { emailValidator, isOnlyAlphabetChars, passwordValidator } from '@/utilities/validators';
 import RegisterModalPresentation from './RegisterModalPresentation';
 import { FIREBASE_ERRROR_CODES, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
