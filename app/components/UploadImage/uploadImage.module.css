@@ -1,0 +1,26 @@
+.upload-image {
+  border: 2px dashed var(--color-blue);
+  border-radius: 10px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.upload-image__input {
+  visibility: hidden;
+}
+
+.upload-image__icon {
+  color: var(--color-blue);
+}
+
+.upload-image__text {
+  font-size: 12px;
+  color: var(--color-blue);
+  text-align: center;
+}

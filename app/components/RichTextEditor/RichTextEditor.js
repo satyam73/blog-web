@@ -23,15 +23,12 @@ const FroalaEditor = dynamic(() => import('react-froala-wysiwyg'), {
 
 import { toolbarButtons } from './richTextEditor.constant';
 import styles from './richTextEditor.module.css';
-import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+// import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 
 export default function RichTextEditor({ blogPost, handleBlogPostChange }) {
 
   return (
     <Box className={styles['rich-text-editor']} >
-      <FroalaEditorView
-        model={'<p><img src="blob:http://localhost:3001/5882e0c8-aa31-4486-be73-74237d169288" style="width: 300px;" class="fr-fic fr-dib"><strong>HI THERE</strong></p>'}
-      />
       <FroalaEditor tag='textarea'
         model={blogPost}
         onModelChange={handleBlogPostChange}
