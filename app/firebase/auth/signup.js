@@ -11,19 +11,19 @@ export default async function signUp(name, email, password) {
     error = null;
   try {
     result = await createUserWithEmailAndPassword(auth, email, password);
-    const user = result?.user;
+    const user = result.user;
     const actionCodeSettings = {
-      url: `${DOMAIN}/?email=${user?.email}`
+      url: `${DOMAIN}/?email=${user.email}`
     }
 
     await sendEmailVerification(user, actionCodeSettings);
 
-    await setDoc(doc(db, 'users', user?.uid), {
+    await setDoc(doc(db, 'users', user.uid), {
       name,
       email: user.email,
-      uid: user.uid,
-      created_at: user.metadata?.createdAt,
-      updated_at: user.metadata?.createdAt
+      id: user.uid,
+      created_at: user.metadata.createdAt,
+      updated_at: user.metadata.createdAt
     });
 
     updateProfile(user, { displayName: name });
