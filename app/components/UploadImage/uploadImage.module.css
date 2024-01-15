@@ -9,8 +9,7 @@
   padding: 10px;
   width: 100%;
   cursor: pointer;
-
-
+  animation: fade-in 0.3s linear forwards;
 }
 
 .upload-image__input {
@@ -37,5 +36,15 @@
 
   0% {
     transform: translateY(20px);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
