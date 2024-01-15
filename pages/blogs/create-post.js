@@ -10,7 +10,7 @@ const RichTextEditor = dynamic(
   }
 );
 
-import { addDataToFirebase } from '@/app/firebase/db/db';
+import { addDataToFirebase, updateDataOfFirebase } from '@/app/firebase/db/db';
 import styles from '@/styles/create-post.module.css';
 import UploadImage from '@/app/components/UploadImage/UploadImage';
 const NextImage = dynamic(
@@ -31,16 +31,27 @@ export default function CreatePost() {
   const [isUploadImageVisible, setIsUploadImageVisible] = useState(false);
   const [isPublishButtonDisabled, setIsPublishButtonDisabled] = useState(true);
 
-  // useEffect(() => {
-  //   const blogData = {
-  //     title: 'blog title',
-  //     content: 'blog content11',
-  //   };
-  //   (async () => {
-  //     const { error, result } = await addDataToFirebase('blogs', blogData);
-  //     console.log(error, result);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    // const blogData = {
+    //   title: 'blog title',
+    //   content: 'blog content11',
+    //   featuredImage: 'blob file',
+    //   readCount: 1212,
+    //   status: 'published | draft',
+    //   createdBy: '121213123',
+    //   createdAt: '32324535',
+    //   updatedAt: '32324424',
+    //   likes: 42,
+    //   categories: ['tech']
+    // };
+    (async () => {
+      const { error, result } = await addDataToFirebase('blogs', blogData);
+      console.log(error, result);
+    })();
+    updateDataOfFirebase('ZPMzOnRiuYNDXZlBzpWf', 'blogs', {
+      title: 'phir se update ho gaya mai'
+    })
+  }, []);
 
   function handleBlogPostChange(value, name = 'content') {
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }))
