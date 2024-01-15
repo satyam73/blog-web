@@ -1,5 +1,6 @@
 .create-post {
-  height: calc(100vh - var(--navbar-height));
+  /* height: calc(100vh - var(--navbar-height)); */
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,10 +12,26 @@
   margin: 10px 0;
 }
 
+
 .create-post__editor {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.create-post__image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: calc(100vw - 100px);
+  overflow: hidden
+}
+
+.create-post__featured-image {
+  height: 250px;
+  width: 100%;
+  object-fit: contain;
 }
 
 .editor__title {

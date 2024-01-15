@@ -13,6 +13,13 @@ const RichTextEditor = dynamic(
 import { addDataToFirebase } from '@/app/firebase/db/db';
 import styles from '@/styles/create-post.module.css';
 import UploadImage from '@/app/components/UploadImage/UploadImage';
+const NextImage = dynamic(
+  () => import('next/image'),
+  {
+    ssr: false,
+  }
+);
+
 
 export default function CreatePost() {
   const [blogPost, setBlogPost] = useState({
@@ -20,6 +27,8 @@ export default function CreatePost() {
     content: '',
   });
   const [file, setFile] = useState('');
+  const [imageURL, setImageURL] = useState('');
+  const [isUploadImageVisible, setIsUploadImageVisible] = useState(false);
   const [isPublishButtonDisabled, setIsPublishButtonDisabled] = useState(true);
 
   // useEffect(() => {
@@ -34,7 +43,6 @@ export default function CreatePost() {
   // }, []);
 
   function handleBlogPostChange(value, name = 'content') {
-    console.log(value, name)
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }))
     const tempIsPublishButtonDisabled = value.trim().length <= 0;
     setIsPublishButtonDisabled(tempIsPublishButtonDisabled);
@@ -48,8 +56,12 @@ export default function CreatePost() {
   }
 
   function onImageUpload(e) {
-    setFile(e.target.files[0])
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0])
+    const url = URL.createObjectURL(e.target.files[0]);
+    setImageURL(url);
   }
+
 
   return (
     <Box className={styles['create-post']}>
@@ -57,7 +69,12 @@ export default function CreatePost() {
         Create Post
       </Typography>
       <Box className={styles['create-post__editor']}>
-        <UploadImage file={file} onImageUpload={onImageUpload} />
+        {imageURL ?
+          <Box className={styles['create-post__image-container']} onMouseOver={() => setIsUploadImageVisible(true)} onMouseOut={() => setIsUploadImageVisible(false)}   >
+            {isUploadImageVisible && <UploadImage style={{ background: 'rgba(0, 0, 0, 0.08)', width: 'calc(100vw - 100px)', height: '250px', position: 'absolute' }} file={file} onImageUpload={onImageUpload} />}
+            <NextImage width={100} height={250} className={styles['create-post__featured-image']} src={imageURL} alt='featured banner' />
+          </Box>
+          : <UploadImage file={file} onImageUpload={onImageUpload} />}
         <input onInput={(e) => handleBlogPostChange(e.target.value, e.target.name)} className={styles['editor__title']} type='text' placeholder='Title here!' name='title' />
         <RichTextEditor model={blogPost} handleBlogPostChange={handleBlogPostChange} />
       </Box>
