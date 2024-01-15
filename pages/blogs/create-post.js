@@ -71,7 +71,7 @@ export default function CreatePost() {
       <Box className={styles['create-post__editor']}>
         {imageURL ?
           <Box className={styles['create-post__image-container']} onMouseOver={() => setIsUploadImageVisible(true)} onMouseOut={() => setIsUploadImageVisible(false)}   >
-            {isUploadImageVisible && <UploadImage style={{ background: 'rgba(0, 0, 0, 0.08)', width: 'calc(100vw - 100px)', height: '250px', position: 'absolute' }} file={file} onImageUpload={onImageUpload} />}
+            {isUploadImageVisible && <UploadImage isUploadImageVisible={isUploadImageVisible} style={{ background: 'rgba(0, 0, 0, 0.08)', width: 'calc(100vw - 100px)', height: '250px', position: 'absolute' }} file={file} onImageUpload={onImageUpload} />}
             <NextImage width={100} height={250} className={styles['create-post__featured-image']} src={imageURL} alt='featured banner' />
           </Box>
           : <UploadImage file={file} onImageUpload={onImageUpload} />}

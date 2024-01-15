@@ -3,7 +3,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import styles from './uploadImage.module.css';
 
-export default function UploadImage({ style = {}, file, onImageUpload }) {
+export default function UploadImage({ style = {}, file, onImageUpload, isUploadImageVisible }) {
   return (
     <>
       <Box component="label" htmlFor="uploadImageInput" className={styles['upload-image']} style={{ ...style }}>
