@@ -1,0 +1,35 @@
+.update-profile-photo {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.update-profile-photo__main {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.update-profile-photo:first-child {
+  flex: 3;
+}
+
+.update-profile-photo:last-child {
+  flex: 1;
+}
+
+.update-profile-photo__heading {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.update-profile-photo__text {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-pure-grey);
+}
+
+.update-profile-photo__change-button {
+  margin-right: 5px;
+}

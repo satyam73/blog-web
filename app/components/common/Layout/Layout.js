@@ -6,7 +6,6 @@ import Appbar from "../Appbar/Appbar";
 export default function Layout({ children }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   return (
     <>
       {!isMobile && < Navbar />}

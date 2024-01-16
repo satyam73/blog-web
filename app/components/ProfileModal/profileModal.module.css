@@ -1,0 +1,78 @@
+.profile-modal {
+  height: fit-content;
+  width: 420px;
+  border-radius: 15px;
+  position: relative;
+  padding: 15px;
+  box-shadow: var(--grey-box-shadow);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 94svw;
+  outline: none;
+  max-height: 80vh;
+}
+
+.profile-modal__close-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.profile-modal__main {
+  height: 80%;
+  width: 100%;
+}
+
+.profile-modal__heading {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.profile-modal__bio-label {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  margin-left: 5px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+
+.profile-modal__bio-textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--secondary-color);
+  font-weight: 500;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  resize: none;
+  scrollbar-width: thin;
+}
+
+.profile-modal__bio-textarea::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: var(--color-pure-grey);
+  border-radius: 5px;
+}
+
+.profile-modal__bio-textarea::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+.profile-modal__bio-textarea:disabled {
+  outline: none;
+  transition: box-shadow .1s ease-in-out;
+  border: none;
+  background-color: #80808042;
+}
+
+.profile-modal__bio-textarea:focus {
+  outline: none;
+  transition: box-shadow .1s ease-in-out;
+  box-shadow: 0px 0px 0px 4px #80808042;
+}

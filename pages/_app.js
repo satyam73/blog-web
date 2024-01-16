@@ -7,7 +7,6 @@ import '../styles/globals.css';
 const montserrat = Montserrat({ subsets: ['latin'] });
 export default function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
-
   return (
     <ThemeProvider>
       <ToastProvider>

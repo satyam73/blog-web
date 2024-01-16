@@ -6,8 +6,7 @@
 .input-box__label {
   display: block;
   width: 100%;
-  font-size: 1.1rem;
-  color: var(--contrast-color);
+  font-size: 1rem;
   margin-left: 5px;
   font-weight: 600;
   margin-bottom: 5px;
@@ -23,7 +22,6 @@
   padding: 10px;
   border-radius: 8px;
   border: 2px solid var(--secondary-color);
-  color: var(--contrast-color);
   font-weight: 500;
   display: block;
   font-family: 'Montserrat', sans-serif;
@@ -33,6 +31,13 @@
   outline: none;
   transition: box-shadow .1s ease-in-out;
   box-shadow: 0px 0px 0px 4px #80808042;
+}
+
+.container__input:disabled {
+  outline: none;
+  transition: box-shadow .1s ease-in-out;
+  border: none;
+  background-color: #80808042;
 }
 
 .input-box__container .container__visibility-button {

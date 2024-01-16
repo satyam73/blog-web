@@ -1,0 +1,10 @@
+.input-box-editable {
+  position: relative;
+
+}
+
+.input-box-editable__button {
+  position: absolute;
+  right: 0px;
+  top: 26px;
+}

@@ -12,8 +12,10 @@ export default function InputBox({
   placeholder,
   id,
   isValid,
-  ref = null,
+  inputRef = null,
+  disabled = false,
   handleChange = () => { },
+  handleFocusOut = () => { }
 }) {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const lowerCaseName = name?.toLowerCase();
@@ -30,6 +32,7 @@ export default function InputBox({
       </label>
       <Box className={styles['input-box__container']}>
         <input
+          ref={inputRef}
           id={id}
           className={styles['container__input']}
           type={isPasswordHidden && isTypePassword ? type : 'text'}
@@ -38,6 +41,8 @@ export default function InputBox({
           placeholder={placeholder}
           onChange={handleChange}
           style={inputStyles}
+          disabled={disabled}
+          onBlur={(e) => handleFocusOut(e, lowerCaseName)}
         />
         {isTypePassword && (
           <IconButton
