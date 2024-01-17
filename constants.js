@@ -20,7 +20,7 @@ export const INFO_MESSAGES = {
 
 export const SUCCESS_MESSAGES = {
   SIGNUP_SUCCESS_MESSAGE: 'Successfully signed up',
-  PROFILE_PIC_UPDATE_MESSAGE: 'Successfully updated the profile'
+  PROFILE_UPDATE_MESSAGE: 'Successfully updated the profile'
 }
 
 

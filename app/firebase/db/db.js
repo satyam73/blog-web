@@ -41,3 +41,19 @@ export const updateDataOfFirebase = async (id, collectionName, dataToUpdate) => 
 
   return { result, error };
 }
+
+
+export const getDataById = async (id, collectionName) => {
+  let result = null;
+  let error = null;
+  try {
+    const docRef = doc(db, collectionName, id)
+
+    result = (await getDoc(docRef)).data();
+  } catch (e) {
+    error = e;
+  }
+
+  console.log()
+  return { result, error };
+}

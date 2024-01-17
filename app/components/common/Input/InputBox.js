@@ -15,7 +15,7 @@ export default function InputBox({
   inputRef = null,
   disabled = false,
   handleChange = () => { },
-  handleFocusOut = () => { }
+  handleFocusOut = () => { },
 }) {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const lowerCaseName = name?.toLowerCase();

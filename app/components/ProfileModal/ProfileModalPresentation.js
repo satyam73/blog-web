@@ -32,9 +32,11 @@ export default function ProfileModalPresentation({
   imageRef,
   setCompletedCrop,
   handleBack,
-  isImageUploading,
+  isSubmitButtonLoading,
   onRemoveProfileClick,
   isRemoveButtonLoading,
+  handleInputChange,
+  formFields,
 }) {
   return (
     <Modal open={open} onClose={handleClose}>
@@ -69,22 +71,22 @@ export default function ProfileModalPresentation({
                 isRemoveButtonLoading={isRemoveButtonLoading}
               />
               <InputBox
-                value={user?.displayName}
+                value={formFields.name}
                 type={'text'}
                 name={'Name'}
                 placeholder={'name'}
                 id={'name'}
                 isValid={'true'}
-                disabled={true}
+                handleChange={handleInputChange}
               />
               <InputBox
-                value={user?.email}
+                value={formFields.email}
                 type={'text'}
                 name={'Email'}
                 placeholder={'name'}
                 id={'name'}
                 isValid={'true'}
-                disabled={true}
+                handleChange={handleInputChange}
               />
               <label
                 htmlFor={'bio'}
@@ -94,12 +96,12 @@ export default function ProfileModalPresentation({
               </label>
               <textarea
                 className={styles['profile-modal__bio-textarea']}
-                name=''
+                name='bio'
                 id='bio'
                 cols='30'
                 rows='10'
-                disabled={true}
-                value={user?.bio}
+                value={formFields.bio}
+                onInput={handleInputChange}
               ></textarea>
             </Box>
           ) : (
@@ -114,12 +116,12 @@ export default function ProfileModalPresentation({
         </Box>
         <Box className={styles['profile-modal__actions']}>
           <Button
-            disabled={isSubmitButtonDisabled || isImageUploading}
+            disabled={isSubmitButtonDisabled || isSubmitButtonLoading}
             variant='contained'
             className={styles['profile-modal__submit-button']}
             onClick={onSubmitButtonClick}
           >
-            {isImageUploading ? (
+            {isSubmitButtonLoading ? (
               <CircularProgress size={20} color='inherit' />
             ) : (
               'Submit'

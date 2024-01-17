@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { updateProfile } from 'firebase/auth';
 
-import { updateDataOfFirebase } from '@/app/firebase/db/db';
+import { getDataById, updateDataOfFirebase } from '@/app/firebase/db/db';
 import { useToast } from '@/app/contexts/ToastProvider';
 import { useUser } from '@/app/contexts/UserProvider';
 import { useDebounceEffect } from './profileModal.hooks';
@@ -16,7 +16,7 @@ import ProfileModalPresentation from './ProfileModalPresentation'
 export default function ProfileModal({ open, handleClose }) {
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isRemoveButtonLoading, setIsRemoveButtonLoading] = useState(false);
-  const { user } = useUser();
+  const { user, userDataFirebase, loading } = useUser();
   const [isChangeProfileStep, setIsChangeProfileStep] = useState();
   const [image, setImage] = useState(null);
   const imageRef = useRef();
@@ -24,9 +24,21 @@ export default function ProfileModal({ open, handleClose }) {
   const [croppedImageBlob, setCroppedImageBlob] = useState(null);
   const [crop, setCrop] = useState();
   const [completedCrop, setCompletedCrop] = useState(null);
-  const [isImageUploading, setIsImageUploading] = useState(false);
+  const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState(false);
   const { toast, showToast } = useToast();
+  const [formFields, setFormFields] = useState({
+    name: userDataFirebase?.name,
+    email: userDataFirebase?.email,
+    bio: userDataFirebase?.bio
+  });
 
+  useEffect(() => {
+    setFormFields({
+      name: userDataFirebase?.name,
+      email: userDataFirebase?.email,
+      bio: userDataFirebase?.bio
+    })
+  }, [loading])
   useDebounceEffect(() => {
     imgPreview(imageRef, completedCrop).then(({ file, blob }) => {
 
@@ -85,7 +97,7 @@ export default function ProfileModal({ open, handleClose }) {
 
   async function onSubmitButtonClick() {
     if (isChangeProfileStep) {
-      setIsImageUploading(true);
+      setIsSubmitButtonLoading(true);
 
       let sanitizedFile;
 
@@ -105,10 +117,30 @@ export default function ProfileModal({ open, handleClose }) {
         console.error('some error ocurred while updating profile picture ', error);
         showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });
       } finally {
-        setIsImageUploading(false);
+        setIsSubmitButtonLoading(false);
         handleBack();
       }
       return;
+    }
+
+
+    const sanitizedData = {
+      bio: formFields.bio.trim(),
+      // email: formFields.email.trim(), //email updation to be handle later
+      name: formFields.name.trim()
+    }
+    setIsSubmitButtonLoading(true);
+    try {
+      const { result, error } = await updateDataOfFirebase(user.uid, 'users', sanitizedData);
+
+      if (result && !error) return showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
+
+      throw new Error();
+    } catch (error) {
+      console.error('Some error occured while updating profile details ', error);
+      showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });
+    } finally {
+      setIsSubmitButtonLoading(false);
     }
   }
 
@@ -119,13 +151,21 @@ export default function ProfileModal({ open, handleClose }) {
     try {
       updateProfile(user, { photoURL: '' });
       await updateDataOfFirebase(user.uid, 'users', { profilePic: null });
-      showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_PIC_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
+      showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
     } catch (error) {
       console.error('Something went wrong while removing profile picture ', error);
       showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });
     } finally {
       setIsRemoveButtonLoading(false);
     }
+  }
+
+  function handleInputChange(e) {
+    const sanitizedValue = e.target.value;
+    const name = e.target.name;
+    setIsSubmitButtonDisabled(false);
+
+    setFormFields({ ...formFields, [name]: sanitizedValue });
   }
 
   return (
@@ -143,9 +183,11 @@ export default function ProfileModal({ open, handleClose }) {
       imageRef={imageRef} crop={crop} setCrop={setCrop}
       setCompletedCrop={setCompletedCrop}
       handleBack={handleBack}
-      isImageUploading={isImageUploading}
+      isSubmitButtonLoading={isSubmitButtonLoading}
       onRemoveProfileClick={onRemoveProfileClick}
       isRemoveButtonLoading={isRemoveButtonLoading}
+      handleInputChange={handleInputChange}
+      formFields={formFields}
     />
   )
 };
