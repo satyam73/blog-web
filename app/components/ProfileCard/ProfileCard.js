@@ -15,7 +15,7 @@ export default function ProfileCard() {
       <Box component='span' className={styles['profile-card__image-container']}>
         <Image
           className={styles['image-container__image']}
-          src={userDataFirebase.profilePic || '/assets/profile.avif'}
+          src={userDataFirebase?.profilePic || '/assets/profile.avif'}
           height={100}
           width={100}
         />
