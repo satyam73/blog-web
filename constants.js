@@ -19,7 +19,9 @@ export const INFO_MESSAGES = {
 
 export const SUCCESS_MESSAGES = {
   SIGNUP_SUCCESS_MESSAGE: 'Successfully signed up',
+  PROFILE_PIC_UPDATE_MESSAGE: 'Successfully updated the profile'
 }
+
 
 export const FIREBASE_ERRROR_CODES = {
   AUTH_EMAIL_ALREADY_IN_USE: 'auth/email-already-in-use',

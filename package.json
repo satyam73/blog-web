@@ -21,7 +21,8 @@
     "next": "13.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-froala-wysiwyg": "^4.1.3"
+    "react-froala-wysiwyg": "^4.1.3",
+    "react-image-crop": "^11.0.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.3",

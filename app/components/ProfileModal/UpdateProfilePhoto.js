@@ -1,8 +1,21 @@
-import React from 'react';
-import styles from './updateProfilePhoto.module.css';
-import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
-export default function UpdateProfilePhoto({ profilePic }) {
+import React from 'react';
+import { Box, Button, Typography } from '@mui/material';
+import 'react-image-crop/dist/ReactCrop.css';
+
+import styles from './updateProfilePhoto.module.css';
+
+export default function UpdateProfilePhoto({
+  profilePic,
+  isChangeProfileStep,
+  setIsChangeProfileStep,
+  setIsSubmitButtonDisabled,
+  setImage,
+}) {
+  function onChangeButtonClick() {
+    setIsChangeProfileStep(true);
+    setIsSubmitButtonDisabled(false);
+  }
   return (
     <Box className={styles['update-profile-photo']}>
       <Box className={styles['update-profile-photo__main']}>
@@ -20,12 +33,23 @@ export default function UpdateProfilePhoto({ profilePic }) {
         </Typography>
         <Box className={styles['update-profile-photo__actions']}>
           <Button
+            // onClick={onChangeButtonClick}
             className={styles['update-profile-photo__change-button']}
             variant='outlined'
+            component='label'
+            htmlFor='profilePic'
           >
             Change
+            <input
+              id='profilePic'
+              type='file'
+              className={styles['upload-profile-photo__file-input']}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                onChangeButtonClick();
+              }}
+            />
           </Button>
-
           <Button
             className={styles['update-profile-photo__remove-button']}
             variant='outlined'

@@ -14,18 +14,25 @@
   max-height: 80vh;
 }
 
+.profile-modal .profile-modal__back-button {
+  position: absolute;
+  left: 5px;
+  top: 12px;
+}
+
 .profile-modal .profile-modal__close-button {
   position: absolute;
   right: 5px;
-  top: 5px;
+  top: 12px;
 }
 
 .profile-modal__main {
   height: 80%;
   width: 100%;
+  min-height: 545px;
 }
 
-.profile-modal__heading {
+.profile-modal .profile-modal__heading {
   font-size: 1.4rem;
   text-align: center;
 }
@@ -81,4 +88,8 @@
   padding-top: 10px;
   text-align: center;
   cursor: pointer;
+}
+
+.profile-modal__submit-button {
+  gap: 10px;
 }

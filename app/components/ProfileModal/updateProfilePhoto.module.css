@@ -32,4 +32,13 @@
 
 .update-profile-photo .update-profile-photo__change-button {
   margin-right: 5px;
+  z-index: 1;
+  position: relative;
+}
+
+.upload-profile-photo__file-input {
+  height: 5px;
+  width: 5px;
+  z-index: -1;
+  position: absolute;
 }
