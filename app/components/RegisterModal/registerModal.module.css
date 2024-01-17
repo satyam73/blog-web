@@ -12,7 +12,7 @@
   max-width: 94svw;
 }
 
-.register-modal__close-button {
+.register-modal .register-modal__close-button {
   position: absolute;
   right: 5px;
   top: 5px;
