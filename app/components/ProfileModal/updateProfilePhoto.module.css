@@ -36,6 +36,10 @@
   position: relative;
 }
 
+.update-profile-photo .update-profile-photo__remove-button {
+  min-width: 90px;
+}
+
 .upload-profile-photo__file-input {
   height: 5px;
   width: 5px;

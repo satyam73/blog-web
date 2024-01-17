@@ -9,12 +9,13 @@ import { useDebounceEffect } from './profileModal.hooks';
 import { fileToBlob } from '@/utilities/common';
 import { imgPreview } from './profileModal.util';
 
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+import { ERROR_MESSAGES, INFO_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
 
 import ProfileModalPresentation from './ProfileModalPresentation'
 
 export default function ProfileModal({ open, handleClose }) {
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
+  const [isRemoveButtonLoading, setIsRemoveButtonLoading] = useState(false);
   const { user } = useUser();
   const [isChangeProfileStep, setIsChangeProfileStep] = useState();
   const [image, setImage] = useState(null);
@@ -111,7 +112,40 @@ export default function ProfileModal({ open, handleClose }) {
     }
   }
 
+  async function onRemoveProfileClick() {
+    if (!user.photoURL) return showToast({ ...toast, isVisible: true, text: INFO_MESSAGES.PROFILE_ALREADY_REMOVED, type: TOAST_TYPES.INFO });
+
+    setIsRemoveButtonLoading(true)
+    try {
+      updateProfile(user, { photoURL: '' });
+      await updateDataOfFirebase(user.uid, 'users', { profilePic: null });
+      showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_PIC_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
+    } catch (error) {
+      console.error('Something went wrong while removing profile picture ', error);
+      showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });
+    } finally {
+      setIsRemoveButtonLoading(false);
+    }
+  }
+
   return (
-    <ProfileModalPresentation open={open} handleClose={handleClose} isSubmitButtonDisabled={isSubmitButtonDisabled} user={user} setIsChangeProfileStep={setIsChangeProfileStep} isChangeProfileStep={isChangeProfileStep} setIsSubmitButtonDisabled={setIsSubmitButtonDisabled} setImage={setImage} image={image} blobImageURL={blobImageURL} onSubmitButtonClick={onSubmitButtonClick} imageRef={imageRef} crop={crop} setCrop={setCrop} setCompletedCrop={setCompletedCrop} handleBack={handleBack} isImageUploading={isImageUploading} />
+    <ProfileModalPresentation
+      open={open}
+      handleClose={handleClose}
+      isSubmitButtonDisabled={isSubmitButtonDisabled}
+      user={user}
+      setIsChangeProfileStep={setIsChangeProfileStep}
+      isChangeProfileStep={isChangeProfileStep}
+      setIsSubmitButtonDisabled={setIsSubmitButtonDisabled}
+      setImage={setImage}
+      image={image} blobImageURL={blobImageURL}
+      onSubmitButtonClick={onSubmitButtonClick}
+      imageRef={imageRef} crop={crop} setCrop={setCrop}
+      setCompletedCrop={setCompletedCrop}
+      handleBack={handleBack}
+      isImageUploading={isImageUploading}
+      onRemoveProfileClick={onRemoveProfileClick}
+      isRemoveButtonLoading={isRemoveButtonLoading}
+    />
   )
 };

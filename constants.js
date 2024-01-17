@@ -14,7 +14,8 @@ export const ERROR_MESSAGES = {
 
 export const INFO_MESSAGES = {
   TOO_MANY_REQUESTS: 'Too many requests please try again later',
-  EMAIL_ALREADY_EXISTS_MESSAGE: 'Email already exists'
+  EMAIL_ALREADY_EXISTS_MESSAGE: 'Email already exists',
+  PROFILE_ALREADY_REMOVED: 'Profile is already removed'
 }
 
 export const SUCCESS_MESSAGES = {

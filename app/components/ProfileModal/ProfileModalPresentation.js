@@ -33,6 +33,8 @@ export default function ProfileModalPresentation({
   setCompletedCrop,
   handleBack,
   isImageUploading,
+  onRemoveProfileClick,
+  isRemoveButtonLoading,
 }) {
   return (
     <Modal open={open} onClose={handleClose}>
@@ -63,6 +65,8 @@ export default function ProfileModalPresentation({
                 setIsChangeProfileStep={setIsChangeProfileStep}
                 setIsSubmitButtonDisabled={setIsSubmitButtonDisabled}
                 setImage={setImage}
+                onRemoveProfileClick={onRemoveProfileClick}
+                isRemoveButtonLoading={isRemoveButtonLoading}
               />
               <InputBox
                 value={user?.displayName}

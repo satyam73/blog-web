@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -12,6 +12,8 @@ export default function UpdateProfilePhoto({
   setIsChangeProfileStep,
   setIsSubmitButtonDisabled,
   setImage,
+  onRemoveProfileClick,
+  isRemoveButtonLoading,
 }) {
   function onChangeButtonClick() {
     setIsChangeProfileStep(true);
@@ -34,7 +36,6 @@ export default function UpdateProfilePhoto({
         </Typography>
         <Box className={styles['update-profile-photo__actions']}>
           <Button
-            // onClick={onChangeButtonClick}
             className={styles['update-profile-photo__change-button']}
             variant='outlined'
             component='label'
@@ -54,8 +55,14 @@ export default function UpdateProfilePhoto({
           <Button
             className={styles['update-profile-photo__remove-button']}
             variant='outlined'
+            onClick={onRemoveProfileClick}
+            disabled={isRemoveButtonLoading}
           >
-            Remove
+            {isRemoveButtonLoading ? (
+              <CircularProgress size={20} color='inherit' />
+            ) : (
+              'Remove'
+            )}
           </Button>
         </Box>
       </Box>
