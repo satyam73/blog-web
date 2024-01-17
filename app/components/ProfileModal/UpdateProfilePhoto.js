@@ -1,6 +1,7 @@
-import Image from 'next/image';
 import React from 'react';
+import Image from 'next/image';
 import { Box, Button, Typography } from '@mui/material';
+
 import 'react-image-crop/dist/ReactCrop.css';
 
 import styles from './updateProfilePhoto.module.css';

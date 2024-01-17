@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
 import ReactCrop from "react-image-crop";
 
 export default function ImageCropper({ crop, setCrop, imageRef, src, setCompletedCrop }) {

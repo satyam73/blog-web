@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
-import ProfileModalPresentation from './ProfileModalPresentation'
-import { useUser } from '@/app/contexts/UserProvider';
-import { fileToBlob } from '@/utilities/common';
-import { canvasPreview, downloadFile, imgPreview } from './profileModal.util';
-import { useDebounceEffect } from './profileModal.hooks';
+import React, { useRef, useState } from 'react'
 import { updateProfile } from 'firebase/auth';
-import { useToast } from '@/app/contexts/ToastProvider';
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+
 import { updateDataOfFirebase } from '@/app/firebase/db/db';
+import { useToast } from '@/app/contexts/ToastProvider';
+import { useUser } from '@/app/contexts/UserProvider';
+import { useDebounceEffect } from './profileModal.hooks';
+
+import { fileToBlob } from '@/utilities/common';
+import { imgPreview } from './profileModal.util';
+
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+
+import ProfileModalPresentation from './ProfileModalPresentation'
 
 export default function ProfileModal({ open, handleClose }) {
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);

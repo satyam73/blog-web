@@ -7,12 +7,15 @@ import {
   Typography,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Modal from '../common/Modal/Modal';
-import InputBox from '../common/Input/InputBox';
-import UpdateProfilePhoto from './UpdateProfilePhoto';
-import styles from './profileModal.module.css';
-import ImageCropper from './ImageCropper';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+import UpdateProfilePhoto from './UpdateProfilePhoto';
+import InputBox from '../common/Input/InputBox';
+import Modal from '../common/Modal/Modal';
+import ImageCropper from './ImageCropper';
+
+import styles from './profileModal.module.css';
+
 export default function ProfileModalPresentation({
   open,
   handleClose,
