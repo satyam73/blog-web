@@ -112,7 +112,7 @@ export default function ProfileModal({ open, handleClose }) {
 
         updateProfile(user, { photoURL: cloudImageURL });
         await updateDataOfFirebase(user.uid, 'users', { profilePic: cloudImageURL });
-        showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_PIC_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
+        showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
       } catch (error) {
         console.error('some error ocurred while updating profile picture ', error);
         showToast({ ...toast, isVisible: true, text: ERROR_MESSAGES.SOMETHING_WENT_WRONG, type: TOAST_TYPES.ERROR });

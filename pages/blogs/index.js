@@ -3,6 +3,7 @@ import Layout from '@/app/components/common/Layout/Layout';
 import styles from '@/styles/blogs.module.css';
 import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
 import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
+import UserProvider from '@/app/contexts/UserProvider';
 
 export default function BlogsPage() {
   return (
@@ -33,5 +34,9 @@ export default function BlogsPage() {
 }
 
 BlogsPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return (
+    <UserProvider>
+      < Layout > {page}</Layout >
+    </UserProvider>
+  )
 };
