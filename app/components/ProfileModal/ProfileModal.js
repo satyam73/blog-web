@@ -7,6 +7,7 @@ import { useDebounceEffect } from './profileModal.hooks';
 import { updateProfile } from 'firebase/auth';
 import { useToast } from '@/app/contexts/ToastProvider';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+import { updateDataOfFirebase } from '@/app/firebase/db/db';
 
 export default function ProfileModal({ open, handleClose }) {
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
@@ -93,7 +94,7 @@ export default function ProfileModal({ open, handleClose }) {
         const cloudImageURL = await uploadImageToCloud(sanitizedFile);
 
         updateProfile(user, { photoURL: cloudImageURL });
-
+        await updateDataOfFirebase(user.uid, 'users', { profilePic: cloudImageURL });
         showToast({ ...toast, isVisible: true, text: SUCCESS_MESSAGES.PROFILE_PIC_UPDATE_MESSAGE, type: TOAST_TYPES.SUCCESS });
       } catch (error) {
         console.error('some error ocurred while updating profile picture ', error);
