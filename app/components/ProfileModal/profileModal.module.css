@@ -14,7 +14,7 @@
   max-height: 80vh;
 }
 
-.profile-modal__close-button {
+.profile-modal .profile-modal__close-button {
   position: absolute;
   right: 5px;
   top: 5px;
@@ -75,4 +75,10 @@
   outline: none;
   transition: box-shadow .1s ease-in-out;
   box-shadow: 0px 0px 0px 4px #80808042;
+}
+
+.profile-modal__actions {
+  padding-top: 10px;
+  text-align: center;
+  cursor: pointer;
 }

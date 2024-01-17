@@ -30,6 +30,6 @@
   color: var(--color-pure-grey);
 }
 
-.update-profile-photo__change-button {
+.update-profile-photo .update-profile-photo__change-button {
   margin-right: 5px;
 }

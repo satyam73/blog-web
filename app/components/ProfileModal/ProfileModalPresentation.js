@@ -1,12 +1,17 @@
 import React from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Modal from '../common/Modal/Modal';
 import InputBox from '../common/Input/InputBox';
 import UpdateProfilePhoto from './UpdateProfilePhoto';
 import styles from './profileModal.module.css';
 
-export default function ProfileModalPresentation({ open, handleClose }) {
+export default function ProfileModalPresentation({
+  open,
+  handleClose,
+  isSubmitButtonDisabled,
+  user,
+}) {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={styles['profile-modal']}>
@@ -22,26 +27,24 @@ export default function ProfileModalPresentation({ open, handleClose }) {
           </Typography>
 
           <Box className={styles['profile-modal__info']}>
-            <UpdateProfilePhoto />
+            <UpdateProfilePhoto profilePic={user?.photoURL} />
             <InputBox
-              value={'Satyam Bajpai'}
+              value={user?.displayName}
               type={'text'}
               name={'Name'}
               placeholder={'name'}
               id={'name'}
               isValid={'true'}
               disabled={true}
-              handleChange
             />
             <InputBox
-              value={'bajpai1973satyam@gmail.com'}
+              value={user?.email}
               type={'text'}
               name={'Email'}
               placeholder={'name'}
               id={'name'}
               isValid={'true'}
               disabled={true}
-              handleChange
             />
             <label
               htmlFor={'bio'}
@@ -56,10 +59,18 @@ export default function ProfileModalPresentation({ open, handleClose }) {
               cols='30'
               rows='10'
               disabled={true}
-              value={`Real Dev Squad is an online non-profit open source free fun community for people in tech, mainly developers, designers, college students, or product managers, to come, learn and contribute towards building a platform for our community, that helps upskill everyone.
-              We are an inclusive, respectful, warm, motivated and commited squad of people who constantly grow together and tackle bigger and harder challenges to ensure we become some of the best problem solvers, engineers, designers and more out there.`}
+              value={user?.bio}
             ></textarea>
           </Box>
+        </Box>
+        <Box className={styles['profile-modal__actions']}>
+          <Button
+            disabled={isSubmitButtonDisabled}
+            variant='contained'
+            className={styles['profile-modal__submit-button']}
+          >
+            Submit
+          </Button>
         </Box>
       </Box>
     </Modal>

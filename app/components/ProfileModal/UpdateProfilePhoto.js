@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './updateProfilePhoto.module.css';
 import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
-export default function UpdateProfilePhoto() {
+export default function UpdateProfilePhoto({ profilePic }) {
   return (
     <Box className={styles['update-profile-photo']}>
       <Box className={styles['update-profile-photo__main']}>
@@ -39,7 +39,7 @@ export default function UpdateProfilePhoto() {
           style={{ borderRadius: '10px' }}
           height={80}
           width={80}
-          src={'/assets/profile.avif'}
+          src={profilePic || '/assets/profile.avif'}
           alt={'profile'}
         />
       </Box>

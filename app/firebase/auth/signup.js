@@ -17,16 +17,17 @@ export default async function signUp(name, email, password) {
     }
 
     await sendEmailVerification(user, actionCodeSettings);
-
     await setDoc(doc(db, 'users', user.uid), {
       name,
       email: user.email,
       id: user.uid,
-      created_at: user.metadata.createdAt,
-      updated_at: user.metadata.createdAt
+      createdAt: user.metadata.createdAt,
+      updatedAt: user.metadata.createdAt,
+      bio: null,
+      profilePic: null,
     });
 
-    updateProfile(user, { displayName: name });
+    updateProfile(user, { displayName: name, photoURL: null });
 
   } catch (e) {
     error = e;
