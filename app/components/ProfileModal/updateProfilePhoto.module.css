@@ -19,12 +19,12 @@
   flex: 1;
 }
 
-.update-profile-photo__heading {
+.update-profile-photo__main .update-profile-photo__heading {
   font-size: 14px;
   font-weight: 600;
 }
 
-.update-profile-photo__text {
+.update-profile-photo__main .update-profile-photo__text {
   font-size: 12px;
   font-weight: 400;
   color: var(--color-pure-grey);
