@@ -1,20 +1,30 @@
 .blog-card {
-  height: 180px;
+  height: 155px;
   width: 100%;
-  box-shadow: var(--grey-box-shadow);
+  border: 2px solid var(--light-grey-mid);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
   cursor: pointer;
   margin: 15px auto;
+  gap: 5px;
 }
 
 .blog-card .blog-card__title {
   font-size: 1.5rem;
   font-weight: 600;
+  word-wrap: break-word;
 }
 
 .image-container__image {
   border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (width<=1007px) {
+  .blog-card .blog-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
 }
