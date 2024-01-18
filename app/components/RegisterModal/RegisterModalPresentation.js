@@ -5,7 +5,7 @@ import Modal from '../common/Modal/Modal';
 import InputBox from '../common/Input/InputBox';
 import styles from './registerModal.module.css';
 
-export default function RegisterModalPresentation({ open, isDetailsValid, signupDetails, isSignupLoading, handleClose, handleChange, handleSignup, }) {
+export default function RegisterModalPresentation({ open, isDetailsValid, signupDetails, isSignupLoading, handleClose, handleChange, handleSignup, openLoginModal }) {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={styles['register-modal']}>
@@ -56,6 +56,10 @@ export default function RegisterModalPresentation({ open, isDetailsValid, signup
               handleChange={handleChange}
               isValid={isDetailsValid.password}
             />
+            <Button variant='text' onClick={() => {
+              handleClose();
+              openLoginModal();
+            }}>Already have a account? Click here</Button>
             <Button disabled={isSignupLoading} onClick={handleSignup} variant='contained' className={styles['form__button']}>
               {isSignupLoading && <CircularProgress size={20} color="inherit" />}
               Signup

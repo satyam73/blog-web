@@ -6,7 +6,7 @@ export default function Modal({ open, handleClose, children }) {
       open={open}
       onClose={handleClose}
       sx={{ display: 'grid', placeItems: 'center' }}
-      hideBackdrop={true}
+    // hideBackdrop={false}
     >
       {children}
     </MUIModal>

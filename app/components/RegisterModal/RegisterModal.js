@@ -7,7 +7,7 @@ import { useToast } from '@/app/contexts/ToastProvider';
 import { useRouter } from 'next/router';
 
 
-export default function RegisterModal({ open, handleClose }) {
+export default function RegisterModal({ open, handleClose, openLoginModal }) {
   const [signupDetails, setSignupDetails] = useState({
     name: '',
     email: '',
@@ -97,6 +97,7 @@ export default function RegisterModal({ open, handleClose }) {
       handleChange={handleChange}
       handleSignup={handleSignup}
       isSignupLoading={isSignupLoading}
+      openLoginModal={openLoginModal}
     />
   )
 }
