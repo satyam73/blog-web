@@ -1,11 +1,34 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useStepContext } from '@mui/material';
 import Layout from '@/app/components/common/Layout/Layout';
 import styles from '@/styles/blogs.module.css';
 import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
 import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
-import UserProvider from '@/app/contexts/UserProvider';
+import UserProvider, { useUser } from '@/app/contexts/UserProvider';
+import { getAllDocs } from '@/app/firebase/db/db';
+import { useEffect, useState } from 'react';
 
 export default function BlogsPage() {
+  const { user, loading } = useUser();
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    async function fetchBlogs() {
+      const queryObject = {
+        createdBy: user?.uid
+      }
+      try {
+        const { result, error } = await getAllDocs('blogs', queryObject);
+
+        if (result && !error) {
+          setBlogs(result)
+        }
+      } catch (error) {
+        console.error('Some error occured in fetch blogs function ', error);
+      }
+    }
+    fetchBlogs();
+  }, [loading]);
+
   return (
     <Box className={styles.blogs}>
       <Typography component='h2' className={styles['blogs__heading']}>
@@ -13,17 +36,16 @@ export default function BlogsPage() {
       </Typography>
       <Box className={styles['blogs__main']}>
         <Box className={styles['main__container']}>
-          {Array(4)
-            .fill('blog-card')
-            .map((elem, index) => {
-              return (
-                <BlogCard
-                  title='Free Stock Photos, Royalty Free Stock Images & Copyright'
-                  image='/assets/dummy.jpg'
-                  key={elem + index}
-                />
-              );
-            })}
+          {blogs?.map((blog, index) => {
+            return (
+              <BlogCard
+                id={blog.id}
+                title={blog.title}
+                image={blog.featuredImage}
+                key={blog.id}
+              />
+            );
+          })}
         </Box>
         <Box className={styles['main__sidebar']}>
           <ProfileCard />
@@ -40,3 +62,4 @@ BlogsPage.getLayout = function getLayout(page) {
     </UserProvider>
   )
 };
+;

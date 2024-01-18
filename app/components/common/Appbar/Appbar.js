@@ -1,6 +1,8 @@
 import { useState } from "react"
 import AppbarPresentation from "./AppbarPresentation";
 import ProfileModal from "../../ProfileModal/ProfileModal";
+import UserProvider from "@/app/contexts/UserProvider";
+import AuthGuard from "../../AuthGuard/AuthGuard";
 
 export default function Appbar() {
   const [activePage, setActivePage] = useState(0);
@@ -19,8 +21,12 @@ export default function Appbar() {
 
   return (
     <>
-      <AppbarPresentation activePage={activePage} onItemClick={onItemClick} />
-      <ProfileModal open={isProfileModalVisible} handleClose={handleClose} />
+      <UserProvider>
+        <AuthGuard>
+          <AppbarPresentation activePage={activePage} onItemClick={onItemClick} />
+          <ProfileModal open={isProfileModalVisible} handleClose={handleClose} />
+        </AuthGuard>
+      </UserProvider>
     </>
   )
 }

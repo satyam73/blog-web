@@ -15,12 +15,14 @@ export const ERROR_MESSAGES = {
 export const INFO_MESSAGES = {
   TOO_MANY_REQUESTS: 'Too many requests please try again later',
   EMAIL_ALREADY_EXISTS_MESSAGE: 'Email already exists',
-  PROFILE_ALREADY_REMOVED: 'Profile is already removed'
+  PROFILE_ALREADY_REMOVED: 'Profile is already removed',
+  BLOG_POST_VALIDATION_MESSAGE: 'Please add file, title and content to publish your post'
 }
 
 export const SUCCESS_MESSAGES = {
   SIGNUP_SUCCESS_MESSAGE: 'Successfully signed up',
-  PROFILE_UPDATE_MESSAGE: 'Successfully updated the profile'
+  PROFILE_UPDATE_MESSAGE: 'Successfully updated the profile',
+  BLOG_POST_PUBLISHED: 'Successfully published the post'
 }
 
 

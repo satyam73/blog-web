@@ -1,5 +1,5 @@
 'use client'
-import { Timestamp, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from "firebase/firestore";
 import firebaseApp from "../config";
 
 const db = getFirestore(firebaseApp);
@@ -53,7 +53,28 @@ export const getDataById = async (id, collectionName) => {
   } catch (e) {
     error = e;
   }
+  return { result, error };
+}
 
-  console.log()
+export async function getAllDocs(collectionName, queryData) {
+  let result = null;
+  let error = null;
+  try {
+    let dataFromDB;
+    result = [];
+    for (let [key, value] of Object.entries(queryData)) {
+      if (key && value) {
+        dataFromDB = query(collection(db, collectionName), where(key, "==", value));
+      }
+    }
+    const querySnapshot = await getDocs(dataFromDB);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      result.push(doc.data())
+    });
+  } catch (e) {
+    error = e;
+  }
+
   return { result, error };
 }

@@ -10,7 +10,7 @@ export default function UploadImage({ style = {}, file, onImageUpload, isUploadI
         <input onInput={onImageUpload} accept="image/*" className={styles['upload-image__input']} name=" uploadImageInput" id="uploadImageInput" type='file' aria-labelledby='upload featured image' />
         <CloudUploadIcon className={styles['upload-image__icon']} fontSize={'large'} />
         <Typography className={styles['upload-image__text']}>
-          {file.name || 'Upload banner for your post'}
+          {file?.name || 'Upload banner for your post'}
         </Typography>
       </Box >
     </>

@@ -4,17 +4,17 @@
   border: 2px solid var(--light-grey-mid);
   border-radius: 10px;
   display: flex;
-  justify-content: space-between;
   padding: 10px;
   cursor: pointer;
   margin: 15px auto;
-  gap: 5px;
+  gap: 10px;
 }
 
 .blog-card .blog-card__title {
   font-size: 1.5rem;
   font-weight: 600;
   word-wrap: break-word;
+  color: var(--secondary-color);
 }
 
 .image-container__image {

@@ -15,6 +15,11 @@ export const NAVBAR_ITEMS = [
     link: '/profile'
   },
   {
+    name: 'create-post',
+    text: 'Create',
+    link: '/blogs/create-post',
+  },
+  {
     name: 'sign out',
     text: 'Sign out',
     link: 'javascript:void(0)'
