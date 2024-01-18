@@ -21,14 +21,14 @@ export default function ProfileCard() {
         />
       </Box>
       <Typography className={styles['profile-card__name']}>
-        {userDataFirebase?.name || 'David George'}
+        {userDataFirebase?.name || 'Guest'}
       </Typography>
       <Typography className={styles['profile-card__bio']}>
-        {userDataFirebase?.bio || 'no bio present!'}
+        {userDataFirebase?.bio || ''}
       </Typography>
       <Link href='/profile'>
         <Typography className={styles['profile-card__edit-link']}>
-          Edit Profile
+          {!user ? 'Login' : 'Edit Profile'}
         </Typography>
       </Link>
     </Box>

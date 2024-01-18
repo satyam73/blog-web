@@ -87,6 +87,7 @@ export default function ProfileModalPresentation({
                 id={'name'}
                 isValid={'true'}
                 handleChange={handleInputChange}
+                readOnly
               />
               <label
                 htmlFor={'bio'}

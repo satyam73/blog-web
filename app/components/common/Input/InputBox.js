@@ -16,6 +16,7 @@ export default function InputBox({
   disabled = false,
   handleChange = () => { },
   handleFocusOut = () => { },
+  readOnly = false
 }) {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const lowerCaseName = name?.toLowerCase();
@@ -42,6 +43,7 @@ export default function InputBox({
           onChange={handleChange}
           style={inputStyles}
           disabled={disabled}
+          readOnly={readOnly}
           onBlur={(e) => handleFocusOut(e, lowerCaseName)}
         />
         {isTypePassword && (

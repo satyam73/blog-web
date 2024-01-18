@@ -28,7 +28,6 @@ export default function ProfileModal({ open, handleClose }) {
   const { toast, showToast } = useToast();
   const [formFields, setFormFields] = useState({
     name: userDataFirebase?.name,
-    email: userDataFirebase?.email,
     bio: userDataFirebase?.bio
   });
 
@@ -123,10 +122,9 @@ export default function ProfileModal({ open, handleClose }) {
       return;
     }
 
-
+    //email updation to be handle later
     const sanitizedData = {
       bio: formFields.bio.trim(),
-      // email: formFields.email.trim(), //email updation to be handle later
       name: formFields.name.trim()
     }
     setIsSubmitButtonLoading(true);
