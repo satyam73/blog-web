@@ -4,18 +4,18 @@ import ProfileModal from "../../ProfileModal/ProfileModal";
 import UserProvider from "@/app/contexts/UserProvider";
 import AuthGuard from "../../AuthGuard/AuthGuard";
 
-export default function Appbar() {
+export default function Appbar({ isProfileModalOpen, setIsProfileModalOpen }) {
   const [activePage, setActivePage] = useState(0);
-  const [isProfileModalVisible, setIsProfileModalVisible] = useState(true);
 
   function handleClose() {
-    setIsProfileModalVisible(false)
+    setIsProfileModalOpen(false)
   }
+
   function onItemClick(index) {
     setActivePage(index);
 
     if (index === 2) {
-      setIsProfileModalVisible(true)
+      setIsProfileModalOpen(true)
     }
   }
 
@@ -24,7 +24,7 @@ export default function Appbar() {
       <UserProvider>
         <AuthGuard>
           <AppbarPresentation activePage={activePage} onItemClick={onItemClick} />
-          <ProfileModal open={isProfileModalVisible} handleClose={handleClose} />
+          <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
         </AuthGuard>
       </UserProvider>
     </>

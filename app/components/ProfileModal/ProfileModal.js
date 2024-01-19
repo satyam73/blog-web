@@ -14,6 +14,7 @@ import { ERROR_MESSAGES, INFO_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/
 import ProfileModalPresentation from './ProfileModalPresentation'
 
 export default function ProfileModal({ open, handleClose }) {
+  console.log('open ', open)
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isRemoveButtonLoading, setIsRemoveButtonLoading] = useState(false);
   const { user, userDataFirebase, loading } = useUser();

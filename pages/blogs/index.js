@@ -13,12 +13,10 @@ export default function BlogsPage() {
 
   useEffect(() => {
     async function fetchBlogs() {
-      const queryObject = {
-        createdBy: user?.uid
-      }
       try {
-        const { result, error } = await getAllDocs('blogs', queryObject);
+        const { result, error } = await getAllDocs('blogs');
 
+        console.log(result)
         if (result && !error) {
           setBlogs(result)
         }
@@ -29,6 +27,7 @@ export default function BlogsPage() {
     fetchBlogs();
   }, [loading]);
 
+  console.log(blogs)
   return (
     <Box className={styles.blogs}>
       <Typography component='h2' className={styles['blogs__heading']}>
@@ -41,7 +40,7 @@ export default function BlogsPage() {
               <BlogCard
                 id={blog.id}
                 title={blog.title}
-                image={blog.featuredImage}
+                image={blog.featuredImage || '/assets/profile.avif'}
                 key={blog.id}
               />
             );
@@ -62,4 +61,3 @@ BlogsPage.getLayout = function getLayout(page) {
     </UserProvider>
   )
 };
-;

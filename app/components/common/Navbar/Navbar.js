@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import signoutHandler from "@/app/firebase/auth/signout";
 import NavbarPresentation from "./NavbarPresentation";
 import ProfileModal from "@/app/components/ProfileModal/ProfileModal";
+import UserProvider from "@/app/contexts/UserProvider";
 
-export default function Navbar() {
+export default function Navbar({ isProfileModalOpen, setIsProfileModalOpen }) {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
-  const [isProfileModalVisible, setIsProfileModalVisible] = useState(true);
+
   const { push } = useRouter();
   async function onNavbarItemClick(index, item) {
     if (item.name === 'sign out') {
@@ -15,7 +16,8 @@ export default function Navbar() {
     }
 
     if (item.name === 'profile') {
-      setIsProfileModalVisible(true);
+      setIsProfileModalOpen(true);
+      return;
     }
 
     setActiveLinkIndex(index);
@@ -23,13 +25,15 @@ export default function Navbar() {
   }
 
   function handleClose() {
-    setIsProfileModalVisible(false);
+    setIsProfileModalOpen(false);
   }
 
   return (
     <>
-      <ProfileModal open={isProfileModalVisible} handleClose={handleClose} />
-      <NavbarPresentation activeLinkIndex={activeLinkIndex} onNavbarItemClick={onNavbarItemClick} />
+      <UserProvider>
+        <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
+        <NavbarPresentation activeLinkIndex={activeLinkIndex} onNavbarItemClick={onNavbarItemClick} />
+      </UserProvider>
     </>
   )
 }

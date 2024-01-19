@@ -50,26 +50,34 @@ export const getDataById = async (id, collectionName) => {
     const docRef = doc(db, collectionName, id)
 
     result = (await getDoc(docRef)).data();
+
+    result.updatedAt = (result.updatedAt.seconds * 1000);
+    result.createdAt = (result.createdAt.seconds * 1000);
   } catch (e) {
     error = e;
   }
   return { result, error };
 }
 
-export async function getAllDocs(collectionName, queryData) {
+export async function getAllDocs(collectionName, queryData = {}) {
   let result = null;
   let error = null;
   try {
     let dataFromDB;
     result = [];
-    for (let [key, value] of Object.entries(queryData)) {
-      if (key && value) {
-        dataFromDB = query(collection(db, collectionName), where(key, "==", value));
+    if (Object.keys(queryData).length) {
+      for (let [key, value] of Object.entries(queryData)) {
+        if (key && value) {
+          dataFromDB = query(collection(db, collectionName), where(key, "==", value));
+        }
       }
+    } else {
+      dataFromDB = collection(db, collectionName);
     }
     const querySnapshot = await getDocs(dataFromDB);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
+      console.log(doc.data())
       result.push(doc.data())
     });
   } catch (e) {
