@@ -110,6 +110,24 @@ export default function CreatePost() {
     setImageURL(url);
   }
 
+  function onDiscardClick() {
+    const isOk = confirm('Are you sure? All the contents of the post will be lost');
+
+    if (!isOk) return;
+
+    setBlogPost({
+      title: '',
+      content: ''
+    });
+
+    if (editor) {
+      editor.root.innerHTML = '';
+    }
+
+    setImageURL('');
+    setFile(null);
+  }
+
   return (
     <Box className={styles['create-post']}>
       <Typography variant='h4' className={styles['create-post__heading']}>
@@ -167,7 +185,7 @@ export default function CreatePost() {
         >
           Publish
         </Button>
-        <Button variant='outlined' className={styles['buttons__discard']}>
+        <Button onClick={onDiscardClick} variant='outlined' className={styles['buttons__discard']}>
           Discard
         </Button>
       </Box>
