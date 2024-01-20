@@ -9,10 +9,11 @@ import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
 import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
 
 import styles from '@/styles/blogs.module.css';
+import BlogCardSkeleton from '@/app/components/blogs/BlogCard/BlogCardSkeleton';
 export default function BlogsPage() {
   const { userDataFirebase, loading } = useUser();
   const [blogs, setBlogs] = useState([]);
-
+  const [isBlogsLoading, setIsBlogsLoading] = useState(true);
   useEffect(() => {
     async function fetchBlogs() {
       try {
@@ -23,12 +24,14 @@ export default function BlogsPage() {
         }
       } catch (error) {
         console.error('Some error occured in fetch blogs function ', error);
+      } finally {
+        setIsBlogsLoading(false);
       }
     }
     fetchBlogs();
-  }, [loading]);
+  }, []);
 
-  if (loading) return;
+  const blogsSkeletonMapping = Array(5).fill('blogsSkeletonMapping').map((skeleton, index) => (<BlogCardSkeleton key={skeleton + "-" + index} />));
 
   return (
     <Box className={styles.blogs}>
@@ -37,16 +40,17 @@ export default function BlogsPage() {
       </Typography>
       <Box className={styles['blogs__main']}>
         <Box className={styles['main__container']}>
-          {blogs?.map((blog, index) => {
-            return (
-              <BlogCard
-                id={blog.id}
-                title={blog.title}
-                image={blog.featuredImage || '/assets/profile.jpg'}
-                key={blog.id}
-              />
-            );
-          })}
+          {isBlogsLoading ? blogsSkeletonMapping :
+            blogs?.map((blog) => {
+              return (
+                <BlogCard
+                  id={blog.id}
+                  title={blog.title}
+                  image={blog.featuredImage || '/assets/profile.jpg'}
+                  key={blog.id}
+                />
+              );
+            })}
         </Box>
         <Box className={styles['main__sidebar']}>
           <ProfileCard name={userDataFirebase?.name} image={userDataFirebase?.profilePic} bio={userDataFirebase?.bio} isButtonVisible={true} />
