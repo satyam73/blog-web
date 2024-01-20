@@ -1,39 +1,47 @@
-import dynamic from 'next/dynamic';
+import Quill from 'quill';
 import { Box } from '@mui/material';
-// Require Editor CSS files.
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-import 'froala-editor/js/plugins/align.min.js';
-import 'froala-editor/js/plugins/colors.min.js';
-import 'froala-editor/js/plugins/image.min';
-import 'froala-editor/js/plugins/font_size.min.js';
-import 'froala-editor/js/plugins/font_family.min.js';
-import 'froala-editor/js/plugins/emoticons.min.js';
-import 'froala-editor/js/plugins/char_counter.min.js';
-import 'froala-editor/js/plugins/table.min.js';
-import 'froala-editor/js/plugins/image_manager.min.js';
-import 'froala-editor/js/plugins/paragraph_format.min.js';
-import 'froala-editor/js/plugins/quote.min.js';
-import 'froala-editor/js/plugins/link.min.js';
-import 'froala-editor/js/plugins/lists.min.js';
+import { useEffect, useRef, useState } from 'react';
 
-const FroalaEditor = dynamic(() => import('react-froala-wysiwyg'), {
-  ssr: false,
-});
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
 
-import { toolbarButtons } from './richTextEditor.constant';
 import styles from './richTextEditor.module.css';
-// import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 
-export default function RichTextEditor({ blogPost, handleBlogPostChange }) {
+export default function RichTextEditor({ handleBlogPostChange }) {
+  const editorRef = useRef(null);
+  const [isEditorRendered, setIsEditorRendered] = useState(false);
 
+  useEffect(() => {
+    let editor;
+
+    function onTextChange(delta, source) {
+      console.log(delta, source);
+      console.log(editor.root.innerHTML);
+      console.log(editorRef.current.innerHTML);
+      handleBlogPostChange(editor.root.innerHTML, 'content', editor);
+    }
+
+    if (!isEditorRendered) {
+      editor = new Quill(editorRef?.current, {
+        modules: {
+          toolbar: true,
+        },
+        placeholder: 'Start pouring your creativity...',
+        theme: 'snow',
+      });
+      editor.on('text-change', onTextChange);
+    }
+    setIsEditorRendered(true);
+
+    return () => editor?.off('text-change', onTextChange);
+  }, []);
   return (
-    <Box className={styles['rich-text-editor']} >
-      <FroalaEditor tag='textarea'
-        model={blogPost}
-        onModelChange={handleBlogPostChange}
-        toolbarButtons={toolbarButtons}
-      />
+    <Box className={styles['rich-text-editor']}>
+      <Box
+        className={styles['editor-container']}
+        ref={editorRef}
+        style={{ height: '500px' }}
+      ></Box>
     </Box>
-  )
+  );
 }

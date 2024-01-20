@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import Layout from '@/app/components/common/Layout/Layout';
@@ -38,9 +38,13 @@ export default function CreatePost() {
   const [isPublishButtonDisabled, setIsPublishButtonDisabled] = useState(true);
   const { toast, showToast } = useToast();
   const { user } = useUser();
-  useEffect(() => {}, []);
+  const [editor, setEditor] = useState(null);
 
-  function handleBlogPostChange(value, name = 'content') {
+  function handleBlogPostChange(value, name, editorInstance = null) {
+    if (editorInstance) {
+      setEditor(editorInstance)
+    }
+    console.log('Hello there ', value, name)
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }));
     const tempIsPublishButtonDisabled = value.trim().length <= 0;
     setIsPublishButtonDisabled(tempIsPublishButtonDisabled);
@@ -76,9 +80,14 @@ export default function CreatePost() {
           });
           setBlogPost({
             title: '',
-            content: '',
+            content: ''
           });
-          setFile(null);
+          if (editor) {
+            editor.root.innerHTML = '';
+          }
+          setImageURL('')
+          setFile(null)
+
           return;
         }
 
@@ -146,7 +155,6 @@ export default function CreatePost() {
           value={blogPost.title}
         />
         <RichTextEditor
-          model={blogPost}
           handleBlogPostChange={handleBlogPostChange}
         />
       </Box>

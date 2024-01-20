@@ -1,5 +1,4 @@
 .create-post {
-  /* height: calc(100vh - var(--navbar-height)); */
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -40,7 +39,6 @@
   border-radius: 10px;
   font-size: 1.5rem;
   border: 2px solid var(--light-grey-mid);
-
   outline: none;
 }
 
@@ -49,7 +47,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  gap: 10px;
+  margin: 60px 0;
 }
 
 .buttons__discard {

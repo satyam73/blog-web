@@ -22,10 +22,8 @@ export default function Appbar({ isProfileModalOpen, setIsProfileModalOpen }) {
   return (
     <>
       <UserProvider>
-        <AuthGuard>
-          <AppbarPresentation activePage={activePage} onItemClick={onItemClick} />
-          <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
-        </AuthGuard>
+        <AppbarPresentation activePage={activePage} onItemClick={onItemClick} />
+        <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
       </UserProvider>
     </>
   )
