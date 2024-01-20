@@ -71,7 +71,7 @@ export default function UpdateProfilePhoto({
           style={{ borderRadius: '10px' }}
           height={80}
           width={80}
-          src={profilePic || '/assets/profile.avif'}
+          src={profilePic || '/assets/profile.jpg'}
           alt={'profile'}
         />
       </Box>

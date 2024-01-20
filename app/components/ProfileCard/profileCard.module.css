@@ -30,3 +30,9 @@
   font-size: 14px;
   text-align: center;
 }
+
+.profile-card__edit-link,
+.profile-card__edit-link:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+}

@@ -9,8 +9,10 @@ import styles from '@/styles/blog-post.module.css';
 import ToastProvider from '@/app/contexts/ToastProvider';
 import UserProvider from '@/app/contexts/UserProvider';
 import Layout from '@/app/components/common/Layout/Layout';
+import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
 
-export default function BlogPost({ post }) {
+export default function BlogPost({ post, author }) {
+  console.log(author)
   const sanitizedPost = DOMPurify.sanitize(post?.content, {
     USE_PROFILES: { html: true },
   });
@@ -30,6 +32,7 @@ export default function BlogPost({ post }) {
       <Box className={styles['blog-post__content']}>
         {ReactHtmlParser(sanitizedPost)}
       </Box>
+      <ProfileCard name={author.name} image={author.profilePic} bio={author.bio} />
     </Box>
   );
 }
@@ -59,7 +62,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { result: post, error } = await getDataById(params.id, 'blogs');
+  const { result: author, } = await getDataById(post.createdBy, 'users');
 
   // Pass post data to the page via props
-  return { props: { post: post } };
+  return { props: { post, author } };
 }

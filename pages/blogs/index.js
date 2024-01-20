@@ -8,7 +8,7 @@ import { getAllDocs } from '@/app/firebase/db/db';
 import { useEffect, useState } from 'react';
 
 export default function BlogsPage() {
-  const { user, loading } = useUser();
+  const { user, userDataFirebase, loading } = useUser();
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function BlogsPage() {
     fetchBlogs();
   }, [loading]);
 
-  console.log(blogs)
+  if (loading) return;
   return (
     <Box className={styles.blogs}>
       <Typography component='h2' className={styles['blogs__heading']}>
@@ -40,14 +40,14 @@ export default function BlogsPage() {
               <BlogCard
                 id={blog.id}
                 title={blog.title}
-                image={blog.featuredImage || '/assets/profile.avif'}
+                image={blog.featuredImage || '/assets/profile.jpg'}
                 key={blog.id}
               />
             );
           })}
         </Box>
         <Box className={styles['main__sidebar']}>
-          <ProfileCard />
+          <ProfileCard name={userDataFirebase.name} image={userDataFirebase.profilePic} bio={userDataFirebase.bio} isButtonVisible={true} />
         </Box>
       </Box>
     </Box>

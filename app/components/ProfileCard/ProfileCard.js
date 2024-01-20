@@ -1,14 +1,15 @@
-import { useUser } from '@/app/contexts/UserProvider';
-import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
-import styles from './profileCard.module.css';
-import { handleLoginModalChange, handleProfileModalChange, handleUnauthorizeModalChange } from '@/app/store/global';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, } from 'react-redux';
+import { Box, Button, Typography } from '@mui/material';
 
-export default function ProfileCard() {
+import { useUser } from '@/app/contexts/UserProvider';
+import { handleLoginModalChange, handleProfileModalChange } from '@/app/store/global';
+
+import styles from './profileCard.module.css';
+
+export default function ProfileCard({ image, name, bio = '', isButtonVisible = false }) {
   const dispatch = useDispatch();
-  const { user, userDataFirebase, loading } = useUser();
-  const { isUnauthorizeModalOpen } = useSelector((state) => state.global);
+  const { user, loading } = useUser();
 
   function openLoginModal() {
     dispatch(handleLoginModalChange(true));
@@ -18,6 +19,7 @@ export default function ProfileCard() {
     dispatch(handleProfileModalChange(true));
   }
   const unauthorizeModalOpenOrEditProfileCallback = !user ? openLoginModal : openProfileModal;
+
   //TODO add skeleton here
   if (loading) return;
   return (
@@ -25,22 +27,21 @@ export default function ProfileCard() {
       <Box component='span' className={styles['profile-card__image-container']}>
         <Image
           className={styles['image-container__image']}
-          src={userDataFirebase?.profilePic || '/assets/profile.avif'}
+          src={image || '/assets/profile.jpg'}
           height={100}
           width={100}
         />
       </Box>
       <Typography className={styles['profile-card__name']}>
-        {userDataFirebase?.name || 'Guest'}
+        {name || 'Guest'}
       </Typography>
       <Typography className={styles['profile-card__bio']}>
-        {userDataFirebase?.bio || ''}
+        {bio || ''}
       </Typography>
-      <Button variant='text' onClick={unauthorizeModalOpenOrEditProfileCallback}>
-        <Typography className={styles['profile-card__edit-link']}>
-          {!user ? 'Login' : 'Edit Profile'}
-        </Typography>
+      {isButtonVisible && <Button className={styles['profile-card__edit-link']} variant='text' onClick={unauthorizeModalOpenOrEditProfileCallback}>
+        {!user ? 'Login' : 'Edit Profile'}
       </Button>
+      }
     </Box>
   );
 }
