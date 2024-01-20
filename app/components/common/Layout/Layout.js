@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
-import Navbar from "../Navbar/Navbar";
-import Appbar from "../Appbar/Appbar";
-import UnauthorizeModal from "../UnauthorizeModal/UnauthorizeModal";
 import { useDispatch, useSelector } from "react-redux";
-import { handleLoginModalChange, handleRegisterModalChange, handleUnauthorizeModalChange } from "@/app/store/global";
-import RegisterModal from "../../RegisterModal/RegisterModal";
-import LoginModal from "../../LoginModal/LoginModal";
+
+import { handleLoginModalChange, handleProfileModalChange, handleRegisterModalChange, handleUnauthorizeModalChange } from "@/app/store/global";
+
+import Navbar from "@/app/components/common/Navbar";
+import Appbar from "@/app/components/common/Appbar/Appbar";
+import LoginModal from "@/app/components/LoginModal/LoginModal";
+import ProfileModal from "@/app/components/ProfileModal/ProfileModal";
+import RegisterModal from "@/app/components/RegisterModal/RegisterModal";
+import UnauthorizeModal from "@/app/components/common/UnauthorizeModal/UnauthorizeModal";
 
 export default function Layout({ children }) {
   const theme = useTheme();
@@ -39,11 +42,18 @@ export default function Layout({ children }) {
     dispatch(handleLoginModalChange(false));
   }
 
+  function closeProfileModal(e) {
+    e?.stopPropagation();
+    dispatch(handleProfileModalChange(false));
+  }
+
   return (
     <>
       <UnauthorizeModal open={isUnauthorizeModalOpen} handleClose={closeUnauthorizeModal} onLoginClick={onLoginClick} />
       <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={onLoginButtonClick} />
       <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
+
+      <ProfileModal open={isProfileModalOpen} handleClose={closeProfileModal} />
       {!isMobile && <Navbar />}
       {children}
       {isMobile && <Appbar activePage={activePage} setActivePage={setActivePage} />}
