@@ -1,12 +1,14 @@
-import { Box, Typography, useStepContext } from '@mui/material';
-import Layout from '@/app/components/common/Layout/Layout';
-import styles from '@/styles/blogs.module.css';
-import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
-import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
-import UserProvider, { useUser } from '@/app/contexts/UserProvider';
-import { getAllDocs } from '@/app/firebase/db/db';
 import { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
 
+import { getAllDocs } from '@/app/firebase/db/db';
+import UserProvider, { useUser } from '@/app/contexts/UserProvider';
+
+import Layout from '@/app/components/common/Layout/Layout';
+import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
+import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
+
+import styles from '@/styles/blogs.module.css';
 export default function BlogsPage() {
   const { userDataFirebase, loading } = useUser();
   const [blogs, setBlogs] = useState([]);
@@ -16,7 +18,6 @@ export default function BlogsPage() {
       try {
         const { result, error } = await getAllDocs('blogs');
 
-        console.log(result)
         if (result && !error) {
           setBlogs(result)
         }
