@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Box, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
 import DOMPurify from 'isomorphic-dompurify';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -12,7 +12,12 @@ import Layout from '@/app/components/common/Layout/Layout';
 import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
 
 export default function BlogPost({ post, author }) {
-  console.log(author)
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   const sanitizedPost = DOMPurify.sanitize(post?.content, {
     USE_PROFILES: { html: true },
   });
@@ -20,19 +25,34 @@ export default function BlogPost({ post, author }) {
   return (
     <Box className={styles['blog-post']}>
       <Typography className={styles['blog-post__heading']} variant='h1'>
-        {post.title}
+        {isLoading ? <Skeleton height={60} sx={{ width: '100%' }} /> : post.title}
       </Typography>
       <Box className={styles['blog-post__image-container']}>
-        <Image
-          className={styles['blog-post__image']}
-          src={post.featuredImage}
-          fill={true}
-        />
+        {isLoading ? <Skeleton height={300} sx={{ width: '100%' }} /> :
+          <Image
+            className={styles['blog-post__image']}
+            src={post.featuredImage}
+            fill={true}
+          />}
       </Box>
       <Box className={styles['blog-post__content']}>
-        {ReactHtmlParser(sanitizedPost)}
+        {isLoading ?
+          <>
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+            <Skeleton height={30} sx={{ width: '100%' }} />
+          </> :
+          ReactHtmlParser(sanitizedPost)
+        }
       </Box>
-      <ProfileCard name={author.name} image={author.profilePic} bio={author.bio} />
+      {isLoading ? <Skeleton height={300} sx={{ width: '100%' }} /> : < ProfileCard name={author.name} image={author.profilePic} bio={author.bio} />}
     </Box>
   );
 }
