@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './homePresentation.module.css';
 import { Box, Button, Typography } from '@mui/material';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+
+import styles from './homePresentation.module.css';
 
 export default function HomePresentation({ onJoinButtonClick }) {
   return (

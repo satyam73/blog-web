@@ -1,13 +1,13 @@
-import { Box, Button, Typography } from '@mui/material'
-import styles from '../styles/index.module.css'
-import { Montserrat } from 'next/font/google';
-import Layout from '@/app/components/common/Layout/Layout';
 import { useState } from 'react';
+import { Box } from '@mui/material';
+
+import Layout from '@/app/components/common/Layout/Layout';
 import RegisterModal from '@/app/components/RegisterModal/RegisterModal';
 import LoginModal from '@/app/components/LoginModal/LoginModal';
 import HomePresentation from '@/app/components/home/HomePresentation';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+import styles from '../styles/index.module.css';
+
 export default function Home() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -33,10 +33,7 @@ export default function Home() {
     <>
       <Box className={styles.home} data-testid={'home-heading'} >
         <HomePresentation onJoinButtonClick={onRegisterButtonClick} />
-        <Button variant="contained" onClick={onRegisterButtonClick} > Register</Button>
-        <Button variant="contained" onClick={onLoginButtonClick}> Login</Button>
       </Box>
-
       <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={onLoginButtonClick} />
       <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
     </>
