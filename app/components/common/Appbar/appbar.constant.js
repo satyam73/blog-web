@@ -1,4 +1,5 @@
-import { Home, Article, AccountCircle } from "@mui/icons-material";
+import { Home, Article, AccountCircle, MoreVert } from "@mui/icons-material";
+
 export const APPBAR_ITEMS = [
   {
     name: 'home',
@@ -13,9 +14,9 @@ export const APPBAR_ITEMS = [
     icon: <Article />
   },
   {
-    name: 'profile',
-    text: 'Profile',
-    link: '/profile',
-    icon: <AccountCircle />
+    name: 'more',
+    text: 'More',
+    link: 'javascript:void(0)',
+    icon: <MoreVert />
   },
 ]

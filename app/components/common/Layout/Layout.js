@@ -7,12 +7,14 @@ import Appbar from "../Appbar/Appbar";
 export default function Layout({ children }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
+  const [activePage, setActivePage] = useState(0);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+
   return (
     <>
-      {!isMobile && < Navbar isProfileModalOpen={isProfileModalOpen} setIsProfileModalOpen={setIsProfileModalOpen} />}
+      {!isMobile && <Navbar isProfileModalOpen={isProfileModalOpen} setIsProfileModalOpen={setIsProfileModalOpen} />}
       {children}
-      {isMobile && <Appbar isProfileModalOpen={isProfileModalOpen} setIsProfileModalOpen={setIsProfileModalOpen} />}
+      {isMobile && <Appbar activePage={activePage} setActivePage={setActivePage} isProfileModalOpen={isProfileModalOpen} setIsProfileModalOpen={setIsProfileModalOpen} />}
     </>
   )
 }
