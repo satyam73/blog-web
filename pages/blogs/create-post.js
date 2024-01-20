@@ -1,8 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
-
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { Box, Button, Typography } from '@mui/material';
+const NextImage = dynamic(() => import('next/image'), {
+  ssr: false,
+});
+
+import { addDataToFirebase, } from '@/app/firebase/db/db';
+import { uploadImageToCloud } from '@/services/cloudinary';
+import UserProvider, { useUser } from '@/app/contexts/UserProvider';
+import ToastProvider, { useToast } from '@/app/contexts/ToastProvider';
+
+import {
+  ERROR_MESSAGES,
+  INFO_MESSAGES,
+  SUCCESS_MESSAGES,
+  TOAST_TYPES,
+} from '@/constants';
+
+import AuthGuard from '@/app/components/AuthGuard/AuthGuard';
+import UploadImage from '@/app/components/UploadImage/UploadImage';
 import Layout from '@/app/components/common/Layout/Layout';
-import { Box, Button, IconButton, Typography } from '@mui/material';
 const RichTextEditor = dynamic(
   () => import('@/app/components/RichTextEditor/RichTextEditor'),
   {
@@ -10,22 +27,7 @@ const RichTextEditor = dynamic(
   }
 );
 
-import { addDataToFirebase, updateDataOfFirebase } from '@/app/firebase/db/db';
 import styles from '@/styles/create-post.module.css';
-import UploadImage from '@/app/components/UploadImage/UploadImage';
-import AuthGuard from '@/app/components/AuthGuard/AuthGuard';
-import UserProvider, { useUser } from '@/app/contexts/UserProvider';
-import ToastProvider, { useToast } from '@/app/contexts/ToastProvider';
-import {
-  ERROR_MESSAGES,
-  INFO_MESSAGES,
-  SUCCESS_MESSAGES,
-  TOAST_TYPES,
-} from '@/constants';
-import { uploadImageToCloud } from '@/services/cloudinary';
-const NextImage = dynamic(() => import('next/image'), {
-  ssr: false,
-});
 
 export default function CreatePost() {
   const [blogPost, setBlogPost] = useState({
@@ -44,7 +46,7 @@ export default function CreatePost() {
     if (editorInstance) {
       setEditor(editorInstance)
     }
-    console.log('Hello there ', value, name)
+
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }));
     const tempIsPublishButtonDisabled = value.trim().length <= 0;
     setIsPublishButtonDisabled(tempIsPublishButtonDisabled);
