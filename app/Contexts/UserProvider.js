@@ -14,7 +14,8 @@ export const useUser = () => useContext(UserContext);
 export default function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userDataFirebase, setUserDataFirebase] = useState(null)
+  const [userDataFirebase, setUserDataFirebase] = useState(null);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {

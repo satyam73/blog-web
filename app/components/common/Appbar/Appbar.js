@@ -6,14 +6,18 @@ import ProfileModal from "../../ProfileModal/ProfileModal";
 import AppbarPresentation from "./AppbarPresentation";
 import { useState } from "react";
 import signoutHandler from "@/app/firebase/auth/signout";
+import { useDispatch, useSelector } from "react-redux";
+import { handleProfileModalChange } from "@/app/store/global";
 
-export default function Appbar({ activePage, setActivePage, isProfileModalOpen, setIsProfileModalOpen }) {
+export default function Appbar({ activePage, setActivePage, }) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
+  const { isProfileModalOpen } = useSelector(state => state.global);
+  const dispatch = useDispatch();
 
   function handleClose() {
-    setIsProfileModalOpen(false)
+    dispatch(handleProfileModalChange(false));
   }
 
   function onItemClick(item, index) {
@@ -36,7 +40,7 @@ export default function Appbar({ activePage, setActivePage, isProfileModalOpen, 
   };
 
   function onProfileClick() {
-    setIsProfileModalOpen(true);
+    dispatch(handleProfileModalChange(true));
     handleMenuClose()
   }
 

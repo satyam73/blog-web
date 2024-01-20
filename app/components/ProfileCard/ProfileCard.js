@@ -1,13 +1,23 @@
 import { useUser } from '@/app/contexts/UserProvider';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
-import Link from 'next/link';
 import styles from './profileCard.module.css';
+import { handleLoginModalChange, handleProfileModalChange, handleUnauthorizeModalChange } from '@/app/store/global';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function ProfileCard() {
+  const dispatch = useDispatch();
   const { user, userDataFirebase, loading } = useUser();
-  console.log(user, userDataFirebase, loading);
+  const { isUnauthorizeModalOpen } = useSelector((state) => state.global);
 
+  function openLoginModal() {
+    dispatch(handleLoginModalChange(true));
+  }
+
+  function openProfileModal() {
+    dispatch(handleProfileModalChange(true));
+  }
+  const unauthorizeModalOpenOrEditProfileCallback = !user ? openLoginModal : openProfileModal;
   //TODO add skeleton here
   if (loading) return;
   return (
@@ -26,11 +36,11 @@ export default function ProfileCard() {
       <Typography className={styles['profile-card__bio']}>
         {userDataFirebase?.bio || ''}
       </Typography>
-      <Link href='/profile'>
+      <Button variant='text' onClick={unauthorizeModalOpenOrEditProfileCallback}>
         <Typography className={styles['profile-card__edit-link']}>
           {!user ? 'Login' : 'Edit Profile'}
         </Typography>
-      </Link>
+      </Button>
     </Box>
   );
 }

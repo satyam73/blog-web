@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import signoutHandler from "@/app/firebase/auth/signout";
-import NavbarPresentation from "./NavbarPresentation";
-import ProfileModal from "@/app/components/ProfileModal/ProfileModal";
+import { useDispatch, useSelector } from "react-redux";
+
 import UserProvider from "@/app/contexts/UserProvider";
+import signoutHandler from "@/app/firebase/auth/signout";
+import { handleProfileModalChange } from "@/app/store/global";
 
-export default function Navbar({ isProfileModalOpen, setIsProfileModalOpen }) {
+import ProfileModal from "@/app/components/ProfileModal/ProfileModal";
+import NavbarPresentation from "./NavbarPresentation";
+
+export default function Navbar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
-
+  const { isProfileModalOpen } = useSelector(state => state.global);
+  const dispatch = useDispatch();
   const { push } = useRouter();
   async function onNavbarItemClick(index, item) {
     if (item.name === 'sign out') {
@@ -16,7 +21,7 @@ export default function Navbar({ isProfileModalOpen, setIsProfileModalOpen }) {
     }
 
     if (item.name === 'profile') {
-      setIsProfileModalOpen(true);
+      dispatch(handleProfileModalChange(true));
       return;
     }
 
@@ -25,7 +30,7 @@ export default function Navbar({ isProfileModalOpen, setIsProfileModalOpen }) {
   }
 
   function handleClose() {
-    setIsProfileModalOpen(false);
+    dispatch(handleProfileModalChange(false));
   }
 
   return (
@@ -36,4 +41,4 @@ export default function Navbar({ isProfileModalOpen, setIsProfileModalOpen }) {
       </UserProvider>
     </>
   )
-}
+};

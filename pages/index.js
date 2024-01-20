@@ -7,36 +7,21 @@ import LoginModal from '@/app/components/LoginModal/LoginModal';
 import HomePresentation from '@/app/components/home/HomePresentation';
 
 import styles from '../styles/index.module.css';
+import { handleLoginModalChange, handleRegisterModalChange } from '@/app/store/global';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   function onRegisterButtonClick() {
-    setIsRegisterModalOpen(true);
+    dispatch(handleRegisterModalChange(true))
   }
 
-  function onLoginButtonClick() {
-    setIsLoginModalOpen(true);
-  }
 
-  function closeRegisterModal(e) {
-    e?.stopPropagation();
-    setIsRegisterModalOpen(false);
-  }
-
-  function closeLoginModal(e) {
-    e?.stopPropagation();
-    setIsLoginModalOpen(false);
-  }
   return (
-    <>
-      <Box className={styles.home} data-testid={'home-heading'} >
-        <HomePresentation onJoinButtonClick={onRegisterButtonClick} />
-      </Box>
-      <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={onLoginButtonClick} />
-      <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
-    </>
+    <Box className={styles.home} data-testid={'home-heading'} >
+      <HomePresentation onJoinButtonClick={onRegisterButtonClick} />
+    </Box>
   )
 }
 
