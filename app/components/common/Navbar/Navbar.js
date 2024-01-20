@@ -11,6 +11,7 @@ export default function Navbar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
   const dispatch = useDispatch();
   const { push } = useRouter();
+
   async function onNavbarItemClick(index, item) {
     if (item.name === 'sign out') {
       signoutHandler();
@@ -25,8 +26,6 @@ export default function Navbar() {
     setActiveLinkIndex(index);
     push(item.link);
   }
-
-
 
   return (
     <>

@@ -4,6 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import { handleLoginModalChange, handleProfileModalChange, handleRegisterModalChange, handleUnauthorizeModalChange } from "@/app/store/global";
+import UserProvider from "@/app/contexts/UserProvider";
 
 import Navbar from "@/app/components/common/Navbar/Navbar";
 import Appbar from "@/app/components/common/Appbar/Appbar";
@@ -48,7 +49,8 @@ export default function Layout({ children }) {
   }
 
   return (
-    <>
+
+    <UserProvider>
       <UnauthorizeModal open={isUnauthorizeModalOpen} handleClose={closeUnauthorizeModal} onLoginClick={onLoginClick} />
       <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={onLoginButtonClick} />
       <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
@@ -57,6 +59,7 @@ export default function Layout({ children }) {
       {!isMobile && <Navbar />}
       {children}
       {isMobile && <Appbar activePage={activePage} setActivePage={setActivePage} />}
-    </>
+    </UserProvider>
+
   )
 }
