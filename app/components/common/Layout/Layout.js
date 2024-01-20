@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { handleLoginModalChange, handleProfileModalChange, handleRegisterModalChange, handleUnauthorizeModalChange } from "@/app/store/global";
 
-import Navbar from "@/app/components/common/Navbar";
+import Navbar from "@/app/components/common/Navbar/Navbar";
 import Appbar from "@/app/components/common/Appbar/Appbar";
 import LoginModal from "@/app/components/LoginModal/LoginModal";
 import ProfileModal from "@/app/components/ProfileModal/ProfileModal";
