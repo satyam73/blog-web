@@ -77,7 +77,6 @@ export async function getAllDocs(collectionName, queryData = {}) {
     const querySnapshot = await getDocs(dataFromDB);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.data())
       result.push(doc.data())
     });
   } catch (e) {

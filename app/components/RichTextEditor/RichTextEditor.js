@@ -15,9 +15,6 @@ export default function RichTextEditor({ handleBlogPostChange }) {
     let editor;
 
     function onTextChange(delta, source) {
-      console.log(delta, source);
-      console.log(editor.root.innerHTML);
-      console.log(editorRef.current.innerHTML);
       handleBlogPostChange(editor.root.innerHTML, 'content', editor);
     }
 
