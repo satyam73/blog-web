@@ -1,13 +1,22 @@
 import Image from 'next/image';
-import { useDispatch, } from 'react-redux';
-import { Box, Button, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { Box, Button, Skeleton, Typography } from '@mui/material';
 
 import { useUser } from '@/app/contexts/UserProvider';
-import { handleLoginModalChange, handleProfileModalChange } from '@/app/store/global';
+import {
+  handleLoginModalChange,
+  handleProfileModalChange,
+} from '@/app/store/global';
 
 import styles from './profileCard.module.css';
 
-export default function ProfileCard({ image, name, bio = '', isButtonVisible = false }) {
+export default function ProfileCard({
+  image,
+  name,
+  bio = '',
+  isButtonVisible = false,
+  isLoading = false,
+}) {
   const dispatch = useDispatch();
   const { user, loading } = useUser();
 
@@ -18,10 +27,19 @@ export default function ProfileCard({ image, name, bio = '', isButtonVisible = f
   function openProfileModal() {
     dispatch(handleProfileModalChange(true));
   }
-  const unauthorizeModalOpenOrEditProfileCallback = !user ? openLoginModal : openProfileModal;
+  const unauthorizeModalOpenOrEditProfileCallback = !user
+    ? openLoginModal
+    : openProfileModal;
 
-  //TODO add skeleton here
-  if (loading) return;
+  if (loading || isLoading)
+    return (
+      <Skeleton
+        className={styles['skeleton']}
+        component='div'
+        variant='rectangle'
+      />
+    );
+
   return (
     <Box className={styles['profile-card']}>
       <Box component='span' className={styles['profile-card__image-container']}>
@@ -38,10 +56,15 @@ export default function ProfileCard({ image, name, bio = '', isButtonVisible = f
       <Typography className={styles['profile-card__bio']}>
         {bio || ''}
       </Typography>
-      {isButtonVisible && <Button className={styles['profile-card__edit-link']} variant='text' onClick={unauthorizeModalOpenOrEditProfileCallback}>
-        {!user ? 'Login' : 'Edit Profile'}
-      </Button>
-      }
+      {isButtonVisible && (
+        <Button
+          className={styles['profile-card__edit-link']}
+          variant='text'
+          onClick={unauthorizeModalOpenOrEditProfileCallback}
+        >
+          {!user ? 'Login' : 'Edit Profile'}
+        </Button>
+      )}
     </Box>
   );
 }

@@ -6,7 +6,7 @@ export default function AuthGuard({ children }) {
   console.log(user, loading)
   return (
     <>
-      {!user?.uid ? <p>You're not authenticated to view this page!</p> : children}
+      {!user?.uid ? <p>You&apos;re not authenticated to view this page!</p> : children}
     </>
   )
 }
