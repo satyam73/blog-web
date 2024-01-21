@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 
-import UserProvider from "@/app/contexts/UserProvider";
-
 import ProfileModal from "../../ProfileModal/ProfileModal";
 import AppbarPresentation from "./AppbarPresentation";
 import { useState } from "react";
@@ -50,10 +48,8 @@ export default function Appbar({ activePage, setActivePage, }) {
 
   return (
     <>
-      <UserProvider>
-        <AppbarPresentation onSignoutClick={onSignoutClick} onProfileClick={onProfileClick} handleMoreClick={handleMoreClick} anchorEl={anchorEl} isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} activePage={activePage} onItemClick={onItemClick} />
-        <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
-      </UserProvider>
+      <AppbarPresentation onSignoutClick={onSignoutClick} onProfileClick={onProfileClick} handleMoreClick={handleMoreClick} anchorEl={anchorEl} isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} activePage={activePage} onItemClick={onItemClick} />
+      <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
     </>
   )
 }

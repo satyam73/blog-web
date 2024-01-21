@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import UserProvider from "@/app/contexts/UserProvider";
 import signoutHandler from "@/app/firebase/auth/signout";
 import { handleProfileModalChange } from "@/app/store/global";
 import NavbarPresentation from "./NavbarPresentation";
@@ -29,9 +28,7 @@ export default function Navbar() {
 
   return (
     <>
-      <UserProvider>
-        <NavbarPresentation activeLinkIndex={activeLinkIndex} onNavbarItemClick={onNavbarItemClick} />
-      </UserProvider>
+      <NavbarPresentation activeLinkIndex={activeLinkIndex} onNavbarItemClick={onNavbarItemClick} />
     </>
   )
 };

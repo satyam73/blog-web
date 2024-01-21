@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Skeleton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import { getAllDocs } from '@/app/firebase/db/db';
 import UserProvider, { useUser } from '@/app/contexts/UserProvider';
@@ -8,8 +8,9 @@ import Layout from '@/app/components/common/Layout/Layout';
 import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
 import BlogCard from '@/app/components/blogs/BlogCard/BlogCard';
 
-import styles from '@/styles/blogs.module.css';
 import BlogCardSkeleton from '@/app/components/blogs/BlogCard/BlogCardSkeleton';
+
+import styles from '@/styles/blogs.module.css';
 export default function BlogsPage() {
   const { userDataFirebase, loading: isUserInfoLoading } = useUser();
   const [blogs, setBlogs] = useState([]);

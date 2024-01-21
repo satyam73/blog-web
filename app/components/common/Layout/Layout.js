@@ -49,17 +49,14 @@ export default function Layout({ children }) {
   }
 
   return (
-
     <UserProvider>
       <UnauthorizeModal open={isUnauthorizeModalOpen} handleClose={closeUnauthorizeModal} onLoginClick={onLoginClick} />
       <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={onLoginButtonClick} />
       <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
-
       <ProfileModal open={isProfileModalOpen} handleClose={closeProfileModal} />
       {!isMobile && <Navbar />}
       {children}
       {isMobile && <Appbar activePage={activePage} setActivePage={setActivePage} />}
     </UserProvider>
-
   )
 }
