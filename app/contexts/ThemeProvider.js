@@ -100,6 +100,11 @@ theme = createTheme(theme, {
         root: {
           backgroundColor: theme.palette.primary.light,
           color: theme.palette.primary.dark,
+          position: 'sticky',
+          top: 'auto',
+          bottom: '0',
+          bottom: '0px',
+          left: '0px',
         }
       }
     }

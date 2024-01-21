@@ -32,9 +32,8 @@ export default function AppbarPresentation({
           aria-haspopup='true'
           aria-expanded={open ? 'true' : undefined}
           onClick={(event) => handleMoreClick(event, item, index)}
-          className={`${styles.main__item} ${
-            activePage === index ? styles['main__item--active'] : ''
-          }`}
+          className={`${styles.main__item} ${activePage === index ? styles['main__item--active'] : ''
+            }`}
           data-testid={`appbar-item-${item.name}`}
         >
           <Box>
@@ -51,9 +50,8 @@ export default function AppbarPresentation({
           fontSize='small'
           key={`appbar-item-${item.name}`}
           onClick={() => onItemClick(item, index)}
-          className={`${styles.main__item} ${
-            activePage === index ? styles['main__item--active'] : ''
-          }`}
+          className={`${styles.main__item} ${activePage === index ? styles['main__item--active'] : ''
+            }`}
           data-testid={`appbar-item-${item.name}`}
         >
           <Box>
@@ -68,7 +66,7 @@ export default function AppbarPresentation({
   });
 
   return (
-    <MUIAppbar position='fixed' color='primary' className={styles.appbar}>
+    <MUIAppbar position='fixed' color='primary'>
       <Menu
         id='appbar-more-menu'
         aria-labelledby='appbar-more-menu'

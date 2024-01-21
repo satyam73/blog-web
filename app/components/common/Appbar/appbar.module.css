@@ -1,12 +1,3 @@
-.appbar {
-  top: auto;
-  bottom: 0;
-  position: sticky;
-  bottom: 0px;
-  left: 0px;
-}
-
-
 .appbar__main {
   justify-content: space-around;
 }
