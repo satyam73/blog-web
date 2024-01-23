@@ -132,7 +132,7 @@ export default function CreatePost() {
 
   return (
     <Box className={styles['create-post']}>
-      <Typography variant='h4' className={styles['create-post__heading']}>
+      <Typography variant='h1' className={styles['create-post__heading']}>
         Create Post
       </Typography>
       <Box className={styles['create-post__editor']}>

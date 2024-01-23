@@ -3,12 +3,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: var(--navbar-height);
 }
 
-.create-post__heading {
+.create-post .create-post__heading {
   text-decoration: underline;
   margin: 10px 0;
+  font-weight: 600;
 }
 
 
