@@ -19,9 +19,25 @@ let theme = createTheme({
       fontWeight: 500,
       lineHeight: 1.4,
     },
+    h1: {
+      fontSize: '2.5rem'
+    },
+    h2: {
+      fontSize: '2.2rem'
+    },
+    h3: {
+      fontSize: '2rem'
+    },
     h4: {
       fontWeight: 600,
+      fontSize: '1.8rem'
     },
+    h5: {
+      fontSize: '1.5rem'
+    },
+    h6: {
+      fontSize: '1.2rem'
+    }
   },
   breakpoints: {
     values: {
