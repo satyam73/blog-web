@@ -44,8 +44,8 @@
   text-align: center;
 }
 
-.profile-card__edit-link,
-.profile-card__edit-link:hover {
+.profile-card .profile-card__edit-link,
+.profile-card .profile-card__edit-link:hover {
   color: var(--color-blue);
   text-decoration: underline;
 }
