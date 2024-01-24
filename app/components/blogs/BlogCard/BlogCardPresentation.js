@@ -1,9 +1,11 @@
-import Image from 'next/image';
-import { Box, Typography } from '@mui/material';
-import styles from './blogCard.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
+import EditIcon from '@mui/icons-material/Edit';
+import { Box, IconButton, Typography } from '@mui/material';
 
-export default function BlogCardPresentation({ id, title, image, onClick = () => { } }) {
+import styles from './blogCard.module.css';
+
+export default function BlogCardPresentation({ id, title, image, onClick = () => { }, isEditMode, onEditClick = () => { } }) {
 
   return (
     <Link href={`/blogs/${id}`} style={{ textDecoration: 'none' }}>
@@ -14,6 +16,10 @@ export default function BlogCardPresentation({ id, title, image, onClick = () =>
         <Typography component='h4' className={styles['blog-card__title']} >
           {title}
         </Typography>
+        {isEditMode &&
+          <IconButton sx={{ alignSelf: 'flex-start', marginLeft: 'auto' }} className={styles['blog-card__edit-button']} onClick={onEditClick}>
+            <EditIcon fontSize='medium' />
+          </IconButton>}
       </Box >
     </Link >
   );

@@ -1,0 +1,31 @@
+.dashboard {
+  max-width: 1024px;
+  margin: auto;
+  /* gap: 20px; */
+  padding: 10px 1rem;
+}
+
+.dashboard .dashboard__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dashboard .dashboard__add-post-button {
+  border: 1px solid var(--secondary-color);
+  text-decoration: none;
+  color: var(--secondary-color);
+  background-color: var(--color-white);
+  padding: 5px 10px;
+  border-radius: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: background-color 0.1s;
+  font-size: 1rem;
+}
+
+.dashboard .dashboard__add-post-button:hover {
+  color: var(--color-white);
+  background-color: var(--secondary-color);
+}
