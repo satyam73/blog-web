@@ -26,6 +26,7 @@ export default function RichTextEditor({ handleBlogPostChange }) {
         placeholder: 'Start pouring your creativity...',
         theme: 'snow',
       });
+      editor.clipboard.dangerouslyPasteHTML(0, '&nbsp;<b>World</b>');
       editor.on('text-change', onTextChange);
     }
     setIsEditorRendered(true);

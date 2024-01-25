@@ -1,3 +1,5 @@
+import AuthGuard from '@/app/components/AuthGuard/AuthGuard';
+import EditGuard from '@/app/components/EditGuard/EditGuard';
 import Layout from '@/app/components/common/Layout/Layout';
 import ToastProvider from '@/app/contexts/ToastProvider';
 import UserProvider from '@/app/contexts/UserProvider';
@@ -17,7 +19,11 @@ EditPost.getLayout = function getLayout(page) {
   return (
     <ToastProvider>
       <UserProvider>
-        <Layout>{page}</Layout>
+        <AuthGuard>
+          <EditGuard>
+            <Layout>{page}</Layout>
+          </EditGuard>
+        </AuthGuard>
       </UserProvider>
     </ToastProvider>
   );
