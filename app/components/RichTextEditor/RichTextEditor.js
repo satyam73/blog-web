@@ -7,7 +7,7 @@ import 'quill/dist/quill.snow.css';
 
 import styles from './richTextEditor.module.css';
 
-export default function RichTextEditor({ handleBlogPostChange }) {
+export default function RichTextEditor({ handleBlogPostChange, setQuill = () => { } }) {
   const editorRef = useRef(null);
   const [isEditorRendered, setIsEditorRendered] = useState(false);
 
@@ -21,12 +21,18 @@ export default function RichTextEditor({ handleBlogPostChange }) {
     if (!isEditorRendered) {
       editor = new Quill(editorRef?.current, {
         modules: {
-          toolbar: true,
+          toolbar: [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline', 'link'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['blockquote', 'code-block'],
+          ]
         },
         placeholder: 'Start pouring your creativity...',
         theme: 'snow',
       });
-      editor.clipboard.dangerouslyPasteHTML(0, '&nbsp;<b>World</b>');
+
+      setQuill(editor);
       editor.on('text-change', onTextChange);
     }
     setIsEditorRendered(true);
