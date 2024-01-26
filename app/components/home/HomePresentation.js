@@ -11,16 +11,26 @@ export default function HomePresentation({ onJoinButtonClick }) {
   const { user, loading } = useUser();
   const { push } = useRouter()
   const homeCtaCallback = (!loading && !user) ? onJoinButtonClick : () => push('/blogs');
+  let homeCtaText;
+
+  if (loading) {
+    homeCtaText = 'Loading...';
+  } else if (user) {
+    homeCtaText = 'Explore blogs';
+  } else {
+    homeCtaText = 'Join the community';
+  }
 
   return (
     <Box className={styles.home}>
       <Typography variant='h4' className={styles['home__heading']}>
-        Lorem ipsum dolor sit amet, consectetur
+        Start pouring your creativity!
       </Typography>
       <Typography variant='h6' className={styles['home__description']}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum labore
-        corrupti est molestiae atque dolorem neque impedit, voluptates dolor
-        officia.
+        Start writing blogs that matters to the world and to you. Publish in one click!
+        Join in now the journey awaits you😀
+      </Typography>
+      <Typography variant='h6' className={styles['home__description']}>
       </Typography>
       <Button
         className={styles['home__cta-button']}
@@ -28,7 +38,7 @@ export default function HomePresentation({ onJoinButtonClick }) {
         endIcon={<KeyboardDoubleArrowRightIcon />}
         onClick={homeCtaCallback}
       >
-        {(!loading && !user) ? 'Join the community' : 'Explore blogs'}
+        {homeCtaText}
       </Button>
     </Box>
   );
