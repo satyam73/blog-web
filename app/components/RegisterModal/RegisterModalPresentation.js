@@ -56,7 +56,7 @@ export default function RegisterModalPresentation({ open, isDetailsValid, signup
               handleChange={handleChange}
               isValid={isDetailsValid.password}
             />
-            <Button variant='text' onClick={() => {
+            <Button sx={{ textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }} variant='text' onClick={() => {
               handleClose();
               openLoginModal();
             }}>Already have a account? Click here</Button>
