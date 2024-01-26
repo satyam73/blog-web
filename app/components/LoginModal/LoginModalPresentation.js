@@ -50,7 +50,7 @@ export default function LoginModalPresentation({ open, handleClose, handleChange
             <Button sx={{ textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }} variant='text' onClick={() => {
               handleClose();
               openRegisterModal();
-            }}>Don't have account? Click here</Button>
+            }}>Don&apos;t have account? Click here</Button>
             <Button disabled={isLoginLoading} onClick={handleLogin} variant='contained' className={styles['form__button']}>
               {isLoginLoading && <CircularProgress size={20} color="inherit" />}
               Login

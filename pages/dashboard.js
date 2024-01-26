@@ -33,7 +33,7 @@ export default function Dashboard() {
         console.error('Something went wrong while fetching the posts ', error);
       }
     })();
-  }, [loading]);
+  }, [loading, userDataFirebase]);
 
   return (
     <Box className={styles['dashboard']}>
@@ -51,6 +51,7 @@ export default function Dashboard() {
       </Box>
       {posts?.map((post) => (
         <BlogCard
+          key={post.id}
           id={post.id}
           title={post.title}
           image={post.featuredImage}
