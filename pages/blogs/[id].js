@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Box, Skeleton, Typography } from '@mui/material';
 import DOMPurify from 'isomorphic-dompurify';
 import ReactHtmlParser from 'react-html-parser';
+import React, { useEffect, useState } from 'react';
+import { Box, Skeleton, Typography } from '@mui/material';
 
 import { getAllDocs, getDataById } from '@/app/firebase/db/db';
-import styles from '@/styles/blog-post.module.css';
 import ToastProvider from '@/app/contexts/ToastProvider';
 import UserProvider from '@/app/contexts/UserProvider';
+
 import Layout from '@/app/components/common/Layout/Layout';
 import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
+
+import styles from '@/styles/blog-post.module.css';
 
 export default function BlogPost({ post, author }) {
   const [isLoading, setIsLoading] = useState(true);
