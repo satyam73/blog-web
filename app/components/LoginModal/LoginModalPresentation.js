@@ -5,7 +5,7 @@ import InputBox from '../common/Input/InputBox';
 import Modal from '../common/Modal/Modal';
 import styles from './loginModal.module.css';
 
-export default function LoginModalPresentation({ open, handleClose, handleChange, handleLogin, isDetailsValid, loginDetails, isLoginLoading }) {
+export default function LoginModalPresentation({ open, handleClose, handleChange, handleLogin, isDetailsValid, loginDetails, isLoginLoading, openRegisterModal }) {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box className={styles['login-modal']}>
@@ -47,6 +47,10 @@ export default function LoginModalPresentation({ open, handleClose, handleChange
               handleChange={handleChange}
               isValid={isDetailsValid.password}
             />
+            <Button sx={{ textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }} variant='text' onClick={() => {
+              handleClose();
+              openRegisterModal();
+            }}>Don't have account? Click here</Button>
             <Button disabled={isLoginLoading} onClick={handleLogin} variant='contained' className={styles['form__button']}>
               {isLoginLoading && <CircularProgress size={20} color="inherit" />}
               Login

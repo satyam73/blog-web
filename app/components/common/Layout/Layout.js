@@ -29,8 +29,12 @@ export default function Layout({ children }) {
     dispatch(handleUnauthorizeModalChange(false));
   }
 
-  function onLoginButtonClick() {
+  function openLoginModal() {
     dispatch(handleLoginModalChange(true))
+  }
+
+  function openRegisterModal() {
+    dispatch(handleRegisterModalChange(true))
   }
 
   function closeRegisterModal(e) {
@@ -51,8 +55,8 @@ export default function Layout({ children }) {
   return (
     <UserProvider>
       <UnauthorizeModal open={isUnauthorizeModalOpen} handleClose={closeUnauthorizeModal} onLoginClick={onLoginClick} />
-      <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={onLoginButtonClick} />
-      <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
+      <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={openLoginModal} />
+      <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} openRegisterModal={openRegisterModal} />
       <ProfileModal open={isProfileModalOpen} handleClose={closeProfileModal} />
       {!isMobile && <Navbar />}
       {children}

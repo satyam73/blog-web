@@ -7,7 +7,7 @@ import LoginModalPresentation from './LoginModalPresentation';
 import { ERROR_MESSAGES, FIREBASE_ERRROR_CODES, INFO_MESSAGES, SOMETHING_WENT_WRONG, TOAST_HIDEOUT_TIME, TOAST_OPTIONS_TOP_RIGHT, TOAST_TYPES } from '@/constants';
 import { LOGIN_SUCCESS_MESSAGE } from './loginModal.constant';
 
-export default function LoginModal({ open, handleClose, }) {
+export default function LoginModal({ open, handleClose, openRegisterModal }) {
   const [loginDetails, setLoginDetails] = useState({ email: '', password: '' });
   const [isDetailsValid, setIsDetailsValid] = useState({
     email: true,
@@ -90,6 +90,7 @@ export default function LoginModal({ open, handleClose, }) {
       isDetailsValid={isDetailsValid}
       loginDetails={loginDetails}
       isLoginLoading={isLoginLoading}
+      openRegisterModal={openRegisterModal}
     />
   )
 }
