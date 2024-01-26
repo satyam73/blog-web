@@ -5,21 +5,22 @@ import AppbarPresentation from "./AppbarPresentation";
 import { useState } from "react";
 import signoutHandler from "@/app/firebase/auth/signout";
 import { useDispatch, useSelector } from "react-redux";
-import { handleProfileModalChange } from "@/app/store/global";
+import { handleActiveBottomBarItemChange, handleProfileModalChange } from "@/app/store/global";
 
-export default function Appbar({ activePage, setActivePage, }) {
+export default function Appbar({ }) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const { isProfileModalOpen } = useSelector(state => state.global);
   const dispatch = useDispatch();
+  const { activeBottomBarItem: activePage } = useSelector(state => state.global);
 
   function handleClose() {
     dispatch(handleProfileModalChange(false));
   }
 
   function onItemClick(item, index) {
-    setActivePage(index);
+    dispatch(handleActiveBottomBarItemChange(index));
 
     if (index === 2) {
       return;

@@ -5,6 +5,7 @@ const initialState = {
   isRegisterModalOpen: false,
   isUnauthorizeModalOpen: false,
   isProfileModalOpen: false,
+  activeBottomBarItem: ''
 
 }
 
@@ -23,11 +24,14 @@ export const globalSlice = createSlice({
     },
     handleProfileModalChange: (state, action) => {
       state.isProfileModalOpen = action.payload;
+    },
+    handleActiveBottomBarItemChange: (state, action) => {
+      state.activeBottomBarItem = action.payload;
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { handleLoginModalChange, handleRegisterModalChange, handleUnauthorizeModalChange, handleProfileModalChange } = globalSlice.actions
+export const { handleLoginModalChange, handleRegisterModalChange, handleUnauthorizeModalChange, handleProfileModalChange, handleActiveBottomBarItemChange } = globalSlice.actions
 
 export default globalSlice.reducer

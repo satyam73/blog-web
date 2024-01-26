@@ -60,7 +60,7 @@ export default function Layout({ children }) {
       <ProfileModal open={isProfileModalOpen} handleClose={closeProfileModal} />
       {!isMobile && <Navbar />}
       {children}
-      {isMobile && <Appbar activePage={activePage} setActivePage={setActivePage} />}
+      {isMobile && <Appbar />}
     </UserProvider>
   )
 }

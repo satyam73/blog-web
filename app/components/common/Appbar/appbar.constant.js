@@ -1,11 +1,11 @@
-import { Home, Article, AccountCircle, MoreVert } from "@mui/icons-material";
+import { Home, Article, AccountCircle, Dashboard, MoreVert } from "@mui/icons-material";
 
 export const APPBAR_ITEMS = [
   {
-    name: 'home',
-    text: 'Home',
-    link: '/',
-    icon: <Home />
+    name: 'dashboard',
+    text: 'Dashboard',
+    link: '/dashboard',
+    icon: <Dashboard />
   },
   {
     name: 'blogs',
