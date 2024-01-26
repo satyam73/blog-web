@@ -41,7 +41,7 @@ export default function BlogsPage() {
 
   return (
     <Box className={styles.blogs}>
-      <Typography component='h2' className={styles['blogs__heading']}>
+      <Typography variant='h1' className={styles['blogs__heading']}>
         Explore Blogs
       </Typography>
       <Box className={styles['blogs__main']}>
@@ -49,15 +49,15 @@ export default function BlogsPage() {
           {isBlogsLoading
             ? blogsSkeletonMapping
             : blogs?.map((blog) => {
-                return (
-                  <BlogCard
-                    id={blog.id}
-                    title={blog.title}
-                    image={blog.featuredImage || '/assets/profile.jpg'}
-                    key={blog.id}
-                  />
-                );
-              })}
+              return (
+                <BlogCard
+                  id={blog.id}
+                  title={blog.title}
+                  image={blog.featuredImage || '/assets/profile.jpg'}
+                  key={blog.id}
+                />
+              );
+            })}
         </Box>
         <Box className={styles['main__sidebar']}>
           <ProfileCard
