@@ -1,10 +1,14 @@
 import AuthGuard from '@/app/components/AuthGuard/AuthGuard';
 import EditGuard from '@/app/components/EditGuard/EditGuard';
 import Layout from '@/app/components/common/Layout/Layout';
-import ToastProvider from '@/app/contexts/ToastProvider';
+import ToastProvider, { useToast } from '@/app/contexts/ToastProvider';
 import UserProvider from '@/app/contexts/UserProvider';
-import { getAllDocs, getDataById } from '@/app/firebase/db/db';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  getAllDocs,
+  getDataById,
+  updateDataOfFirebase,
+} from '@/app/firebase/db/db';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -17,47 +21,121 @@ const RichTextEditor = dynamic(
 import styles from '@/styles/edit-post.module.css';
 import UploadImage from '@/app/components/UploadImage/UploadImage';
 import Image from 'next/image';
+import { uploadImageToCloud } from '@/services/cloudinary';
+import { INFO_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
 export default function EditPost({ post }) {
   const router = useRouter();
-  const { id: postId } = router.query;
   const [quill, setQuill] = useState(null);
   const [blogPost, setBlogPost] = useState({
     title: post?.title || '',
     content: post?.content || '',
   });
-  const [isPostLoading, setIsPostLoading] = useState(false);
-  const [postData, setPostData] = useState(post);
+  const { toast, showToast } = useToast();
+  const [isPostLoading, setIsPostLoading] = useState(true);
+  const [isEditButtonLoading, setIsEditButtonLoading] = useState(false);
+  const [isEditButtonDisabled, setIsEditButtonDisabled] = useState(false);
+
   const [isUploadImageVisible, setIsUploadImageVisible] = useState(true);
-  const [postImage, setPostImage] = useState(post?.featuredImage);
+
   const [file, setFile] = useState(null);
+  const [imageURL, setImageURL] = useState(post?.featuredImage);
+
+  useEffect(() => {
+    setIsPostLoading(false);
+  }, []);
 
   useEffect(() => {
     if (!quill) return;
-
-    quill.clipboard.dangerouslyPasteHTML(0, postData?.content);
-  }, [quill, postData]);
+    //TODO work on santizing DOM when creating, updating
+    quill.clipboard.dangerouslyPasteHTML(0, post?.content);
+  }, [quill]);
 
   function handleBlogPostChange(value, name, editorInstance) {
     console.log(value, name, editorInstance);
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }));
   }
-
-  function onImageUpload() {
-    console.log('onImageUpload');
+  function onImageUpload(e) {
+    setFile(e.target.files[0]);
+    const url = URL.createObjectURL(e.target.files[0]);
+    setImageURL(url);
   }
 
-  function handleBlogPostSubmit() {}
+  function getSanitizedData() {
+    const sanitizedObject = {};
 
-  function onDiscardClick() {}
+    const isTitleChanged = blogPost.title.trim() !== post.title;
+    const isContentChanged = blogPost.content.trim() !== post.content;
+
+    if (isTitleChanged) {
+      sanitizedObject.title = blogPost.title.trim();
+    }
+
+    if (isContentChanged) {
+      sanitizedObject.content = blogPost.content.trim();
+    }
+
+    return sanitizedObject;
+  }
+
+  async function handleBlogPostSubmit() {
+    const isImageChanged = imageURL !== post.featuredImage;
+    if (!imageURL || !blogPost.title.trim() || !blogPost.content.trim())
+      return showToast({
+        ...toast,
+        isVisible: true,
+        text: INFO_MESSAGES.BLOG_POST_VALIDATION_MESSAGE,
+        type: TOAST_TYPES.INFO,
+      });
+    setIsEditButtonLoading(true);
+    setIsEditButtonDisabled(true);
+    try {
+      let uploadedImageURL;
+      const dataToUpdate = getSanitizedData();
+      if (isImageChanged) {
+        if (file.type === 'image/png' || file.type === 'image/jpeg') {
+          uploadedImageURL = await uploadImageToCloud(
+            file,
+            'blog-web-app/posts'
+          );
+          dataToUpdate.featuredImage = uploadedImageURL;
+        } else {
+          return showToast({
+            ...toast,
+            isVisible: true,
+            text: INFO_MESSAGES.PNG_JPEG_IMAGE_VALIDATION,
+            type: TOAST_TYPES.INFO,
+          });
+        }
+      }
+
+      const { error } = updateDataOfFirebase(post?.id, 'blogs', dataToUpdate);
+
+      if (error) throw error;
+
+      return showToast({
+        ...toast,
+        isVisible: true,
+        text: SUCCESS_MESSAGES.BLOG_POST_UPDATED,
+        type: TOAST_TYPES.SUCCESS,
+      });
+    } catch (error) {
+      console.error('Something went wrong while editing the post ', error);
+    } finally {
+      setIsEditButtonLoading(false);
+      setIsEditButtonDisabled(false);
+    }
+  }
+
   //TODO add loading skeleton
   if (isPostLoading) return <>loading</>;
+
   return (
     <Box className={styles['edit-post']}>
       <Typography variant='h1' className={styles['edit-post__heading']}>
         Edit Post
       </Typography>
       <Box className={styles['edit-post__editor']}>
-        {postImage ? (
+        {imageURL ? (
           <Box
             className={styles['edit-post__image-container']}
             onMouseOver={() => setIsUploadImageVisible(true)}
@@ -80,7 +158,7 @@ export default function EditPost({ post }) {
               width={100}
               height={250}
               className={styles['edit-post__featured-image']}
-              src={postImage}
+              src={imageURL}
               alt='featured banner'
             />
           </Box>
@@ -104,17 +182,21 @@ export default function EditPost({ post }) {
         <Button
           onClick={handleBlogPostSubmit}
           variant='contained'
-          className='buttons__publish'
-          // disabled={isPublishButtonDisabled}
+          className={styles['buttons__edit']}
+          disabled={isEditButtonDisabled}
         >
-          Publish
+          {isEditButtonLoading ? (
+            <CircularProgress size={20} color='inherit' />
+          ) : (
+            'Edit'
+          )}
         </Button>
         <Button
-          onClick={onDiscardClick}
+          onClick={() => router.push('/dashboard')}
           variant='outlined'
-          className={styles['buttons__discard']}
+          className={styles['buttons__back']}
         >
-          Discard
+          Go Back
         </Button>
       </Box>
     </Box>

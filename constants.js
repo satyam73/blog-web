@@ -16,13 +16,15 @@ export const INFO_MESSAGES = {
   TOO_MANY_REQUESTS: 'Too many requests please try again later',
   EMAIL_ALREADY_EXISTS_MESSAGE: 'Email already exists',
   PROFILE_ALREADY_REMOVED: 'Profile is already removed',
-  BLOG_POST_VALIDATION_MESSAGE: 'Please add file, title and content to publish your post'
+  BLOG_POST_VALIDATION_MESSAGE: 'Please add file, title and content to publish your post',
+  PNG_JPEG_IMAGE_VALIDATION: 'Please use png or jpg image in blog image'
 }
 
 export const SUCCESS_MESSAGES = {
   SIGNUP_SUCCESS_MESSAGE: 'Successfully signed up',
   PROFILE_UPDATE_MESSAGE: 'Successfully updated the profile',
-  BLOG_POST_PUBLISHED: 'Successfully published the post'
+  BLOG_POST_PUBLISHED: 'Successfully published the post',
+  BLOG_POST_UPDATED: 'Successfully updated the post',
 }
 
 

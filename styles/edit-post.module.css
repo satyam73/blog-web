@@ -51,6 +51,11 @@
   margin: 60px 0;
 }
 
-.buttons__discard {
+.edit-post__buttons .buttons__edit {
+  width: 100px;
+}
+
+.edit-post__buttons .buttons__back {
   margin-left: 10px;
+  width: 100px;
 }
