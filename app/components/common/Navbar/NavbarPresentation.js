@@ -10,7 +10,7 @@ import styles from './navbar.module.css';
 export default function NavbarPresentation({ activeLinkIndex, onNavbarItemClick }) {
   const { user, loading } = useUser()
   const navbarItemsMapping = NAVBAR_ITEMS.map((item, index) => {
-    if ((item.name === 'profile') || (item.name === 'sign out') || (item.name === 'create-post')) {
+    if (item.isProtected) {
       if (!loading && user) {
         return (<Button variant='text' onClick={() => onNavbarItemClick(index, item)} className={`${styles['navbar__item']} ${activeLinkIndex == index ? styles['navbar__item--active'] : ''}`} data-testid={`navbar-item-${item.name}`} key={item.name} >
           {item.text}
