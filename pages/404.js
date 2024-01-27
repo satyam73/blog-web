@@ -1,10 +1,13 @@
 import React from 'react'
-import Lottie from 'react-lottie';
-import * as animationData from '@/lottie/page-not-found.json';
 import Link from 'next/link';
-import styles from '@/styles/404.module.css';
+import Lottie from 'react-lottie';
 import { Box } from '@mui/material';
+
+import * as animationData from '@/lottie/page-not-found.json';
+
 import Layout from '@/app/components/common/Layout/Layout';
+
+import styles from '@/styles/404.module.css';
 
 export default function PageNotFound() {
   const defaultOptions = {
@@ -19,7 +22,7 @@ export default function PageNotFound() {
   return (
     <Layout>
       <Box className={styles['page-not-found']} >
-        <Lottie options={defaultOptions} height={400} width={400} />;
+        <Lottie options={defaultOptions} height={400} width={400} />
         <Link className={styles['page-not-found__button']} href={'/'}>Go to home</Link>
       </Box>
     </Layout>

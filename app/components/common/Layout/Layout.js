@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +15,9 @@ import UnauthorizeModal from "@/app/components/common/UnauthorizeModal/Unauthori
 export default function Layout({ children }) {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const [activePage, setActivePage] = useState(0);
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { isUnauthorizeModalOpen, isLoginModalOpen, isRegisterModalOpen, isProfileModalOpen } = useSelector((state) => state.global);
+
   function closeUnauthorizeModal(e) {
     e?.stopPropagation();
     dispatch(handleUnauthorizeModalChange(false));
@@ -47,7 +46,6 @@ export default function Layout({ children }) {
     dispatch(handleProfileModalChange(false));
   }
 
-  console.log('from layout ', isLoginModalOpen)
   return (
     <UserProvider>
       <UnauthorizeModal open={isUnauthorizeModalOpen} handleClose={closeUnauthorizeModal} />
