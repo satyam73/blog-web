@@ -1,4 +1,4 @@
-.unauthorize-modal {
+.unauthorize-card {
   height: fit-content;
   width: 420px;
   border-radius: 15px;
@@ -13,18 +13,18 @@
   outline: none;
 }
 
-.unauthorize-modal .unauthorize-modal__close-button {
+.unauthorize-card .unauthorize-card__close-button {
   position: absolute;
   right: 5px;
   top: 5px;
 }
 
-.unauthorize-modal__image-container {
+.unauthorize-card__image-container {
   text-align: center;
   width: 100%;
 }
 
-.unauthorize-modal__main {
+.unauthorize-card__main {
   height: 80%;
   width: 100%;
   text-align: center;
