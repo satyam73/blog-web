@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 import signoutHandler from "@/app/firebase/auth/signout";
-import { handleProfileModalChange } from "@/app/store/global";
+import { handleActiveNavbarItemChange, handleProfileModalChange } from "@/app/store/global";
 import NavbarPresentation from "./NavbarPresentation";
 
 export default function Navbar() {
-  const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const { activeNavbarItem } = useSelector(state => state.global);
   const dispatch = useDispatch();
   const { push } = useRouter();
 
@@ -21,14 +20,14 @@ export default function Navbar() {
       dispatch(handleProfileModalChange(true));
       return;
     }
+    dispatch(handleActiveNavbarItemChange(index));
 
-    setActiveLinkIndex(index);
     push(item.link);
   }
 
   return (
     <>
-      <NavbarPresentation activeLinkIndex={activeLinkIndex} onNavbarItemClick={onNavbarItemClick} />
+      <NavbarPresentation activeLinkIndex={activeNavbarItem} onNavbarItemClick={onNavbarItemClick} />
     </>
   )
 };
