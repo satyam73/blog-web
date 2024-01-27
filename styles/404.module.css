@@ -1,0 +1,21 @@
+.page-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--navbar-height));
+  text-align: center;
+  flex-direction: column;
+}
+
+.page-not-found .page-not-found__button {
+  padding: 10px;
+  text-decoration: none;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.page-not-found .page-not-found__button:hover {
+  opacity: 0.9;
+}
