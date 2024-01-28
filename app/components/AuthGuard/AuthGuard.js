@@ -6,15 +6,17 @@ import Layout from "../common/Layout/Layout";
 export default function AuthGuard({ children }) {
   const { user, loading } = useUser();
 
-  return (<>
-    <Layout>
+  return (
+    <>
       {!loading && !user?.uid ?
-        <Box sx={{ display: 'grid', placeItems: 'center', placeContent: 'center', height: 'calc(100vh - var(--navbar-height))', textAlign: 'center' }}>
-          <UnauthorizedCard />
-          <Typography variant="h4">You&apos;re not authenticated to view this page!</Typography >
-        </Box>
+        <Layout>
+          <Box sx={{ display: 'grid', placeItems: 'center', placeContent: 'center', height: 'calc(100vh - var(--navbar-height))', textAlign: 'center' }}>
+            <UnauthorizedCard />
+            <Typography variant="h4">You&apos;re not authenticated to view this page!</Typography >
+          </Box>
+        </Layout>
         : children
       }
-    </Layout>
-  </>)
+    </>
+  )
 }

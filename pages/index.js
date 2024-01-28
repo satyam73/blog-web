@@ -9,6 +9,7 @@ import HomePresentation from '@/app/components/home/HomePresentation';
 import styles from '../styles/index.module.css';
 import { handleLoginModalChange, handleRegisterModalChange } from '@/app/store/global';
 import { useDispatch, useSelector } from 'react-redux';
+import UserProvider from '@/app/contexts/UserProvider';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -28,8 +29,10 @@ export default function Home() {
 
 Home.getLayout = function getLayout(page) {
   return (
-    <Layout>
-      {page}
-    </Layout>
+    <UserProvider>
+      <Layout>
+        {page}
+      </Layout>
+    </UserProvider>
   )
 }

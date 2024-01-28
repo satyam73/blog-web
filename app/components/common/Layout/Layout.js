@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import { useTheme } from "@emotion/react";
-import { useMediaQuery } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from "react-redux";
 
 import { handleLoginModalChange, handleProfileModalChange, handleRegisterModalChange, handleUnauthorizeModalChange } from "@/app/store/global";
-import UserProvider from "@/app/contexts/UserProvider";
+import UserProvider, { useUser } from "@/app/contexts/UserProvider";
 
 import Navbar from "@/app/components/common/Navbar/Navbar";
 import Appbar from "@/app/components/common/Appbar/Appbar";
@@ -14,9 +16,12 @@ import UnauthorizeModal from "@/app/components/common/UnauthorizeModal/Unauthori
 
 export default function Layout({ children }) {
   const theme = useTheme();
+  const router = useRouter();
   const dispatch = useDispatch();
+  const { user, loading: isUserLoading } = useUser();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { isUnauthorizeModalOpen, isLoginModalOpen, isRegisterModalOpen, isProfileModalOpen } = useSelector((state) => state.global);
+  const isFloatingCreatePostButtonVisible = ['/', '/blogs',].includes(router.pathname);
 
   function closeUnauthorizeModal(e) {
     e?.stopPropagation();
@@ -55,6 +60,10 @@ export default function Layout({ children }) {
       {!isMobile && <Navbar />}
       {children}
       {isMobile && <Appbar />}
+
+      {(!isUserLoading && user && isFloatingCreatePostButtonVisible) && <IconButton sx={{ background: 'var(--secondary-color)', position: 'fixed', bottom: 'var(--navbar-height)', right: '50px', '&:hover': { background: 'var(--secondary-color)', opacity: 0.9 } }} aria-label="add" size="medium" onClick={() => router.push('/blogs/create-post')}>
+        <AddIcon fontSize="inherit" sx={{ color: 'var(--primary-color)', '&:hover': { color: 'var(--primary-color)', } }} />
+      </IconButton>}
     </UserProvider>
   )
 }
