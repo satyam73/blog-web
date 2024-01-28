@@ -20,7 +20,7 @@ export default function EditGuard({ children }) {
         if (error) throw error;
 
         setPost(result)
-        console.log(result);
+
         if (userDataFirebase?.id === result.createdBy) {
           setIsEditPermissionGranted(true)
         } else {
@@ -35,7 +35,6 @@ export default function EditGuard({ children }) {
 
   }, [loading]);
 
-  console.log(isEditPermissionGranted, userDataFirebase?.id, post)
   return (
     <div>{isEditPermissionGranted ? children : 'unauthorized to edit the post'}</div>
   )

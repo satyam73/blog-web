@@ -10,7 +10,8 @@ import {
 
 import { useUser } from '@/app/contexts/UserProvider';
 
-import { APPBAR_ITEMS, APPBAR_MENUS } from './appbar.constant';
+import { MENU_ITEMS } from '@/constants';
+import { APPBAR_ITEMS } from './appbar.constant';
 
 import styles from './appbar.module.css';
 
@@ -85,7 +86,14 @@ export default function AppbarPresentation({
           horizontal: 'left',
         }}
       >
-        {APPBAR_MENUS.map((menu, idx) => <MenuItem key={`${menu.name}-${idx}`} sx={{ color: menu.name == 'signout' ? 'red' : 'initial' }} onClick={() => onMenuItemClick(menu, idx)}>{menu.text}</MenuItem>)}
+        {MENU_ITEMS.map((menu, idx) => <MenuItem key={`${menu.name}-${idx}`} sx={{ color: menu.name == 'signout' ? 'red' : 'initial', padding: '5px' }} onClick={() => onMenuItemClick(menu, idx)}>
+          <IconButton
+            sx={{ color: 'inherit' }}
+            font='medium'>
+            {menu.icon}
+          </IconButton>
+          {menu.text}
+        </MenuItem>)}
       </Menu>}
       <Toolbar className={styles.appbar__main}>{itemsMapping}</Toolbar>
     </MUIAppbar >

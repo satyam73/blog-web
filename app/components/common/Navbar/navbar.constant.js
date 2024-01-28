@@ -1,3 +1,6 @@
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CreateIcon from '@mui/icons-material/Create';
 export const NAVBAR_ITEMS = [
   {
     name: 'home',
@@ -15,24 +18,7 @@ export const NAVBAR_ITEMS = [
     name: 'profile',
     text: 'Profile',
     link: '/profile',
+    component: <AccountCircleIcon fontSize='inherit' />,
     isProtected: true
   },
-  {
-    name: 'create-post',
-    text: 'Create',
-    link: '/blogs/create-post',
-    isProtected: true
-  },
-  {
-    name: 'dashboard',
-    text: 'Dashboard',
-    link: '/dashboard',
-    isProtected: true
-  },
-  {
-    name: 'sign out',
-    text: 'Sign out',
-    link: 'javascript:void(0)',
-    isProtected: true,
-  }
 ]

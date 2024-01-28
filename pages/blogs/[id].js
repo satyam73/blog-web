@@ -29,7 +29,6 @@ export default function BlogPost({ post, author }) {
         element.innerHTML = hljs.highlightAuto(element.innerHTML, COMMON_PROGRAMMING_LANGUAGES).value
       });
     }
-    console.log(document.querySelectorAll('.ql-syntax'));
   }, [isLoading]);
 
   useEffect(() => {

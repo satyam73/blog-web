@@ -34,23 +34,26 @@ export default function Appbar({ }) {
       }
       return;
     }
-    router.push(item.link)
+    router.push(item.link);
+    handleMenuClose();
   }
 
   function onMenuItemClick(item, index) {
     switch (item.name) {
-      case 'dashboard':
-        router.push('/dashboard')
-        break;
       case 'profile':
         onProfileClick();
         break;
       case 'signout':
         onSignoutClick();
+        break;
+      default:
+        onItemClick(item, index)
     }
   }
 
   function handleMoreClick(event, item, index) {
+
+    if (!isUserLoading && !user) return;
     setAnchorEl(event.currentTarget);
     onItemClick(item, index);
   };

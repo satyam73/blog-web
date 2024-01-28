@@ -51,7 +51,6 @@ export default function EditPost({ post }) {
   }, [quill]);
 
   function handleBlogPostChange(value, name, editorInstance) {
-    console.log(value, name, editorInstance);
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }));
   }
   function onImageUpload(e) {

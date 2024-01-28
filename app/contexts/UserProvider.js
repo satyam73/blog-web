@@ -25,7 +25,7 @@ export default function UserProvider({ children }) {
       }
       (async () => {
         try {
-          const { result, error } = await getDataById(user.uid, 'users');
+          const { result, error } = await getDataById(user?.uid, 'users');
 
           if (result && !error) {
             setUserDataFirebase(result);

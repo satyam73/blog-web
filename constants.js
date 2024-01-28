@@ -1,3 +1,10 @@
+import {
+  Logout,
+  Create,
+  AccountCircle,
+  Dashboard,
+} from '@mui/icons-material';
+
 export const TOAST_HIDEOUT_TIME = 2500;
 export const TOAST_OPTIONS_TOP_RIGHT = { vertical: 'top', horizontal: 'right' }
 export const TOAST_TYPES = {
@@ -59,4 +66,29 @@ export const COMMON_PROGRAMMING_LANGUAGES = [
   'XML',
   'YAML',
   'Markdown'
+];
+
+export const MENU_ITEMS = [
+  {
+    name: 'dashboard',
+    text: 'Dashboard',
+    link: '/dashboard',
+    icon: <Dashboard />,
+  },
+  {
+    name: 'create-post',
+    text: 'Create',
+    link: '/blogs/create-post',
+    icon: <Create />,
+  },
+  {
+    name: 'profile',
+    text: 'Profile',
+    icon: <AccountCircle />,
+  },
+  {
+    name: 'signout',
+    text: 'Signout',
+    icon: <Logout />,
+  },
 ];
