@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(100vw - var(--width-correction-dimension));
+  width: 100vw;
 }
 
 .create-post .create-post__heading {
@@ -56,4 +56,16 @@
 
 .buttons__discard {
   margin-left: 10px;
+}
+
+@media (width<=1007px) {
+  .create-post {
+    width: 100svw;
+  }
+}
+
+@media (width<=400px) {
+  .create-post .create-post__editor {
+    margin-bottom: 25px;
+  }
 }
