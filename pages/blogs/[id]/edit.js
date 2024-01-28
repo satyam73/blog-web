@@ -1,28 +1,34 @@
-import AuthGuard from '@/app/components/AuthGuard/AuthGuard';
-import EditGuard from '@/app/components/EditGuard/EditGuard';
-import Layout from '@/app/components/common/Layout/Layout';
-import ToastProvider, { useToast } from '@/app/contexts/ToastProvider';
-import UserProvider from '@/app/contexts/UserProvider';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import {
   getAllDocs,
   getDataById,
   updateDataOfFirebase,
 } from '@/app/firebase/db/db';
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+
+import { uploadImageToCloud } from '@/services/cloudinary';
+
+import UserProvider from '@/app/contexts/UserProvider';
+import ToastProvider, { useToast } from '@/app/contexts/ToastProvider';
+
+import { INFO_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+
+import UploadImage from '@/app/components/UploadImage/UploadImage';
+import AuthGuard from '@/app/components/AuthGuard/AuthGuard';
+import EditGuard from '@/app/components/EditGuard/EditGuard';
+import Layout from '@/app/components/common/Layout/Layout';
 const RichTextEditor = dynamic(
   () => import('@/app/components/RichTextEditor/RichTextEditor'),
   {
     ssr: false,
   }
 );
+
 import styles from '@/styles/edit-post.module.css';
-import UploadImage from '@/app/components/UploadImage/UploadImage';
-import Image from 'next/image';
-import { uploadImageToCloud } from '@/services/cloudinary';
-import { INFO_MESSAGES, SUCCESS_MESSAGES, TOAST_TYPES } from '@/constants';
+
 export default function EditPost({ post }) {
   const router = useRouter();
   const [quill, setQuill] = useState(null);
