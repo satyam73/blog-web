@@ -23,7 +23,7 @@ export default function NavbarPresentation({ activeLinkIndex, onNavbarItemClick 
     }
   });
 
-  const skeletonMappingForNavbarItems = Array(6).fill('navbar-items-skeleton').map((item, idx) => <Skeleton variant="rounded" height={20} width={60} />)
+  const skeletonMappingForNavbarItems = Array(6).fill('navbar-items-skeleton').map((item, idx) => <Skeleton variant="rounded" height={20} width={60} key={`${item}-${idx}`} />)
   return (
     <AppBar component="nav">
       <Toolbar>

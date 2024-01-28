@@ -85,7 +85,7 @@ export default function AppbarPresentation({
           horizontal: 'left',
         }}
       >
-        {APPBAR_MENUS.map((menu, idx) => <MenuItem sx={{ color: menu.name == 'signout' ? 'red' : 'initial' }} onClick={() => onMenuItemClick(menu, idx)}>{menu.text}</MenuItem>)}
+        {APPBAR_MENUS.map((menu, idx) => <MenuItem key={`${menu.name}-${idx}`} sx={{ color: menu.name == 'signout' ? 'red' : 'initial' }} onClick={() => onMenuItemClick(menu, idx)}>{menu.text}</MenuItem>)}
       </Menu>}
       <Toolbar className={styles.appbar__main}>{itemsMapping}</Toolbar>
     </MUIAppbar >
