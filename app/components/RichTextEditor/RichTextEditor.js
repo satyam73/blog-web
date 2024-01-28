@@ -1,7 +1,7 @@
 import Quill from 'quill';
 import { Box } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-
+import Delta from "quill-delta";
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 
@@ -30,6 +30,16 @@ export default function RichTextEditor({ handleBlogPostChange, setQuill = () => 
         },
         placeholder: 'Start pouring your creativity...',
         theme: 'snow',
+        clipboard: {
+          // Define a custom paste handler
+          matchers: [
+            ['br', function (node, delta) { return delta; }], // Allow <br> elements
+            ['a', function (node, delta) { return delta; }], // Allow <a> elements
+            [Node.TEXT_NODE, function (node, delta) {
+              return new Delta().insert(node.data);
+            }] // Allow plain text
+          ]
+        }
       });
 
       setQuill(editor);
