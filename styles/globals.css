@@ -33,6 +33,9 @@ body {
 
 pre.ql-syntax {
   overflow-x: auto;
+  background-color: black;
+  color: var(--color-white);
+  padding: 10px;
 }
 
 .ql-editor {
