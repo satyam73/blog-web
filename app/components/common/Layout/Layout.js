@@ -57,10 +57,16 @@ export default function Layout({ children }) {
       <RegisterModal open={isRegisterModalOpen} handleClose={closeRegisterModal} openLoginModal={openLoginModal} />
       <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} openRegisterModal={openRegisterModal} />
       <ProfileModal open={isProfileModalOpen} handleClose={closeProfileModal} />
-      {!isMobile && <Navbar />}
-      <Box sx={{ height: 'var(--navbar-height)', visibility: 'hidden' }} />
+      {!isMobile && <>
+        <Navbar />
+        <Box sx={{ height: 'var(--navbar-height)', visibility: 'hidden' }} />
+      </>}
       {children}
-      {isMobile && <Appbar />}
+      {isMobile &&
+        <>
+          <Appbar />
+          <Box sx={{ height: 'var(--navbar-height)', visibility: 'hidden' }} />
+        </>}
 
       {(!isUserLoading && user && isFloatingCreatePostButtonVisible) && <IconButton sx={{ background: 'var(--secondary-color)', position: 'fixed', bottom: 'var(--navbar-height)', right: '50px', '&:hover': { background: 'var(--secondary-color)', opacity: 0.9 } }} aria-label="add" size="medium" onClick={() => router.push('/blogs/create-post')}>
         <AddIcon fontSize="inherit" sx={{ color: 'var(--primary-color)', '&:hover': { color: 'var(--primary-color)', } }} />

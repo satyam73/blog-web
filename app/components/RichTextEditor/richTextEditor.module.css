@@ -1,6 +1,7 @@
 .rich-text-editor {
-  width: calc(100svw - 100px);
+  width: calc(100vw - var(--width-correction-dimension));
   height: 500px;
+  padding: 0 20px;
 }
 
 .rich-text-editor .editor-container {

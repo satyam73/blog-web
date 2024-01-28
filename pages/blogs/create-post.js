@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Skeleton, Typography } from '@mui/material';
 const NextImage = dynamic(() => import('next/image'), {
   ssr: false,
 });
 
-import { addDataToFirebase, } from '@/app/firebase/db/db';
+import { addDataToFirebase } from '@/app/firebase/db/db';
 import { uploadImageToCloud } from '@/services/cloudinary';
 import UserProvider, { useUser } from '@/app/contexts/UserProvider';
 import ToastProvider, { useToast } from '@/app/contexts/ToastProvider';
@@ -24,6 +24,9 @@ const RichTextEditor = dynamic(
   () => import('@/app/components/RichTextEditor/RichTextEditor'),
   {
     ssr: false,
+    loading: () => (
+      <Skeleton sx={{ width: '100%', height: '500px' }} variant='rounded' />
+    ),
   }
 );
 
@@ -44,7 +47,7 @@ export default function CreatePost() {
 
   function handleBlogPostChange(value, name, editorInstance = null) {
     if (editorInstance) {
-      setEditor(editorInstance)
+      setEditor(editorInstance);
     }
 
     setBlogPost((prevBlogPost) => ({ ...prevBlogPost, [name]: value }));
@@ -82,13 +85,13 @@ export default function CreatePost() {
           });
           setBlogPost({
             title: '',
-            content: ''
+            content: '',
           });
           if (editor) {
             editor.root.innerHTML = '';
           }
-          setImageURL('')
-          setFile(null)
+          setImageURL('');
+          setFile(null);
 
           return;
         }
@@ -113,13 +116,15 @@ export default function CreatePost() {
   }
 
   function onDiscardClick() {
-    const isOk = confirm('Are you sure? All the contents of the post will be lost');
+    const isOk = confirm(
+      'Are you sure? All the contents of the post will be lost'
+    );
 
     if (!isOk) return;
 
     setBlogPost({
       title: '',
-      content: ''
+      content: '',
     });
 
     if (editor) {
@@ -174,9 +179,7 @@ export default function CreatePost() {
           name='title'
           value={blogPost.title}
         />
-        <RichTextEditor
-          handleBlogPostChange={handleBlogPostChange}
-        />
+        <RichTextEditor handleBlogPostChange={handleBlogPostChange} />
       </Box>
       <Box className={styles['create-post__buttons']}>
         <Button
@@ -187,7 +190,11 @@ export default function CreatePost() {
         >
           Publish
         </Button>
-        <Button onClick={onDiscardClick} variant='outlined' className={styles['buttons__discard']}>
+        <Button
+          onClick={onDiscardClick}
+          variant='outlined'
+          className={styles['buttons__discard']}
+        >
           Discard
         </Button>
       </Box>

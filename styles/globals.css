@@ -25,6 +25,8 @@
 
   --bg-width-home: 50px;
   --bg-height-home: 50px;
+
+  --width-correction-dimension: 21px;
 }
 
 body {
