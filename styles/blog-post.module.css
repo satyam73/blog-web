@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 10px 1rem;
+  margin-bottom: 70px;
 }
 
 .blog-post__heading {
