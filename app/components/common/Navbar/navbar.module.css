@@ -3,10 +3,6 @@
   color: var(--secondary-color);
 }
 
-.navbar__item {
-  margin-left: 20px;
-}
-
 .navbar__item:hover::before {
   content: '';
   position: absolute;
