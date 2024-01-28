@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useTheme } from "@emotion/react";
-import { IconButton, useMediaQuery } from "@mui/material";
+import { Box, IconButton, useMediaQuery } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -58,6 +58,7 @@ export default function Layout({ children }) {
       <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} openRegisterModal={openRegisterModal} />
       <ProfileModal open={isProfileModalOpen} handleClose={closeProfileModal} />
       {!isMobile && <Navbar />}
+      <Box sx={{ height: 'var(--navbar-height)', visibility: 'hidden' }} />
       {children}
       {isMobile && <Appbar />}
 

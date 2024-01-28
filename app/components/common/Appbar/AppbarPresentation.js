@@ -70,7 +70,7 @@ export default function AppbarPresentation({
   });
 
   return (
-    <MUIAppbar position='fixed' color='primary'>
+    <MUIAppbar sx={{ position: 'fixed', bottom: 0, right: 0, left: 0 }} color='primary'>
       {!isUserLoading && user && <Menu
         id='appbar-more-menu'
         aria-labelledby='appbar-more-menu'
