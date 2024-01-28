@@ -21,14 +21,19 @@ import 'highlight.js/styles/atom-one-dark-reasonable.min.css';
 export default function BlogPost({ post, author }) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    console.log(document.querySelectorAll('.ql-syntax'))
-    hljs.configure({
-      languages: ['ruby', 'javascript']
-    })
-    document.querySelectorAll('.ql-syntax').forEach((element) => {
-      element.innerHTML = hljs.highlight(element.innerHTML, { language: 'javascript' }).value
-    });
-  }, [isLoading])
+
+    if (!isLoading) {
+
+      hljs.configure({
+        languages: ['ruby', 'javascript']
+      })
+      document.querySelectorAll('.ql-syntax').forEach((element) => {
+        element.innerHTML = hljs.highlight(element.innerHTML, { language: 'javascript' }).value
+      });
+    }
+    console.log(document.querySelectorAll('.ql-syntax'));
+  }, [isLoading]);
+
   useEffect(() => {
     setIsLoading(false);
   }, []);
