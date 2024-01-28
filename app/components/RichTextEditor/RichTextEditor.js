@@ -8,6 +8,7 @@ import 'quill/dist/quill.snow.css';
 import styles from './richTextEditor.module.css';
 
 export default function RichTextEditor({ handleBlogPostChange, setQuill = () => { } }) {
+  // window.hljs = hljs;
   const editorRef = useRef(null);
   const [isEditorRendered, setIsEditorRendered] = useState(false);
 
@@ -25,7 +26,7 @@ export default function RichTextEditor({ handleBlogPostChange, setQuill = () => 
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             ['bold', 'italic', 'underline', 'link'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            ['blockquote', 'code-block'],
+            ['code-block'],
           ]
         },
         placeholder: 'Start pouring your creativity...',
@@ -43,11 +44,12 @@ export default function RichTextEditor({ handleBlogPostChange, setQuill = () => 
 
       setQuill(editor);
       editor.on('text-change', onTextChange);
+      setIsEditorRendered(true);
     }
-    setIsEditorRendered(true);
 
     return () => editor?.off('text-change', onTextChange);
   }, []);
+
   return (
     <Box className={styles['rich-text-editor']}>
       <Box

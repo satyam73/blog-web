@@ -3,6 +3,8 @@ import DOMPurify from 'isomorphic-dompurify';
 import ReactHtmlParser from 'react-html-parser';
 import React, { useEffect, useState } from 'react';
 import { Box, Skeleton, Typography } from '@mui/material';
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
 
 import { getAllDocs, getDataById } from '@/app/firebase/db/db';
 import ToastProvider from '@/app/contexts/ToastProvider';
