@@ -34,7 +34,14 @@ export default function ProfileCard({
   if (loading || isLoading)
     return (
       <Skeleton
-        className={styles['skeleton']}
+        sx={{
+          width: '100%',
+          borderRadius: '10px',
+          gap: '10px',
+          height: '280px',
+          marginTop: '15px',
+          padding: 0,
+        }}
         component='div'
         variant='rectangle'
       />

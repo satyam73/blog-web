@@ -12,19 +12,6 @@
   margin-top: 15px;
 }
 
-.skeleton {
-  width: 100%;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  height: 280px;
-  margin-top: 15px;
-  padding: 0;
-}
-
 .profile-card__image-container {
   height: fit-content;
   width: fit-content;
