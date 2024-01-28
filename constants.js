@@ -17,7 +17,8 @@ export const INFO_MESSAGES = {
   EMAIL_ALREADY_EXISTS_MESSAGE: 'Email already exists',
   PROFILE_ALREADY_REMOVED: 'Profile is already removed',
   BLOG_POST_VALIDATION_MESSAGE: 'Please add file, title and content to publish your post',
-  PNG_JPEG_IMAGE_VALIDATION: 'Please use png or jpg image in blog image'
+  PNG_JPEG_IMAGE_VALIDATION: 'Please use png or jpg image in blog image',
+  NOT_LOGGED_IN_MENU: 'Please login to view more option'
 }
 
 export const SUCCESS_MESSAGES = {

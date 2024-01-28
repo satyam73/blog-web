@@ -1,11 +1,16 @@
-import { useRouter } from "next/router";
-
-import ProfileModal from "../../ProfileModal/ProfileModal";
-import AppbarPresentation from "./AppbarPresentation";
 import { useState } from "react";
-import signoutHandler from "@/app/firebase/auth/signout";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+
+import signoutHandler from "@/app/firebase/auth/signout";
+import { useToast } from "@/app/contexts/ToastProvider";
+import { useUser } from "@/app/contexts/UserProvider";
+
 import { handleActiveBottomBarItemChange, handleProfileModalChange } from "@/app/store/global";
+import { INFO_MESSAGES, TOAST_TYPES } from "@/constants";
+
+import AppbarPresentation from "./AppbarPresentation";
+import ProfileModal from "../../ProfileModal/ProfileModal";
 
 export default function Appbar({ }) {
   const router = useRouter();
@@ -14,7 +19,8 @@ export default function Appbar({ }) {
   const { isProfileModalOpen } = useSelector(state => state.global);
   const dispatch = useDispatch();
   const { activeBottomBarItem: activePage } = useSelector(state => state.global);
-
+  const { user, loading: isUserLoading } = useUser();
+  const { toast, showToast } = useToast()
   function handleClose() {
     dispatch(handleProfileModalChange(false));
   }
@@ -23,11 +29,26 @@ export default function Appbar({ }) {
     dispatch(handleActiveBottomBarItemChange(index));
 
     if (index === 2) {
+      if (!isUserLoading && !user) {
+        return showToast({ ...toast, isVisible: true, text: INFO_MESSAGES.NOT_LOGGED_IN_MENU, type: TOAST_TYPES.SUCCESS });
+      }
       return;
     }
     router.push(item.link)
   }
 
+  function onMenuItemClick(item, index) {
+    switch (item.name) {
+      case 'dashboard':
+        router.push('/dashboard')
+        break;
+      case 'profile':
+        onProfileClick();
+        break;
+      case 'signout':
+        onSignoutClick();
+    }
+  }
 
   function handleMoreClick(event, item, index) {
     setAnchorEl(event.currentTarget);
@@ -49,7 +70,7 @@ export default function Appbar({ }) {
 
   return (
     <>
-      <AppbarPresentation onSignoutClick={onSignoutClick} onProfileClick={onProfileClick} handleMoreClick={handleMoreClick} anchorEl={anchorEl} isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} activePage={activePage} onItemClick={onItemClick} />
+      <AppbarPresentation onSignoutClick={onSignoutClick} onProfileClick={onProfileClick} handleMoreClick={handleMoreClick} anchorEl={anchorEl} isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} activePage={activePage} onItemClick={onItemClick} onMenuItemClick={onMenuItemClick} />
       <ProfileModal open={isProfileModalOpen} handleClose={handleClose} />
     </>
   )

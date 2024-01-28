@@ -7,7 +7,10 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
-import { APPBAR_ITEMS } from './appbar.constant';
+
+import { useUser } from '@/app/contexts/UserProvider';
+
+import { APPBAR_ITEMS, APPBAR_MENUS } from './appbar.constant';
 
 import styles from './appbar.module.css';
 
@@ -18,9 +21,9 @@ export default function AppbarPresentation({
   handleMoreClick,
   activePage,
   onItemClick,
-  onProfileClick,
-  onSignoutClick,
+  onMenuItemClick
 }) {
+  const { user, loading: isUserLoading } = useUser();
   const itemsMapping = APPBAR_ITEMS.map((item, index) => {
     if (index === APPBAR_ITEMS.length - 1) {
       return (
@@ -67,7 +70,7 @@ export default function AppbarPresentation({
 
   return (
     <MUIAppbar position='fixed' color='primary'>
-      <Menu
+      {!isUserLoading && user && <Menu
         id='appbar-more-menu'
         aria-labelledby='appbar-more-menu'
         anchorEl={anchorEl}
@@ -82,12 +85,9 @@ export default function AppbarPresentation({
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={onProfileClick}>Profile</MenuItem>
-        <MenuItem onClick={onSignoutClick} sx={{ color: 'red' }}>
-          Signout
-        </MenuItem>
-      </Menu>
+        {APPBAR_MENUS.map((menu, idx) => <MenuItem sx={{ color: menu.name == 'signout' ? 'red' : 'initial' }} onClick={() => onMenuItemClick(menu, idx)}>{menu.text}</MenuItem>)}
+      </Menu>}
       <Toolbar className={styles.appbar__main}>{itemsMapping}</Toolbar>
-    </MUIAppbar>
+    </MUIAppbar >
   );
 }
