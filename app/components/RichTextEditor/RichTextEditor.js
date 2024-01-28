@@ -31,7 +31,6 @@ export default function RichTextEditor({ handleBlogPostChange, setQuill = () => 
         placeholder: 'Start pouring your creativity...',
         theme: 'snow',
         clipboard: {
-          // Define a custom paste handler
           matchers: [
             ['br', function (node, delta) { return delta; }], // Allow <br> elements
             ['a', function (node, delta) { return delta; }], // Allow <a> elements
