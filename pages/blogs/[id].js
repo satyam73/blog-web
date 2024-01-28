@@ -15,20 +15,18 @@ import ProfileCard from '@/app/components/ProfileCard/ProfileCard';
 
 import styles from '@/styles/blog-post.module.css';
 import 'highlight.js'
-import hljs from 'highlight.js/lib/core';
+import hljs from 'highlight.js/lib/common';
 import 'highlight.js/styles/default.min.css';
-import 'highlight.js/styles/atom-one-dark-reasonable.min.css';
+import 'highlight.js/styles/a11y-dark.min.css';
+import { COMMON_PROGRAMMING_LANGUAGES } from '@/constants';
+
 export default function BlogPost({ post, author }) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-
     if (!isLoading) {
-
-      hljs.configure({
-        languages: ['ruby', 'javascript']
-      })
+      hljs.highlightAll()
       document.querySelectorAll('.ql-syntax').forEach((element) => {
-        element.innerHTML = hljs.highlight(element.innerHTML, { language: 'javascript' }).value
+        element.innerHTML = hljs.highlightAuto(element.innerHTML, COMMON_PROGRAMMING_LANGUAGES).value
       });
     }
     console.log(document.querySelectorAll('.ql-syntax'));

@@ -38,3 +38,25 @@ export const FIREBASE_ERRROR_CODES = {
   AUTH_INVALID_LOGIN_CREDENTIALS: 'auth/invalid-login-credentials',
   AUTH_TOO_MANY_REQUESTS: 'auth/too-many-requests'
 }
+
+export const COMMON_PROGRAMMING_LANGUAGES = [
+  'JavaScript',
+  'Python',
+  'Java',
+  'C#',
+  'C++',
+  'TypeScript',
+  'Ruby',
+  'PHP',
+  'Swift',
+  'Go',
+  'Kotlin',
+  'Rust',
+  'SQL',
+  'HTML/CSS',
+  'Shell Scripting',
+  'JSON',
+  'XML',
+  'YAML',
+  'Markdown'
+];
