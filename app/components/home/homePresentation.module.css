@@ -87,3 +87,9 @@
     background-position: var(--bg-width-home) var(--bg-height-home);
   }
 }
+
+@media (width<=1007px) {
+  .home .home__description {
+    width: 100%;
+  }
+}
