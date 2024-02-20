@@ -55,6 +55,7 @@ export default function ProfileCard({
           src={image || '/assets/profile.jpg'}
           height={100}
           width={100}
+          alt={`${name} profile`}
         />
       </Box>
       <Typography className={styles['profile-card__name']}>

@@ -66,30 +66,6 @@
   }
 }
 
-@-webkit-keyframes bg-scrolling {
-  0% {
-    background-position: var(--bg-width-home) var(--bg-height-home);
-  }
-}
-
-@-moz-keyframes bg-scrolling {
-  0% {
-    background-position: var(--bg-width-home) var(--bg-height-home);
-  }
-}
-
-@-o-keyframes bg-scrolling {
-  0% {
-    background-position: var(--bg-width-home) var(--bg-height-home);
-  }
-}
-
-@keyframes bg-scrolling {
-  0% {
-    background-position: var(--bg-width-home) var(--bg-height-home);
-  }
-}
-
 @media (width<=1007px) {
   .home .home__description {
     width: 100%;
