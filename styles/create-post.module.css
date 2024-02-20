@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .create-post .create-post__heading {
@@ -11,7 +11,6 @@
   margin: 10px 0;
   font-weight: 600;
 }
-
 
 .create-post .create-post__editor {
   display: flex;
@@ -22,7 +21,7 @@
   padding: 0 20px;
 }
 
-.create-post__image-container {
+.create-post__editor .create-post__image-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +29,7 @@
   overflow: hidden
 }
 
-.create-post__featured-image {
+.create-post__image-container .create-post__featured-image {
   height: 250px;
   width: 100%;
   object-fit: contain;
