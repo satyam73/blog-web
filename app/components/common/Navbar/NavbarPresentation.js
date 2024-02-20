@@ -66,7 +66,6 @@ export default function NavbarPresentation({ activeLinkIndex, onNavbarItemClick,
       <Toolbar>
         <Typography
           variant="h5"
-          component="div"
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           className={styles['navbar__logo']}
         >
