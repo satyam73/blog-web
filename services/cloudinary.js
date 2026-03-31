@@ -3,11 +3,14 @@ export async function uploadImageToCloud(imageFile, folder = "blog-web-app") {
     const type = imageFile.type;
 
     if (type === "image/png" || type === "image/jpeg") {
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
       const imageFormData = new FormData();
 
       imageFormData.append("file", imageFile);
-      imageFormData.append("upload_preset", "blog-web-app");
-      imageFormData.append("cloud_name", "dl5pqfdrf");
+      imageFormData.append("upload_preset", uploadPreset);
+      imageFormData.append("cloud_name", cloudName);
       imageFormData.append("asset_folder", folder);
       imageFormData.append("folder", folder);
 
@@ -18,7 +21,7 @@ export async function uploadImageToCloud(imageFile, folder = "blog-web-app") {
         "profilePic",
       ]);
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dl5pqfdrf/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         {
           method: "post",
           body: imageFormData,
